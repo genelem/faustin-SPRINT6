@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/home.css">
+        <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+        <link rel="stylesheet" href="/stylesheets/global.css">
+        <link rel="stylesheet" href="/stylesheets/detallProd.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/https://cdnjs.cloudflare.com/ajax/libs/simple-icons/6.12.0/simpleicons.svgcss/all.min.css" rel="stylesheet" />
+        
+       
+        <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script> 
+        <title>Faustine</title>
+       
+    </head>
+ 
+    <body>
+ 
+      <!--  <header class="header">
+            <div class="cointainer, logo-nav-container">
+                <div class="barra">
+                    <input type="text" id="searchterm" placeholder="¿Qué estas buscando?" class="barra1" >
+                   
+                </div>
+                <nav class="Faustine">
+                    <h3> Faustine </h3>
+                </nav>
+                <div class="logoF">
+                    <img width="80" height="80" src="images/LogoFaustine-header.jpg">
+                </div>
+                <nav class="imgs">
+                <button><a href= "/login"> <img width="50" height="50" src="images/usuario.jpg"></a></button>
+                <button><a href= "#"> <img width="50" height="50" src="images/logoCompras.jpg"></button></a>
+                <button><a href= "/altaProducto"><i class="fas fa-file-alt"></i></button></a>
+                </nav>
+   
+            </div>
+        </header>-->
+        <%- include('partials/header') %>
+    <body class="body1">
+ 
+       <!--- <header> -->
+        <main>
+            <div class="altaProductLogo"> 
+                <h3><%= producto.name %></h3>
+                <ul>       
+                <!--<li><img id="licenciaLogo" src="img/superman.jpg"></li> -->
+                <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
+                </ul>             
+            </div>  
+            <nav>      
+           
+                <div class="descriptionProduct">
+                    <div class="divDescriptionText">
+                    <ul>
+                    <li><%= producto.name %> / </li>            
+                    <li><%=producto.description %></li>
+                    <li><%=producto.description2 %></li>
+                    <li><%= producto.description3 %></li>        
+                    <li>STOCK DISPONIBLE</li>          
+                    <li>Varios COLORES </li> 
+                    </ul>
+                    </div>
+                    <div class="divGrandePrincipal">       
+                    <div class="divPrincipal">  
+                        <!--<img id="principal" src="/images/cartera 2SinFOndo.png">  -->
+                        <img id="principal" src ="/images/<%=producto.imagenPPAL %> ">         
+                        <img id="espalda" src="/images/<%= producto.imagenDORSO %>">  
+                                  
+                    </div>
+                    <div class="divPrincipalPrecio">
+                        <p>PRECIO UNITARIO = $<%= producto.price %></p>
+                        <p>SALE :<%= producto.descuento %> %</p>
+                    </div>
+                    <div class="divSecundarias">              
+                        <img id="secundarias" src="/images/<%= producto.imagenDetalle2 %>">
+                        <img id="secundarias" src="/images/<%= producto.imagenDetalle2 %>">
+                        <img id="secundariasManga" src="/images/<%= producto.imagenDetalle3 %>">
+                    </div> 
+                </div>                      
+                </div>
+            </nav>  
+        <div class="cajaGrande">
+                <div class="productsRelacionados">
+                    <h2>PRODUCTOS</h2>
+                    <h2>Relacionados</h2>
+             <% if (filtrados.length !== 0){ %> 
+                    <% for (i=0 ; i< fin  ; i++){ %>
+                    <article>
+                    <img id="productsRelImagen" src="/images/<%= filtrados[i].imagenPPAL %>">            
+                    <span id="flecha">Ver<a href="/product/detail/<%= filtrados[i].id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span>
+                    </article>
+                    <% } %>
+                    <% } %>              
+
+                   <!--- <article>
+                    <img id="productsRelImagen" src="/images/gucci.1.SinFondo.png"> 
+                    <span id="flecha">Ver<a href="/detalleDeProducto"><i class="fas fa-arrow-alt-circle-right"></i></a></span>
+                    </article>
+                    <article>
+                    <img id="productsRelImagen" src="/images/carteraLouisRosa1.SinFondo.png">
+                    <span id="flecha">Ver<a href="/detalleDeProducto"><i class="fas fa-arrow-alt-circle-right"></i></a></span>
+                    </article>-->
+                </div>    
+                <div class="productValores"> 
+                <form action="/" method="GET">           
+                    <div class="otrosValores">
+                        
+                        <p><label id="" for ="cantidadProducto">CANTIDAD</label>
+                        <input placeholder="" type="number" min="1" pattern="^[0-9]+" name="cantidadProducto" id="user" ></p> 
+                        <br/>
+                        <p><label id="precio total" for ="precioProducto">PRECIO</label>
+                        <input placeholder="" type="number" min="1" pattern="^[0-9]+" name="precioProducto" id="user" ></p>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="ofertaPorcentaje">
+                        <h2><a href="#modal4"><img id="sale"  src="/images/icono.sale.png"></a></h2>
+                        
+                        <p><label id="" for ="ofertaPorcentaje">DESCUENTO</label>
+                            <input placeholder="" type="number" min="1" max="90" step="5" pattern="^[0-90]+" name="ofertaPorcentaje" id="user" ></p> 
+                    </div>
+                    <!--<div class="seleccionTalle">
+                        <p>Talle</p>
+                        <div id="talle">
+                        <select name ="talles" id ="talles">
+                            <option value = "extraSmall">ExtraSmall </option>
+                            <option value = "small">Small</option>
+                            <option value = "medium">Medium</option>
+                            <option value = "large">Large</option>
+                            <option value = "extraLarge">Extra Large</option>
+                        </select>
+                        </div>
+                    </div> -->        
+                <div>                 
+                 <br/>             
+                    <div class="seleccionColor">                
+                      
+                        <p>Colores DISPONIBLES</p>  
+                       
+                        <div class="colores"> 
+                        <input type="checkbox" id = "amarillo" name="brue" value="brue" >
+                        <label for=""><img id="colorList" src="/images/etiqueta11Brue.png"></label>           
+                        <input type="checkbox" id="azul" name="azul" value="azul">
+                        <label for=""><img id="colorList" src="/images/etiqueta11Azul.png"></label>           
+                        
+                        <input type="checkbox" id ="violeta" name="superman" value="superman">
+                        <label for=""><img id="colorList" src="/images/etiqueta11Guinda.png"></label>
+                        <input type="checkbox" id ="negra" name="superman" value="superman">
+                        <label for=""><img id="colorList" src="/images/etiqueta11Suela.png"></label>
+                        <input type="checkbox" id ="gris" name="superman" value="superman">
+                        <label for=""><img id="colorList" src="/images/etiqueta11Marron.png"></label>
+                        </div>                
+                    </div>
+                   <!--- <div class="seleccionTalle">
+                        <p>Talle Producto</p>
+                        <div id="talle">
+                        <select name ="talles" id ="talles">
+                            <option value = "extraSmall">ExtraSmall </option>
+                            <option value = "small">Small</option>
+                            <option value = "medium">Medium</option>
+                            <option value = "large">Large</option>
+                            <option value = "extraLarge">Extra Large</option>
+                        </select>
+                        </div>           
+                        </div>-->
+            </div><!--cierro cajaGrande-->       
+                <div id="modal2" class="modalmask">            
+                    <div class="modalbox rotate">
+                        <a href="#close" title="Close" class="close">X</a>
+                        <h2>ENVIO-COSTOS</h2>
+                        <p>Podés OPTAR por envío Standard o PREMIUM
+                            al momento de la COMPRA podés CONSULAR</p>
+                        <p>El COSTO de envío Standard es sensiblemente MENOR </p>
+                       
+                          
+                    </div>
+                </div>
+                <div id="modal4" class="modalmask">            
+                    <div class="modalbox rotate">
+                        <a href="#close" title="Close" class="close">X</a>
+                        <h2>OFERTA VIGENTE EN ESTE PRODUCTO</h2>
+                        <p>Si existe oferta sobre este producto.-</p>
+                          <p>verá el monto con descuento apliado</p> 
+                        
+                    </div>
+                </div>        
+                <div class="submitMasEnviar">  
+                    <a href="#modal2">Importante<i class="fas fa-user-edit"></i></a>        
+                    <input type="submit" name="submit" id="enviar" value="COMPRAR "> </input>
+                </div>        
+                <div class= "closeMain" >
+                <a href="/" id="vuelvo">Volver a Pagina Principal</a>
+                </div>
+            </form> 
+        </main>
+        <footer>
+         <!--<footer>-->
+            <%- include('partials/footer') %>
+            
+            
+        </footer>
+ 
+    </body>
+    
+</html
+       

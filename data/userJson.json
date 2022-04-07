@@ -1,0 +1,90 @@
+[
+ {
+  "usuario": "usuarioFederico",
+  "primerNombre": "federico",
+  "apellido": "tetaz",
+  "mail": "tetaz@gmail.com",
+  "fechaNacimiento": "1988-01-07",
+  "categoria": "usuario",
+  "contraseña": "$2a$10$7S4s4B8J4YR3CzyeTWBdIOX7xTiiyJnJF7J4ts4B.loDApHLE7DEi",
+  "avatar": "DEFAULT.jpg",
+  "id": 1
+ },
+ {
+  "id": 2,
+  "usuario": "usuarioPerfecto",
+  "primerNombre": "perfecto",
+  "apellido": "esalisto",
+  "mail": "perfecto@gmail.com",
+  "fechaNacimiento": "1983-02-23",
+  "categoria": "usuario",
+  "contraseña": "$2a$10$8wZFXUqalxevn6nT/f4F4uCL2eIorI7CdPlp95JPYyAVoIKvCao3O",
+  "avatar": "avatarHombre1.png"
+ },
+ {
+  "usuario": "usuarioAhoraSI",
+  "primerNombre": "ahora",
+  "apellido": "apellidoSi",
+  "mail": "ahoraSI@gmail.com",
+  "fechaNacimiento": "1985-02-11",
+  "categoria": "usuario",
+  "contraseña": "$2a$10$lNRfq4Jb0o1YHTmXcAN9iO2gYkde/Mn4iN0FaBBUGPBQ3g1LSHJjS",
+  "avatar": "ella.png",
+  "id": 3
+ },
+ {
+  "usuario": "usuarioControla",
+  "primerNombre": "controla",
+  "apellido": "errores",
+  "mail": "errores@gmail.com",
+  "fechaNacimiento": "1990-01-18",
+  "categoria": "usuario",
+  "contraseña": "$2a$10$3Uf3awAvJr3pUkUQtb4cRONPAOn053EOXncgJTxFe1/qKz22cfOa6",
+  "avatar": "DEFAULT.jpg",
+  "id": 4
+ },
+ {
+  "usuario": "usuarioEmilio",
+  "primerNombre": "emilio",
+  "apellido": "cernuda",
+  "mail": "cernuda@gmail.com",
+  "fechaNacimiento": "1970-06-29",
+  "categoria": "usuario",
+  "contraseña": "$2a$10$hpZgyG/WqMVkij0dQWdnm.nxpYr.RA4pWUwMWxaYf4JMBB2C6QAwS",
+  "avatar": "nuevo-1649108684851.png",
+  "id": 5
+ },
+ {
+  "usuario": "usuarioEster",
+  "primerNombre": "ester",
+  "apellido": "campichuelo",
+  "mail": "ester@gmail.com",
+  "fechaNacimiento": "1984-10-25",
+  "categoria": "usuario",
+  "contraseña": "$2a$10$VgbFWAczCyUv7O3C/G7Dp.XszKs1zKCLgR6iAJQo70Siux1AEfSbC",
+  "avatar": "nuevo-1649114674571.png",
+  "id": 6
+ },
+ {
+  "usuario": "usuarioLucas",
+  "primerNombre": "Lucas",
+  "apellido": "Jefecito",
+  "mail": "lucas@gmail.com",
+  "fechaNacimiento": "1966-02-23",
+  "categoria": "administrador",
+  "contraseña": "$2a$10$k.ozHz7.cDZ./TKctmzYX.3B6WRancGFWOsDcm9YZSSEHS7SbVRPm",
+  "avatar": "nuevo-1649123784899.png",
+  "id": 7
+ },
+ {
+  "usuario": "usuarioMara",
+  "primerNombre": "MaraRubia",
+  "apellido": "Verdums",
+  "mail": "mara@gmail.com",
+  "fechaNacimiento": "1964-02-08",
+  "categoria": "administrador",
+  "contraseña": "$2a$10$w1fFPdplt.Tl//a0o7S3IOzCxaGLvBBya5SSF3n7SCs6EAqXdixlC",
+  "avatar": "nuevo-1649159210655.jpg",
+  "id": 8
+ }
+]

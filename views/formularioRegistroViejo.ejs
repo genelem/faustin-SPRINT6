@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!--<link rel="stylesheet" href="/stylesheets/home.css">-->
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/formularioRegistro.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <!--<script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>-->
+    <link rel="https://fontawesome.com/">
+
+
+    <!--<link href="css/formularioRegistro.css" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">-->
+    <title>Formulario Registro</title>
+</head>
+<body>
+    <main>
+    <%- include('partials/header') %>
+   <!-- <header class="header">
+        <div class="cointainer, logo-nav-container">
+            <div class="barra">
+                <input type="text" id="searchterm" placeholder="¿Qué estas buscando?" class="barra1" >
+                
+            </div>
+            <nav class="Faustine">
+                <h3> Faustine </h3>
+            </nav>
+            <div class="logoF">
+                <img width="80" height="80" src="images/LogoFaustine-header.jpg">
+            </div>
+            <nav class="imgs">
+            <button><a href= "/view/login.html"> <img width="50" height="50" src="images/usuario.jpg"></a></button>
+            <button><a href= "#"> <img width="50" height="50" src="images/logoCompras.jpg"></button></a>
+                
+            </nav>
+
+        </div>
+    </header>-->
+    <div class="cuerpoFormularioRegistro">
+        <section class="formularioParaRegistro">
+            <form action="/formularioRegistro" method="POST">
+                <div class="contenedorTodosLosTitulos">
+                    <p class="todosLosTitulos">
+                        <span class="titulosBoton">Usuario</span>
+                    </p>
+                    <p class="todosLosTitulos">
+                        <span class="titulosBoton">Nombre</span>
+                    </p>
+                    <p class="todosLosTitulos">
+                        <span class="titulosBoton">Apellido</span>
+                    </p>
+                    <p class="todosLosTitulos">
+                        <span class="titulosBoton">Contraseña</span>
+                    </p>
+                    <p class="todosLosTitulos">
+                        <span class="titulosBoton">Confirmacion de contraseña</span>
+                    </p>
+                    <p class="todosLosTitulos">
+                        <span class="titulosBoton">Correo electronico</span>
+                    </p>
+                    <p class="todosLosTitulos">
+                        <span class="titulosBoton">Confirmacion de correo electronico</span>
+                    </p>
+                </div>
+                <div class="contenedorTodosLosBotones">
+                    <p>
+                        <input type="text" name="usuario" id="usuario" class="botonDirecto">
+                    </p>
+                    <p>
+                        <input type="text" name="nombre" id="nombre" class="botonDirecto">
+                    </p>
+                    <p>
+                        <input type="text" name="apellido" id="apellido" class="botonDirecto">
+                    </p>
+                    <p>
+                        <input type="password" name="password" id="password" class="botonDirecto">
+                    </p>
+                    <p>
+                        <input type="password" name="confirPassword" id="confirPassword" class="botonDirecto">
+                    </p>
+                    <p>
+                        <input type="email" name="correo" id="correo" class="botonDirecto">
+                    </p>
+                    <p>
+                        <input type="email" name="confirCorreo" id="confirCorreo" class="botonDirecto">
+                    </p>
+                    <p class="terYC">
+                        <span>
+                            <label for="terminos"></label>
+                            <input type="checkbox" name="terminos">
+                        </span>
+                        <span>He leido y acepto los</span><span><a href="https://www.google.com"> terminos y condiciones</a></span>
+                    </p>
+                </div>
+                <div class="crearCuenta">
+                    <p>
+                        <button type="submit" class="crearCuentaBoton">CREAR CUENTA</button>
+                    </p>
+                </div>
+                <span class="usuarioDisponibleONo">
+                    <span class="usuarioVerde">El usuario esta disponible</span><span>/</span><span class="usuarioRojo">El usuario no esta disponible</span>
+                </span>
+                <span class="passwordCoincideONo">
+                    <span class="passwordVerde">Las contraseñas coinciden</span><span>/</span><span class="passwordRojo">Las contraseñas no coinciden</span>
+                </span>
+                <span class="emailCoincideONo">
+            </form>
+        </section>
+        <span class="emailCoindiceONo">
+            <span class="emailVerde">Los correos electronicos coinciden</span><span>/</span><span class="emailRojo">Los correos electronicos no coinciden</span>
+        </span>           
+    </div> 
+    </main>  
+    <footer>
+        <%- include('partials/footer') %>
+        
+    </footer>
+    
+</body>
+</html>

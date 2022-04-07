@@ -1,0 +1,102 @@
+.contenedorTodosLosTitulos {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    top: 0px;
+    /*margin-right: 10px;*/
+    margin-right: 1rem;    
+}
+.errores{
+    margin-left:3.5rem;
+}
+
+.contenedorTodosLosBotones {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.crearCuenta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.terYC {
+    margin-top: 1rem;
+}
+
+.todosLosTitulos {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.botonDirecto {
+    /*width: 550px;*/
+    width: 10rem;
+    margin-top: 1rem;
+    border-radius: 7px;
+}
+
+.crearCuentaBoton {
+    width: 200px;
+    height: 40px;
+    border-radius: 5%;
+    margin-left: 210px;
+}
+
+.crearCuentaBoton:hover {
+    background-color: darkgray;
+    transition-property: background-color;
+    transition:
+        background-color, 0.3s;
+}
+
+
+
+.formularioParaRegistro {
+    background-image: url(/images/imagenFondoLogin-01.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 70%;
+    background-color: #FFFAF0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bold;
+    align-content: center;
+    margin: 2rem 2rem 0.5rem 5rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+    
+}
+#enviar{    
+    background-color: #81b29a;
+    width: 11rem;
+    height: 1.5rem;
+    /*color: white;*/
+    font-weight: strong;
+    font-size: 1rem;
+    margin: 1rem;
+    border-radius: 7px;
+}
+#vuelvo{   
+    text-align: center; 
+    width: 13rem;  
+    height: auto;  
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration-line:none;
+    background-color: #e6d8cc;        
+    color:black;  
+   }
+
+
+@media (min-width: 460px) {
+    /* agregar las reglas */
+}
+
+@media (min-width: 768px) {
+    /*agregar las reglas */
+}

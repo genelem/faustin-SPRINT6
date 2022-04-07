@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/carritoDeCompras.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <!--<script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>-->
+    <link rel="https://fontawesome.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+   
+    <title>Carrito de Compras</title>
+</head>
+<body>
+    <!---
+    <header class="header">
+        <div class="cointainer, logo-nav-container">
+            <div class="barra">
+                <input type="text" id="searchterm" placeholder="¿Que estas buscando?" class="barra1">
+            </div>
+            <nav class="Faustine">
+                <h3> Faustine </h3>
+            </nav>
+            <nav class="imgs">
+            
+            <button><img width="50" height="50" src="images/cuadrado.jpg"></button>
+            <button><img width="50" height="50" src="images/bag.jpg"></button>
+                
+            </nav>
+
+        </div>
+    </header>-->
+    <%- include('partials/header') %>
+    
+    <header class="tituloPagina"><img width="40" height="40" class="logoCarrito" src="design/logoCarritoDeCompras.png" alt= "Cartera"><h1>Carrito de Compras</h1></header>
+    <section class="productosEnCarrito">
+        <div class="botonTriangulo"><button class="triangulo1"></button></div>
+        <article class="primerProducto">
+            <div><img width="320" height="320" src="/images/Cartera.jpg" alt= "Cartera"></div>
+            <div><b><label for="producto1" class="titulosDeProductos">Cartera</label></b></div>
+            <div class="botonAgregarEliminar"><input type= "button" name="producto1" id="producto1" value="+ 1 -" class="botonesAgregado"></div>
+        </article>
+        <article class="segundoProducto">
+            <div><img width="320" height="320" src="/images/bolso.jpg" alt= "Bolso"></div>
+            <div><b><label for="producto2" class="titulosdeProductos">Bolso</label></b></div>
+            <div class="botonAgregarEliminar"><input type= "button" name="producto2" id="producto2" value="+ 1 -" class="botonesAgregado"></div>
+        </article>
+        <article class="tercerProducto">
+            <div><img width="320" height="320" src="/images/riñoneraa.jpg" alt= "Riñonera"></div>
+            <div><b><label for="producto3" class="titulosDeProductos">Riñonera</label></b></div>
+            <div class="botonAgregarEliminar"><input type= "button" name="producto3" id="producto3" value="+ 1 -" class="botonesAgregado"></div>
+        </article>
+        <div class="botonTriangulo"><button class="triangulo2"></button></div>
+
+    </section>
+
+    <div class="botonesParaPasar">
+        <div><button class="seleccionarVentana"></button></div>
+        <div><button class="seleccionarVentana"></button></div>
+        <div><button class="seleccionarVentana"></button></div>
+    </div>
+
+    <section class="finalizarCompra">
+        <div class="totalEnvio">
+            <div class="totalEnvio2"><h3>Total con envio</h4></div>
+            <div class="totalEnvio3">Lorem ipsum dolor sit arnet</div>
+        </div>
+        <div class="direccEntrega">
+            <div class="direccEntrega2"><h3>Direccion de entrega</h4></div>
+            <div class="direccEntrega3">Lorem ipsum dolor sit arnet</div>
+        </div>
+        <div class="botonComprar">
+            <input type="button" value="COMPRAR" class="botonDeComprar">
+        </div>
+    </section>
+    <footer>
+        <%- include('partials/footer') %>
+        
+    </footer>
+
+</body>
+</html>

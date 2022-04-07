@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/home.css">
+        <link rel="stylesheet" href="/stylesheets/global.css">
+        <link rel="stylesheet" href="/stylesheets/altaProducto.css">
+        <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+
+        <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>
+        <title>Faustine</title>
+       
+    </head>
+ 
+<body>
+    <%- include('partials/header') %>
+<main>
+    <div class="altaProductLogo">
+        <h3>LISTADO DE PRODUCTOS A SER MODIFICADOS</h3>
+            <ul>      
+                <li id="altaLogo"><i class="fas fa-file-alt"></i></li>
+                <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
+            </ul>            
+         </div> 
+        <section class="errores">
+            <% if(typeof data!='undefined'){ %>
+                <ul>                  
+                    <li style="color: red;">Producto Modificado Existosamente
+            <% } %>
+                </ul>            
+        </section>
+        <div class = "ppal">
+            <br>
+        <ul>
+            <% for( let i = 0; i < products.length; i++ ) { %>
+            <li>
+            <a href="/product/detailOne/<%= products[i].id %>"><%= products[i].name %></a>
+            </li>
+            <% } %> 
+        </ul>
+
+        </div>
+        <div class= "closeMain" >
+            <a href="/" id="vuelvo">MODIFICAR PRODUCTO </a>
+            <br/>
+            <a href="/" id="vuelvo"> Volver a Página Principal </a>
+            </div>
+           
+        <div id="modal2" class="modalmask">            
+            <div class="modalbox rotate">
+                <a href="#close" title="Close" class="close">X</a>
+                <h2>GUIA</h2>
+                <p>Seleccioná Producto a ser Modificado
+                    clickeando sobre el nombre que se displaya</p>
+               
+                 
+            </div>
+</main>
+</body>
+<footer>
+                         
+    <!--</header> -->
+   <!-- cambio el footer más arribA -->
+   <!--<footer>-->
+
+     <%- include('partials/footer') %>
+        
+    </footer>     
+
+</html > 

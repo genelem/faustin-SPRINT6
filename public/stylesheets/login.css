@@ -1,0 +1,158 @@
+.cuerpoLogin{
+    background-image: url(/images/imagenFondoLogin-01.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 70%;
+   
+    /*width: 1900px;*/
+    padding-bottom: 185px;         
+   
+}
+.cuerpoLogin h3{
+    margin-left: 2rem;
+}
+main div.altaProductLogo{
+    display:inline-block;
+     text-align: center;
+     width: 100%;
+     margin:10px;
+     color:#3D405B;
+     list-style: none;
+    
+ }
+
+div.altaProductLogo ul li{
+    list-style: none;
+    text-decoration: none;
+    color: black;
+}
+div.ppal ul li a{
+    text-decoration: none;
+    color:black;
+}
+#altaLogo{
+    font-size: 4rem;
+    color:black;
+}
+.altaProductLogo a{
+    font-size: 2rem;
+    color:black;
+    text-decoration: none;    
+}
+.paginaLogin {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left:4rem;
+       
+}
+
+.etiquetasDeLogin {
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
+}
+
+.botonesDeLogin {
+    display: flex;
+    flex-direction: column;
+    margin-top: 200px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+
+}
+#volver{
+    text-decoration: none;
+}
+
+
+div .cuentaYContraseña {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-left: 10rem;
+   /* margin-bottom: 70px;*/
+}
+
+.linkOlvidasteContraseña {
+    margin-right: 30px;
+    font-size: 30px;
+}
+
+.linkCrearCuenta {
+    font-size: 25px;
+}
+
+.boton1 {
+    width: 200px;
+    height: 40px;
+    border-radius: 5%;
+    color: black;
+    background-color: #e6d8cc;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.boton1:hover {
+    background-color: #cde4e7;
+    transition-property: background-color;
+    transition:
+        background-color, 0.3s;
+}
+#imgAvatar{
+    width: 5rem;
+    height: 5rem;
+}
+.usuario {
+    font-size: 18px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.password {
+    font-size: 18px;
+    margin-top: 20px;
+    position: relative;
+    left: 89px;
+    font-weight: bold;
+
+}
+
+.barraDeUsuario {
+    width: 200px;
+    height: 18px;
+    border-radius: 3px;
+}
+
+.barraPassword {
+    width: 300px;
+    height: 18px;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.iniciarSesion {
+    font-size: 18px;
+}
+
+.linkOlvidasteContraseña {
+    text-decoration: none;
+    color: rgb(105, 99, 99);
+    font-weight: bold;
+
+
+}
+.linkCrearCuenta{
+    text-decoration: none;
+    color: rgb(105, 99, 99);
+    font-weight: bold;
+
+}

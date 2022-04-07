@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>
+    <link rel="https://fontawesome.com/">
+  
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+
+    <title>Login</title>
+</head>
+
+<body>
+   <!--- <header class="header">
+        <div class="cointainer, logo-nav-container">
+            <div class="barra">
+                <input type="text" id="searchterm" placeholder="¿Qué estas buscando?" class="barra1" >
+
+            </div>
+            <nav class="Faustine">
+                <h3> Faustine </h3>
+            </nav>
+                <div class="logoF">
+                <img width="80" height="80" src="images/LogoFaustine-header.jpg">
+            </div>
+            <nav class="imgs">
+            <button><a href= "#"> <img width="50" height="50" src="images/usuario.jpg"></a></button>
+            <button><a href= "#"> <img width="50" height="50" src="images/logoCompras.jpg"></button></a>
+            </nav>
+        </div>
+    </header>-->
+    <%- include('partials/header') %>
+<div class="cuerpoLogin">
+          
+    <form action="/users/login" method="POST">
+        <div class ="paginaLogin">
+        <%- include('partials/cuerpoLogin') %>  
+        </div> 
+        <div class="button">    
+            <input type="submit" name="submit" class="boton1" value="Iniciar Sesión"> </input>
+             <br/>         
+           <p id="volver"><a href="/" class= "boton1">Volver a Pagina Principal</a></p>
+        </div>             
+        
+        <div class="cuentaYContraseña">                     
+            <p>
+                <a href= "/users/olvido" class="linkCrearCuenta">¿Olvidaste tu contraseña?</a>
+            </p>
+            <p>
+                <a href= "/users/register" class="linkCrearCuenta">Crea tu cuenta</a>
+            </p>            
+                       
+            <p>
+                <a href= "/users/cambio" class="linkCrearCuenta">Modificar Contraseña</a>
+            </p>
+        </div>
+    </fom>
+</div>  
+
+    <footer>
+        <%- include('partials/footer') %>
+       
+    </footer>
+</body>
+
+</html>

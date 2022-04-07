@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/carritoDeCompras.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+    <link rel="stylesheet" href="/stylesheets/finCarrito.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/2393de61a4.js" crossorigin="anonymous"></script>
+    <!--<script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>-->
+    <link rel="https://fontawesome.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+   
+    <title>Carrito de Compras</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+<main>
+    <div class="tituloPaginaFin">
+        <!--<p class="tituloPagina"><img width="40" height="40" class="logoCarrito" src="/images/logoCarritoDeCompras.png" alt= "Cartera"> -->
+            <!--<p id="logoCarrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p> -->
+            <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>       
+            <!--<h1>Carrito de Compras</h1></header>-->
+            <h3 class="totalEnvio2">Total Compra: <spam> $ 55.000 </spam></h3>
+    </div>
+    <form action="/" method="GET">
+        <div class="datosFacturacion">
+            <p><label id="" for ="nombreProducto">DIRECCION ENTREGA</label>
+            <input placeholder="" type="text" minlength="10" maxlength="45" name="direccion" id="direccion" required "[[A-Za-z ]{1,6}"></p>
+
+            <br/>
+            <p><label id="" for ="descripcionProducto">CODIGO POSTAL</label>
+                <input placeholder="" type="text" minlength="4" maxlength="18" name="codigoPostal" id="codigoPostal" required "[[A-Za-z ]{1,6}"></p> 
+
+            <br/> 
+            <div class="seleccionDistribucion">
+                <h3>Tipo De Distribución</h3>
+                <div id="tipoDistribucion">
+                <select name ="distribucionCliente" id ="talles">
+                    <option value = "Standar">Standard </option>
+                    <option value = "Express">Express</option>                     
+                </select>
+            </div> 
+            <br/> 
+            <div class="seleccionPago">
+                <h3>FORMA DE PAGO </h3>
+                <br/>
+                <div class="imagenesPago"> 
+
+                <input type="checkbox" id = "colorList" name="visa" value="visa" >
+                <label for=""><img id="idPago" src="/images/visa.jpg"></label>          
+                <input type="checkbox" id="amex" name="amex" value="azul">
+                <label for=""><img id="idPago" src="/images/amex.jpg"></label>          
+                <input type="checkbox" id="mp" name="mp" value="aqua">
+                <label for=""><img id="idPago" src="/images/mp.jpg"></label>          
+                <input type="checkbox" id ="master" name="master" value="superman">
+                <label for=""><img id="idPago" src="/images/master.jpg"></label>
+                <input type="checkbox" id ="banco" name="banco" value="superman">
+                <label for="" class="iconoPago" ><i class="fa-solid fa-money-check"></i></label>
+  
+ 
+            </div>  
+            <div class="seleccionCuotas">
+                <h3>Seleccione cantidad de cuotas </h3>
+                <div id="tipoDistribucion">
+                <select name ="distribucionCliente" id ="talles">
+                    <option value = "Standar"> PAGO TOTAL  </option>
+                    <option value = "Standar"> 3 CUOTAS </option>
+                    <option value = "Express"> 6 CUOTAS</option>
+                    <option value = "Standar">12 CUOTAS </option>                     
+                </select>
+            </div>        
+            
+        </div>
+        <div class= "closeMain" >
+            <a href="/" id="vuelvo">Volver a Pagina Principal</a>
+        </div>
+    </form>
+</main>
+
+</body>
+        <footer>
+                         
+           <!--</header> -->
+          <!-- cambio el footer más arribA -->
+          <!--<footer>-->
+
+            <%- include('partials/footer') %>
+               
+           </footer>     
+       
+   </html >

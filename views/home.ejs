@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="/stylesheets/home.css">
+        <link rel="stylesheet" href="/stylesheets/global.css">
+        <link rel="stylesheet" href="/stylesheets/barraScile.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <!--<script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>-->
+        <link rel="https://fontawesome.com/">
+        <title>Faustine</title>
+        <!--<link rel="stylesheet" href="/stylesheets/style.css"-->
+    </head>
+ 
+    <body>
+ 
+  <!--     <header class="header">
+         <div class="search-bar">-->
+            <!--<div class="cointainer, logo-nav-container">-->  
+           <!-- <div class="form" action="#" method="GET">-->
+         <!--      <form action="#" method="GET">
+                    <input type="search" name="busqueda" placeholder="¿qué estás buscando?">
+                    <button id="botonSearch" type="submit" aria-placeholder="fa fa-search"><i class="fa fa-search"></i></button>  
+                </form>              
+            </div>                  
+          
+            <div class="logo-nav-container">
+                <div class="Faustine">
+                    <img  class="logoF" src="images/LogoFaustine-header.jpg">
+                    <h3> Faustine </h3>
+                </div>
+                
+                <div class="imgs">
+                 <a href= "/login"><i class="fas fa-user-circle"></i></a>
+                 <a href= "/carritoDeCompras"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                 <a href= "/altaProducto"><i class="fas fa-file-alt"></i></a>
+                 <a href= "/ofertasSemana"><img id="saleLogo" src="images/icono.sale.png"></a>              
+   
+                </div>
+            </div>
+        </header>-->
+        <%- include('partials/header') %>
+    <body class="body1">
+ 
+       <!--- <header> -->
+    <main>
+        <!-- partial:index.partial.html -->
+<div class="slider">
+	<div class="slide-track">
+		<div class="slide">
+			<!--<img id="imgBarra" src="images/gucci.1.SinFondo.png" height="100" width="250" alt="" />-->
+            <img id="imgBarra" src="images/gucci.1.SinFondo.png">
+		</div>
+		<div class="slide">
+			<!--<img id="imgBarra" src="images/dymsSinFondo.png" height="100" width="250" alt="" />-->
+            <img id="imgBarra" src="images/bandoleraHombre1SinFondo.png">
+
+		</div>
+		<div class="slide">
+			<!--<img id="imgBarra" src="images/carteraLouisRosa1.jpg" height="100" width="250" alt="" />-->
+            <img id="imgBarraMediana" src="images/dymsSinFondo.png">
+
+		</div>
+		<div class="slide">
+			<!--<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100" width="250" alt="" />-->
+            <img id="imgBarraGrande" src="images/bandoleraLouisSinFondo.png">
+		</div>
+		<div class="slide">
+			
+            <img id="imgBarraChica" src="images/New_2016_Louis_Vuitton_Bags.png">
+		</div>
+		<div class="slide">
+			<img id="imgBarra" src="images/bandoleraAzulSinFondo.png" >
+		</div>
+		<div class="slide">
+			<img id="imgBarra" src="images/mochilaGucciSinFondo.png">
+		</div>
+		<div class="slide">
+			<img id="imgBarra" src="images/bandoleraRojaSinFondo.png" >
+		</div>
+		<div class="slide">
+			<img id="imgBarraGrande" src="images/carteraColoresSinFondo.png" >
+		</div>
+		<div class="slide">
+			<img id="imgBarra" src="images/bolsoLuoisSinFondo.png" >
+		</div>
+		<div class="slide">
+			<img id="imgBarraGrande" src="images/mochilaColoresSinFondo.png" >
+		</div>
+		<div class="slide">
+			<img id="imgBarra" src="images/carteraLouisRosa1.SinFondo.png" >
+		</div>
+		<div class="slide">
+			<img  id="imgBarraGrande"src="images/mochilaNegraSinFondo.png" >
+		</div>
+		<div class="slide">
+			<img id="imgBarra" src="images/mochilaGverdeSinFondo" >
+		</div>
+	</div>
+</div>
+<!-- partial -->
+
+            <section class="productos">
+                <div class="derecha">
+                   
+                    <div class="producto">
+                         <div class="cajaGrande">
+                            <a href="/product/detail/1"><img src="images/bolsoFaustineSinFondo.png" alt= "bolsos" class="bolsos1"></a>
+                            <div class="cajaDetalle">
+                            <h4>BOLSO FAUSTINE </h4>
+                            <p id="titulo" >Cuero "piel"/interior ecológico</p>
+                            <br/>
+                            <p>PRECIO : $ 18.000</p>
+                            <p id="oferta">ON SALE: 10%</p>
+                            </div>
+                        </div>
+                            <h3>Bolsos <span><a href="/product/detail/3"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                     
+                    </div>
+                    <div class="producto">
+                        <div class="cajaGrande">
+                        <a href="product/detail/2"><img src="images/bandoleraBeigeSinFondo.png" alt= "bandoleraCereza" class="carteras1"></a>
+                        <div class="cajaDetalle">
+                            <h4>CARTERA BRIGIT</h4>
+                            <p id="titulo" >Cuero Ecológico "Supremi"</p>
+                            <br/>
+                            <p>PRECIO : $ 14.000</p>
+                            <p id="oferta">ON SALE: 5%</p>
+                            </div>
+                        </div>   
+                        <h3>Carteras <span><a href="/product/detail/3"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                       
+                        </div>
+                    </div>
+                <div class="izquierda">
+                    <div class="producto">
+                        <div class="cajaGrande">
+                        <a href="/product/detail/4"><img id="bandoleraCereza" src="images/cartera 1SinFondo.png" alt= "carteras" class="bandoleras1"></a>
+                        <div class="cajaDetalle">
+                            <h4>BANDOLERA STACK </h4>
+                            <p id="titulo" >Cuero "novillo" Interior "SOFT"</p>
+                            <br/>
+                            <p>PRECIO : $ 15.000</p>
+                            <p id="oferta">ON SALE: 12%</p>
+                            </div>
+                        </div> 
+                        <h3>Bandoleras <span><a href="/product/detail/3"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                         
+                        
+                       
+                    </div>
+                    <div class="producto">
+                        <div class="cajaGrande">
+                        <a href="product/detail/5"><img src="images/mochilaGVerdeSinFondo.png" alt= "mochilas" class="mochilas1"></a>
+                        <div class="cajaDetalle">
+                        <h4>MOCHILA BARBIE </h4>
+                            <p id="titulo" >Cuero "piel" Interior "Supremi"</p>
+                            <br/>
+                            <p>PRECIO : $ 15.000</p>
+                            <p id="oferta">ON SALE: 12%</p>
+                            </div>
+                        </div>   
+                        <h3>Mochilas <span><a href="/product/detail/5"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3>    
+                        
+                                 
+                </div>                          
+            </section>
+            <section>
+                <div class="iconos">
+ 
+                    <i class="fas fa-truck-moving" size></i>
+                    <i class="fas fa-credit-card"></i>
+                    <i class="fas fa-money-bill-wave"></i>
+ 
+                </div>
+                <div class="modo-pago">
+                    <p>Envios a todo el país</p>          
+                    <p>Pago en cuotas</p>
+                    <p>Pago por transferencia</p>
+                </div>                
+                 
+            </section>                     
+    </main>
+         
+     <footer>
+        <%- include('partials/footer') %>
+                                 
+        <!--</header> -->
+       <!-- cambio el footer más arribA -->
+       <!--<footer>-->
+        <!--<div class="footerfaustine">
+                <img width="250" height="200" class="logoff" src="images/logo.jpg">
+                <div class="redes">
+                    <img width="50" height="50" class="logoIgNegro" src="images/logoIgNegro.jpg">
+                    <img width="50" height="50" class="logoFaceNegro" src="images/logoFaceNegro.jpg">
+                    <img width="50" height="50" class="logoWappNegro" src="images/logoWappNegro.jpg">
+ 
+                </div>
+                <nav class="lista1">
+                    <ul>
+                        <li class="listasMargenes"><a href="#">Preguntas</a></li>
+                        <li class="listasMargenes"><a href="#">Ayuda</a></li>
+                        <li class="listasMargenes"><a href="#">La Marca</a></li>
+                        <li class="listasMargenes"><a href="#">Cambios y devoluciones</a></li>
+                        <li class="listasMargenes"><a href="#">Whatsapp</a></li>
+                        <li class="listasMargenes"><a href="#">Instagram</a></li>
+                        <li class="listasMargenes"><a href="#">Numero</a></li>
+                        <li class="listasMargenes"><a href="#">Mail</a></li>
+                    </ul>
+                </nav>
+   
+   
+   
+            </div>
+        </footer>-->
+ 
+    </body>
+    
+</html

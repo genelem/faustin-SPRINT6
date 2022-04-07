@@ -1,0 +1,25 @@
+
+**********************************************************
+6 de ABRIL 2022
+ TERMINADA LA ENTREGA DEL SPRINT 5 AHORA FALTAN
+  1) arreglar las páginas que van a send ".. " y armar bien una página correcta
+  2) CONTRASEÑA (EN LOGIN Y EN MODIFICAR CONTRASEÑA VER EL TEMA DEL CLICK PARA QUE LA VEA)
+  3) en PRODUCTOS: 
+            3-a)que se pueda clickear los productos de OFERTA SEMANA ( flor )
+            3-b)arreglar imágenes
+            3-c)ver si se puede en el slice clickear productos para ver DETALLE
+            3-d) sacar la parte de comprar en detalle o ver como se maneja eso
+  4) EN PAGINA GENERAL 
+      faltan y lo voy a hacer con MODAL ACTIVO
+      4-a) TERMINOS Y CONDICIONES
+      4-b) QUIENES SOMOS
+      4-C) CANALES DE DISTRIBUCIÓN 
+
+5 ) DESDE EL PRINCIPIO QUEDÓ MAL EL TEMA DEL HEADER con RESPONSIVE . ver de arreglar 
+ese tema 
+
+
+
+
+
+

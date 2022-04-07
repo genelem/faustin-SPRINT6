@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/home.css">
+        <link rel="stylesheet" href="/stylesheets/global.css">
+        <link rel="stylesheet" href="/stylesheets/altaProducto.css">
+        <link rel="stylesheet" href="/stylesheets/updateProducto.css">
+        <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+
+        <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>
+        <title>Faustine</title>
+       
+    </head>
+ 
+<body>
+ 
+     <!---  <header class="header">
+            <div class="cointainer, logo-nav-container">
+                <div class="barra">
+                    <input type="text" id="searchterm" placeholder="¿Qué estas buscando?" class="barra1" >
+                   
+                </div>
+                <nav class="Faustine">
+                    <h3> Faustine </h3>
+                </nav>
+                <div class="logoF">
+                    <img width="80" height="80" src="images/LogoFaustine-header.jpg">
+                </div>
+                <nav class="imgs">
+                <button><a href= "/login"> <img width="50" height="50" src="images/usuario.jpg"></a></button>
+                <button><a href= "#"> <img width="50" height="50" src="images/logoCompras.jpg"></button></a>
+                   
+                </nav>
+   
+            </div>
+        </header> -->
+        <%- include('partials/header') %>
+<main>
+            <div class="altaProductLogo">
+                <h3>UD ESTÁ A PUNTO DE BORRAR ESTE PRODUCTO </h3>
+                <ul>      
+                <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
+                <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
+                </ul>            
+            </div> 
+            
+            <form action="/product/bajaProducto" method="POST">
+                <div class="descriptionProduct">
+                    <p><label id="" for ="nombreProducto">NOMBRE DEL PRODUCTO</label>
+                    <input placeholder="" type="text" name="name" id="user1" value ="<%= producto.name %>"></p>
+                    <br/>
+                    <p><label id="" for ="descripcionProducto">DESCRIPCION PRINCIPAL </label>
+                        <input placeholder="" type="text"  name="description" id="user1" value="<%= producto.description %>" ></p>  
+                    <br/>  
+                    <p><label id="" for ="descripcionProducto">DETALLE  </label>
+                        <input placeholder="" type="text" name="description2" id="user1" value="<%= producto.description2 %>"></p>  
+                    <br/> 
+                    <p><label id="" for ="descripcionProducto">ID   </label>
+                        <input placeholder="" type="text" name="id" id="user1" value="<%= producto.id %>"></p>  
+                    <br/>    
+                    <p><img id="imagenProducto" src="<%= producto.imagenPPAL %>"></p>
+                                       
+                    
+                </div>
+                
+                
+                <div id="modal2" class="modalmask">            
+                    <div class="modalbox rotate">
+                        <a href="#close" title="Close" class="close">X</a>
+                        <h2>IMPORTANTE</h2>
+                        <p> Ud está a punto de ELIMINAR REGISTRO
+                            Del producto </p>
+                        <p> Verifique cuidadosamente si es lo que quiere hacer</p>                    
+                         
+                        </div>
+                </div>
+                
+                <div class="submitMasEnviar">          
+                    <input type="submit" name="submit" id="irBaja" value="CONFIRMAR BAJA "> </input>
+                </div>        
+                <div class= "closeMain" >
+                <a href="/" id="vuelvo">Volver a Pagina Principal</a>
+                </div>
+               
+        </form>
+         
+</main>
+</body>
+        <footer>                          
+           <!--</header> -->
+          <!-- cambio el footer más arribA -->
+          <!--<footer>--> 
+            <%- include('partials/footer') %>                
+        </footer>   
+
+   </html > 
+            

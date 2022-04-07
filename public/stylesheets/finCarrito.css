@@ -1,0 +1,68 @@
+/*titulo página está en css carrito*/
+.tituloPaginaFin {
+    /*display: flex;
+    justify-content: center;
+    align-items:center;*/
+    text-align: center;    
+    background-color: #FFFAF0;
+    color:black;     
+}
+div.tituloPaginaFin h3{ 
+    font-size: 3rem;  
+}
+div.tituloPaginaFin h2{ 
+    font-size: 5rem;  
+}
+/********************/
+div.datosFacturacion{
+    font-weight: bold;
+    color:#bfa294;
+    margin:5px 10px 5px 15px;
+    padding:1rem;
+    box-shadow: 0px 0px 10px rgb(100 100 100);  
+}
+#direccion{
+    width: 60%;
+    border-radius: 7px;
+}
+#codigoPostal{
+    width: 20%;
+    border-radius: 7px;
+}
+div.seleccionDistribucion, div.seleccionCuotas{
+    margin:1rem 0 1rem 0;
+}
+#tipoDistribucion{
+    margin-left: 3rem;
+}
+/* metodos de pago */
+div.seleccionPago{
+    display: flex;    
+    flex-direction: column;
+    justify-content: flex-start;    
+}
+div.imagenesPago{
+    display:flex;
+    flex-wrap:wrap;  
+    justify-content: flex-start;
+    height: 6rem;  
+    padding: 5px 5px 5px 5px;
+}
+div.imagenesPago label{
+    width: 5%;
+    height: 0.5rem;
+}
+#idPago{
+    width: 4rem;
+}
+.iconoPago i{
+    color:black;
+    font-size: 3rem;
+    width: 4rem;
+    height: 4rem;
+}
+@media (max-width: 361px){
+    div.datosFacturacion{
+    box-shadow:none; 
+    }
+}

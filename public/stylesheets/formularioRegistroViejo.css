@@ -1,0 +1,39 @@
+.usuarioVerde {
+    color: green;
+}
+
+.usuarioRojo {
+    color: red;
+}
+
+.passwordVerde {
+    color: green;
+}
+
+.passwordRojo {
+    color: red;
+}
+
+.emailVerde{
+    color: green;
+}
+
+.emailRojo {
+    color: red;
+}
+
+.formularioParaRegistro {
+    background-image: url(/images/imagenFondoLogin-01.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 70%;
+    background-color: #FFFAF0;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    font-weight: bold;
+    
+    
+}

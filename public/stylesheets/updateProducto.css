@@ -1,0 +1,24 @@
+#actual{
+    text-align: center;
+    color:#bfa294;   
+    font-size:large;
+}
+#irBaja{
+    width: 18rem;
+    background-color:coral;
+    color:black;
+    border-radius:20px;
+    text-align: center;
+    text-decoration: none;
+
+   
+}
+#user2{
+    width: 10%;
+}
+
+/* ********** lo de ABAJO PERTENECE A BAJAPRODUCTO **** */
+
+#imagenProducto{
+    width: 8rem;
+}

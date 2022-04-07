@@ -1,0 +1,353 @@
+/*empieza el main*/
+main{  
+    display: flex;
+    margin: 0 5rem 0 5rem;
+    flex-direction: column; 
+    font-size: 14px;
+       
+}
+/* creo que hay que borrar
+main div.altaProdcutLogo{ */  
+    /*display: flex;*/
+/*    display:inline-block;
+    color: #383536;
+    text-align: center;
+    width: 100%; 
+    /*justify-content: center;
+    margin-left: 15rem;   
+    flex-direction: column;
+    flex-wrap: wrap; 
+} */
+  
+/*** agrego EDITAR ICON***/
+main div.altaProductLogo{ 
+   display:inline-block;
+    text-align: center;
+    width: 100%;
+    margin:10px;
+    color:#3D405B; 
+    list-style: none;   
+}
+div.altaProductLogo ul li{
+    list-style:none;}
+#licenciaLogo{
+    width: 3rem;
+}
+
+.altaProductLogo a, #flecha, .submitMasEnviar a, 
+.productsRelacionados a{
+    font-size: 1rem;
+    color:black;
+    text-decoration: none;    
+}
+.altaProductLogo h3{
+    text-align: center;
+    color:#3D405B;
+    font-weight: bold;
+    padding:4px 0 0 20px;
+    font-size:1.3rem;
+}
+/*** termina parte encabezado ALTA */
+.descriptionProduct{  
+    display: flex;
+    font-weight: bold;
+    color: #E07A5F;
+    margin: 5px 15px 0px 15px;
+    /* padding: 0.5rem; */
+    box-shadow: 0px 0px 10px rgb(100 100 100);
+    width: 100%;   
+    display: flex;    
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+}
+.divDescriptionText{
+    display: block;
+    text-decoration: none;
+    color: #383536;    
+    text-align: center;
+    margin: 5px 10px 3px 3rem; 
+}
+.divDescriptionText ul {
+    list-style: none;
+}
+
+  
+.divGrandePrincipal{
+    display:flex;
+    flex-direction: column;
+}
+
+
+/*aquí agrego las imágenes del producto */
+.divPrincipal{
+    width: 70%;   
+    color: #383536;
+    font-weight: bold;
+    display: flex;
+    /* align-content: flex-start; */
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    padding: 1px 5px 15px 5px;
+    align-items: flex-end;
+    margin-left: 2rem;
+    box-sizing:border-box;
+
+}
+.divPrincipalPrecio{  
+    margin-left: 12rem;
+    margin-right: 4rem;
+    font-weight: bold;
+}
+.divSecundarias{     
+    display: flex;
+    justify-content: space-around;    
+    width: 70%;   
+    padding: 15px 5px 15px 5px;
+}
+/*------------*/
+.cajaGrande{
+    display:flex;
+    flex-direction: row;
+
+}
+.productsRelacionados{ 
+ /*modificar en 756*/
+    flex-direction: column;
+    margin-left: 22px;
+    margin-right: 15px;
+
+  
+}
+#productsRelImagen{
+    width: 11rem;
+}
+    
+.descriptionProduct p{      
+    color: #383536;
+    font-weight: bold;
+    font-size: 1rem; 
+}
+#precioAmount{
+    position:relative;
+    top:1.5 rem;    
+    font-size: 1rem;
+    color:#383536;
+    font-weight: bold;
+}
+#principal{
+    width: 50%;    
+    margin-left: 1rem; 
+    animation: zoom-in-zoom-out 9s 5s ease-out infinite;
+}
+/*main div.superman img{
+    width: 10rem;
+    height: 10rem;
+    animation: zoom-in-zoom-out 12s 5s ease-out infinite;
+}*/
+@keyframes zoom-in-zoom-out {
+    0% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(2, 2);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+}
+#secundarias{
+    width: 20%;
+    margin:5px;
+        
+}
+#espalda{
+    width: 35%;
+    position:relative;    
+    bottom: 2rem;
+    left:6rem;
+}
+#secundariasManga{
+    width: 10%;
+   
+}
+/* hasta aquí imagenes producto principal*/
+
+#user1{
+    width: 60%;
+}
+/*termina descriptionProduct***/
+/*agregado para Dar Alta Licencia*/
+main div.licencias{
+    margin:5px 0 15px 0;
+}
+div.licencias i,div.tipoProducto i,div.seleccionColor i{
+    color:black;
+}
+div.licencias p, div.tipoProducto p,div.seeccuibTalle{
+    text-align: center;
+}
+/*titulos h3 del main*/
+main h3{
+    color:#E07A5F;
+    font-weight: bold;
+    font-size: 2rem;
+}
+main div.seleccionColor{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin:2px 2px 0 2px;
+}
+main div.seleccionColor p{
+    text-align: center;
+    display:inline-block;
+
+}
+div.colores{
+    display:flex; 
+    flex-wrap:wrap;  
+    justify-content: flex-start;
+    height: 6rem;  
+    padding: 5px 5px 5px 5px;
+}
+div.colores label{
+    width: 5%;
+    height: 0.5rem;
+}
+div.seleccionTalle{
+    margin:0px 0 10px 0;
+}
+#colorNuevo{
+    text-align: center;
+}
+#talle{
+    margin-left: 3rem;
+}
+/* termina talle y color*/
+#sale{
+    width: 2.9rem;
+}
+/*empieza rectángulo productValores*/
+.productValores{  
+    font-weight: bold;
+    width: 54%;
+    height: 32rem;
+    color:#bfa294;
+    margin:25px 20px 5px 15px;
+    padding:1rem;
+    box-shadow: 0px 0px 10px rgb(100 100 100);   
+}
+.ofertaPorcentaje{
+    margin-top:10px
+}
+.ofertaPorcentaje h2{
+    margin-left: 3rem;
+    color:black;
+    font-weight: bold;   
+}
+.ofertaPorcentaje i{
+    color:black;
+    width: 3rem;
+}
+#user{
+    width: 25%;
+}
+
+main div.submitMasEnviar{    
+    display: flex;
+    flex-wrap: wrap;   
+    flex-direction:column;
+    margin: 10px 1px 10px 18px;
+    /*background-color: #F4F1DE;*/
+    align-content: space-around;  
+   /* color: #383536;*/
+}
+#importanteFinal{
+    color:black;
+    align-self: center;
+}
+
+
+#enviar{    
+    background-color: #81b29a;
+    width: 8rem;
+    height: auto;
+    /*color: white;*/
+    font-weight: strong;
+    border-radius: 10px;
+    margin: 10px 0px 10px 20px;   
+}
+#vuelvo{   
+    text-align: center; 
+    position:absolute;  
+    width: 15rem;  
+    height: 1.8rem;  
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration-line:none;
+    border-radius: 10px;
+    margin-left: 5rem; 
+    margin:0px;  
+    text-align: center; 
+    background-color: #e6d8cc;        
+    border-radius:20px;
+    color:black;
+    font-weight: strong;
+    margin-bottom: 40rem;        
+   }
+
+input{
+    background-color:#F4F1DE ;
+    border-radius: 2px;
+}
+option #talles option{
+    width: 3rem;
+    font-size: 2rem;
+    height: 3rem;
+}
+input:hover{
+    background-color:#81b29a;
+}
+.talle option:hover{
+    background-color:#9EE8A1;
+}
+/*botón volver a página ppal*/
+
+div.closeMain{
+    display:flex;
+    height: 25rem;
+    text-align: center;
+    justify-content: space-around;
+
+}
+
+/***** termina botón volver a página ppal */
+/********************/
+/***********/
+/*Nombre del producto (name)
+● Descripción (description)
+● Imagen (image)
+● Categoría (category)
+● Colores (o cualquier otro campo similar como: tamaños, talles, etc)
+● Precio (price)
+*/
+/*************************************************/
+/* probando el buble para colores */
+#colorList{
+    width: 2rem;
+    height: 2rem;
+
+}
+
+@media (max-width:500px){
+    .descriptionProduct, .productValores{
+        box-shadow:none;
+       
+    }
+}
+
+
+
+

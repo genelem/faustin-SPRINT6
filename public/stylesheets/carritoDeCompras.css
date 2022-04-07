@@ -1,0 +1,218 @@
+.tituloPagina {
+    /*display: flex;
+    justify-content: center;
+    align-items:center;*/
+    text-align: center;    
+    background-color: #FFFAF0;
+    color:black;     
+}
+div.tituloPagina h2{ 
+    font-size: 5rem;  
+}
+
+
+body section.productosEnCarrito {
+    background-color: #FFFAF0;
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    padding: 1rem;
+    flex-wrap: nowrap; 
+}
+.productosEnCarrito img{
+    width: 11rem;
+    height: 11rem;
+    padding:1rem;
+}
+
+.logoCarrito {
+    margin-right: 10px;
+}
+
+.triangulo1  {
+    background-color: #FFFAF0;
+    border-left: 0px solid transparent;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent; 
+    border-right: 30px solid;
+}
+
+
+.triangulo2  {
+     background-color: #FFFAF0;
+     border-left: 30px solid;
+     border-top: 15px solid transparent;
+     border-bottom: 15px solid transparent; 
+     border-right: 0px solid transparent;
+}
+
+.primerProducto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    width: 30%;
+}
+
+.segundoProducto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    width: 30%;
+}
+
+.tercerProducto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    width: 30%;
+}
+
+.seleccionarVentana {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+}
+
+.seleccionarVentana:hover {
+    background-color: black;
+    transition-property: background-color;
+    transition:
+        background-color, 0.1s;
+}
+
+.botonesParaPasar {
+    background-color: #FFFAF0;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.finalizarCompra {    
+    display:flex;
+    margin-left:8rem;
+    justify-content: space-around; 
+    flex-direction: column; 
+}
+
+.totalEnvio h3, .totalEnvio a{     
+    text-decoration: none;
+    color:black;
+    font-size: 2rem;
+}
+div .totalEnvio{
+    margin-left: 6rem;
+}
+.finalizar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    
+}
+/*
+#enviar{    
+    background-color: #81b29a;
+    width: 11rem;
+    height: 1.5rem;
+    /*color: white;
+    font-weight: strong;
+    font-size: 1rem;
+    margin: 1rem;
+    border-radius: 7px;
+} 
+*/
+
+#finalizarHref{    
+    background-color: #81b29a;
+    width: 15rem;
+    height: 1.5rem;
+    /*color: white;*/
+    font-weight: bold;
+    font-size: 1rem;     
+    border-radius: 7px;
+    color:black;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 1rem;
+}
+
+#vuelvo{   
+    text-align: center; 
+    width: 20rem;  
+    height: auto;  
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration-line:none;
+    background-color: #e6d8cc;        
+    color:black; 
+     
+   }
+
+.direccEntrega {
+    display:flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+
+.botonComprar {
+    display:flex;
+    flex-direction: column-reverse;
+    margin-right:45px;
+}
+
+.botonDeComprar {
+    width: 100px;
+    height: 70px;
+    border-radius: 5%;
+}
+
+.botonDeComprar:hover {
+    background-color: darkgray;
+    transition-property: background-color;
+    transition:
+        background-color, 0.3s;
+}
+
+.botonesAgregado:hover {
+    background-color: darkgray;
+    transition-property: background-color;
+    transition:
+        background-color, 0.1s;
+}
+
+.botonesAgregado {
+    width: 60px;
+    height: 30px;
+    border-radius: 3%;
+    margin-top: 5px;
+}
+
+.totalEnvio2 {
+    margin-bottom:50px;
+    text-decoration:underline;
+}
+
+.direccEntrega2 {
+    margin-bottom:50px;
+    text-decoration:underline;
+}
+
+.titulosDeProductos {
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+
+

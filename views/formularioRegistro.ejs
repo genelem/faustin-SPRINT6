@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/formularioRegistro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="https://fontawesome.com/">
+    <title>Formulario Registro</title>
+</head>
+<body>
+    <!--<header class="header">
+        <div class="cointainer, logo-nav-container">
+            <div class="barra">
+                <input type="text" id="searchterm" placeholder="¿Que estas buscando?" class="barra1">
+            </div>
+            <nav class="Faustine">
+                <h3> Faustine </h3>
+            </nav>
+            <nav class="imgs">
+            
+            <button><img width="50" height="50" src="design/cuadrado.jpg"></button>
+            <button><img width="50" height="50" src="design/bag.jpg"></button>
+                
+            </nav>
+
+        </div>
+    </header>-->
+    <header>
+        <%- include('partials/header') %>
+    </header>    
+
+    <section class="formularioParaRegistro">
+        
+        <form action="/users/register" enctype="multipart/form-data" method="POST" >
+            <p><label id="" for ="usuario" class="todosLosTitulos">Usuario</label>
+                <input class="todosLosBotones" placeholder="" type="text"  name="usuario" ></p>
+                <% if(locals.errorsReg && locals.errorsReg.usuario){ %>
+                    <span id="errorMsge" > <%= errorsReg.usuario.msg  %> </span>
+                  <% } %> 
+                <br/>
+            <!--<div class="contenedorTodosLosTitulos">-->
+                <p><label id="" for ="nombre" class="todosLosTitulos">Nombre</label>
+                <input class="todosLosBotones" placeholder="" type="text"  name="primerNombre" ></p> 
+                <% if(locals.errorsReg && locals.errorsReg.primerNombre){ %>
+                    <span id="errorMsge" > <%= errorsReg.primerNombre.msg  %> </span>
+                  <% } %> 
+                <br/>   
+                
+                <p><label id="" for ="apellido" class="todosLosTitulos">Apellido</label>
+                <input class="todosLosBotones" placeholder="" type="text"  name="apellido" ></p> 
+                <% if(locals.errorsReg && locals.errorsReg.apellido){ %>
+                    <span id="errorMsge" > <%= errorsReg.apellido.msg  %> </span>
+                  <% } %> 
+                <br/>   
+                
+                <p><label id="" for ="contraseña" class="todosLosTitulos">Contraseña</label>
+                <input class="todosLosBotones" placeholder="" type="password"  name="contraseña"></p>
+                <% if(locals.errorsReg && locals.errorsReg.contraseña){ %>
+                    <span id="errorMsge" > <%= errorsReg.contraseña.msg  %> </span>
+                  <% } %> 
+                <br/>                 
+                
+                <p><label id="" for ="email" class="todosLosTitulos">Correo Electrónico</label>
+                <input class="todosLosBotones" placeholder="" type="text" " name="mail" ></p>
+                <% if(locals.errorsReg && locals.errorsReg.mail){ %>
+                    <span id="errorMsge" > <%= errorsReg.mail.msg  %> </span>
+                  <% } %> 
+                <br/> 
+                <p><label id="" for="file">Ingresá tu AVATAR</label>
+                    <input class="todosLosBotones" type="file" name="avatar" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none"> </p>
+                
+                <p><label id="" for="fechaNacimiento">Fecha de Nacimiento</label>
+                    <input class="todosLosBotones" type="date" name="fechaNacimiento" id="archivo"> </p>
+                <% if(locals.errorsReg && locals.errorsReg.fechaNacimiento){ %>
+                    <span id="errorMsge" > <%= errorsReg.fechaNacimiento.msg  %> </span>
+                 <% } %> 
+                    <br/>
+                <p><label id="" for="categoria">Categoria</label>
+                    <input class="todosLosBotones" type="text" name="categoria" id="archivo"> </p>
+                <% if(locals.errorsReg && locals.errorsReg.categoria){ %>
+                    <span id="errorMsge" > <%= errorsReg.categoria.msg  %> </span>
+                <% } %> 
+                     <br/> 
+               
+            </div>
+           <!--- <div class="contenedorTodosLosBotones">
+                <p>
+                    <input type="text" name="usuario" id="usuario" class="botonDirecto">
+                </p>
+                <p>
+                    <input type="text" name="nombre" id="nombre" class="botonDirecto">
+                </p>
+                <p>
+                    <input type="text" name="apellido" id="apellido" class="botonDirecto">
+                </p>
+                <p>
+                    <input type="password" name="password" id="password" class="botonDirecto">
+                </p>
+                <p>
+                    <input type="password" name="confirPassword" id="confirPassword" class="botonDirecto">
+                </p>
+                <p>
+                    <input type="email" name="correo" id="correo" class="botonDirecto">
+                </p>
+                <p>
+                    <input type="email" name="confirCorreo" id="confirCorreo" class="botonDirecto">
+                </p>-->
+                
+                <p class="terYC">
+                    <span>
+                        <label for="terminos">He leido y acepto los Términos y Condiciones</label>                       
+                        <input type="checkbox" name="terminos" value="ok">
+                   <!--- </span>
+                    <span>He leido y acepto los</span><span><a href="https://www.google.com"> terminos y condiciones</a></span> -->
+                </p>
+            </div>
+            <div class="crearCuenta">
+               <!--- <p> <button type="submit" class="crearCuentaBoton">CREAR CUENTA</button> -->
+                    <p> <button type="submit" id="enviar">CREAR CUENTA</button>                    
+                     <br/>
+                    <br/>
+                    <a href="/" id="vuelvo">Volver a la Pagina Principal</a>
+                </p>
+            </div>
+        </form>
+
+    </section>    
+         
+    <footer>
+        <%- include('partials/footer') %>         
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/carritoDeCompras.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <!--<script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>-->
+    <link rel="https://fontawesome.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+   
+    <title>Carrito de Compras</title>
+</head>
+<body>
+    <!-- PARECE QUE NOOO LA VOY A USARRRRRRRRRRR -->
+    <%- include('partials/header') %>
+<main>
+    <div class="tituloPagina">    
+        <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>  
+        <br/>
+        <br/>
+        <h2>PARA PROCEDER A COMPRAR DEBERÁ PREVIAMENTE LOGUEARSE EN PAGINA </h2>  
+        <h2><a href= "/users/login"><i class="fas fa-user-circle"></i></a></h2>  
+       
+    </div>
+    
+    <section class="finalizarCompra">
+        >
+        <div class="finalizar"> 
+                            
+                <a href="/" id="vuelvo">Volver a la Pagina Principal</a>
+             
+         </div>
+        
+    </section>
+    <div id="modal2" class="modalmask">            
+        <div class="modalbox rotate">
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>RECUERDA</h2>
+            <p> El monto "TOTAL COMPRA" NO INCLUYE : 
+                    1) Costo de envío ( puede optar por envío Premiun /Standar
+                    2) Costos de financiación (según medio de pago)
+                Cuando concluya de elegir productos,podrá definir entrega/modo pago
+                 y le será informado exactamente el monto de la operación </p>       
+        </div>
+    </div>
+</main>
+    <footer>
+        <%- include('partials/footer') %>
+        
+    </footer>
+
+</body>
+</html>
