@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = 'ProductYear';
+    let alias = 'ProductColor';
     let cols = {
         id: {
             type: dataTypes.INT(10).UNSIGNED,
@@ -8,7 +8,7 @@ module.exports = (sequelize, dataTypes) => {
         },
         // created_at: dataTypes.TIMESTAMP,
         // updated_at: dataTypes.TIMESTAMP,
-        year_name: {
+        color_name: {
             type: dataTypes.STRING(100),
             allowNull: true
         }        
@@ -16,11 +16,11 @@ module.exports = (sequelize, dataTypes) => {
     
     let config = {
         timestamps: false,
-        tableName:"Product-year"
+        tableName:"Product-color"
         
     }
-    const ProductYear = sequelize.define(alias, cols, config); 
-    
+    const ProductColor = sequelize.define(alias, cols, config); 
 
-    return ProductYear
+
+    return ProductColor
 };

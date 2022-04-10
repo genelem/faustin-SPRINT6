@@ -4,8 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
+var methodOverride = require('method-override')
+//<form class="ui form" action="/posts/<%= post['_id'] %>?_method=PUT" method="POST">
+
+
 const recordar = require("./middlewares/recordarMiddle");
 const locals = require("./middlewares/locals");
+
 //const locals = require("./middlewares/locals");
 
 /*ya instalé el multer ver en productRouter*/
@@ -31,6 +36,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+app.use(methodOverride('_method'));
 app.use(recordar);
 app.use(locals);
 

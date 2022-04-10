@@ -1,3 +1,5 @@
+const productColor = require("./product-color");
+
 module.exports = (sequelize, dataTypes) => {
     let alias = 'Product';
     let cols = {
@@ -63,6 +65,7 @@ module.exports = (sequelize, dataTypes) => {
         
     };
     let config = {
+        tableName:"product",
         timestamps: false
         
     }
@@ -75,12 +78,7 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: "product_type"
         })
     },
-    Product.associate = function (models) {
-        Product.belongsTo(models.ProductDto, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "pDto",
-            foreignKey: "product_dto"
-        })
-    },
+   
     Product.associate = function (models) {
         Product.belongsTo(models.ProductColection, { // models.Genre -> Genres es el valor de alias en genres.js
             as: "pColection",
