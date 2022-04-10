@@ -4,7 +4,7 @@ module.exports = (sequelize, dataTypes) => {
     let alias = 'Product';
     let cols = {
         id: {
-            type: dataTypes.INT(10).UNSIGNED,
+            type: dataTypes.BIGINT(10).UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },
@@ -23,15 +23,15 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: true
         },
         id_type: {
-            type: dataTypes.INT(10).UNSIGNED,
+            type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: true
         },
         id_colection: {
-            type: dataTypes.INT(10).UNSIGNED,
+            type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: true
         },    
         id_product_year: {
-        type: dataTypes.INT(10).UNSIGNED,
+        type: dataTypes.BIGINT(10).UNSIGNED,
         allowNull: true
         },
         created: {
@@ -43,23 +43,23 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: true
         },
         image_ppal: {
-            type: dataTypes.VARCHAR(80),
+            type: dataTypes.STRING,
             allowNull: true
         },
         image_back: {
-            type: dataTypes.VARCHAR(80),
+            type: dataTypes.STRING,
             allowNull: true
         },
         image_det1: {
-            type: dataTypes.VARCHAR(80),
+            type: dataTypes.STRING,
             allowNull: true
         },
         image_det2: {
-            type: dataTypes.VARCHAR(80),
+            type: dataTypes.STRING,
             allowNull: true
         },
         image_det3: {
-            type: dataTypes.VARCHAR(80),
+            type: dataTypes.STRING,
             allowNull: true
         }
         

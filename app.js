@@ -4,12 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
-var methodOverride = require('method-override')
+const recordar = require("./middlewares/recordarMiddle");
+const locals = require("./middlewares/locals");
+//var methodOverride = require('method-override')
 //<form class="ui form" action="/posts/<%= post['_id'] %>?_method=PUT" method="POST">
 
 
-const recordar = require("./middlewares/recordarMiddle");
-const locals = require("./middlewares/locals");
 
 //const locals = require("./middlewares/locals");
 
@@ -19,6 +19,8 @@ const locals = require("./middlewares/locals");
 const indexRouter = require('./routes/index');
 const productRouter = require("./routes/product");
 const usersRouter = require('./routes/users');
+// abajo vienen los routers de BASE DE DATOS 
+const bproductRouter = require("./routes/bproduct");
 
 var app = express();
 
@@ -36,12 +38,16 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
-app.use(methodOverride('_method'));
+//app.use(methodOverride('_method'));
 app.use(recordar);
 app.use(locals);
 
 app.use('/', indexRouter);
+
 app.use("/product", productRouter);
+//bproduct serán los que usan la base de datos 
+app.use("/bproduct", bproductRouter)
+
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

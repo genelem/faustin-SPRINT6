@@ -2,7 +2,7 @@ module.exports = (sequelize, dataTypes) => {
     let alias = 'ProductDto';
     let cols = {
         id: {
-            type: dataTypes.INT(10).UNSIGNED,
+            type: dataTypes.BIGINT(10).UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },        
@@ -15,11 +15,11 @@ module.exports = (sequelize, dataTypes) => {
             allowNull: true
         },
         id_product: {
-            type: dataTypes.INT(10),
+            type: dataTypes.BIGINT(10),
             allowNull: true
         },
         dto: {
-            type: dataTypes.INT(3),
+            type: dataTypes.BIGINT(3),
             allowNull: true
         }        
     };         
