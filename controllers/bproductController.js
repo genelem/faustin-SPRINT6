@@ -75,7 +75,35 @@ const controller = {
                                
                 }; // termina el IF                   
                 } ) 
-            }       
+            },
+    listType:(req,res) =>{
+                let array = [ {
+                    id:0,
+                    type_name :" "
+                }]
+                db.ProductType.findAll({
+                    order : [
+                        ['id', 'ASC']
+                    ]         
+                }) 
+                .then(function(productTypes){
+                    if (productTypes) {
+                    res.render('listTypeDb', {array:productTypes});}
+                    else{
+                        res.render("listTypeDb",{array})
+                    }
+                }); 
+    },
+    deleteType: (req,res) =>{ 
+        db.ProductType.destroy({
+            where:{
+                id: req.params.id
+            }
+        })
+        .then (function(){
+            res.send("baja existosa")
+     } ) 
+    }       
  
 }
 module.exports = controller

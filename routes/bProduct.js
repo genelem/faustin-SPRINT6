@@ -12,5 +12,7 @@ router.get('/opciones', bproductController.enlaces);
 
 router.get("/altaType",bproductController.altaType);
 router.put("/creaType",validatorPDB.altaType,bproductController.creaType)
+router.get("/listType",bproductController.listType);
+router.get("/deleteType/:id",bproductController.deleteType)
 
 module.exports = router
