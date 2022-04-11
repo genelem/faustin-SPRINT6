@@ -24,6 +24,25 @@ const validatorPDB = {
         })        
     } )
    ],
+   altaYear :[
+    check("name")
+    .notEmpty()
+    .withMessage("Complete Campo Año")
+    .bail() 
+    .custom(function(value){
+        return db.ProductYear.findOne({
+            where:{
+                year_name :value
+            } 
+         }) 
+         .then (productYear =>{
+             if(productYear){
+                 return Promise.reject("Este nombre-tipo de Producto ya está en la base")
+             }
+         })        
+     } )
+],
+
     altaProducto:[
         check("name")
             .notEmpty()

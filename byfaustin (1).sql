@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-04-2022 a las 16:26:38
+-- Tiempo de generación: 11-04-2022 a las 20:45:44
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -115,7 +115,8 @@ CREATE TABLE `product-colection` (
 
 CREATE TABLE `product-color` (
   `id` int(10) UNSIGNED NOT NULL,
-  `color_name` varchar(100) NOT NULL
+  `color_name` varchar(100) DEFAULT NULL,
+  `image_color` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -181,6 +182,15 @@ CREATE TABLE `product-type` (
   `id` int(10) UNSIGNED NOT NULL,
   `type_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `product-type`
+--
+
+INSERT INTO `product-type` (`id`, `type_name`) VALUES
+(1, 'BOLSOS'),
+(4, 'CARTERAS'),
+(5, 'BANDOLERAS');
 
 -- --------------------------------------------------------
 
@@ -465,7 +475,7 @@ ALTER TABLE `product-stock`
 -- AUTO_INCREMENT de la tabla `product-type`
 --
 ALTER TABLE `product-type`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `product-year`

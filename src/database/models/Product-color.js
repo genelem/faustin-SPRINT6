@@ -11,6 +11,10 @@ module.exports = (sequelize, dataTypes) => {
         color_name: {
             type: dataTypes.STRING(100),
             allowNull: true
+        },
+        color_image:{
+            type : dataTypes.STRING(80),
+            allowNull: true 
         }        
     };         
     

@@ -103,7 +103,85 @@ const controller = {
         .then (function(){
             res.send("baja existosa")
      } ) 
+    },       
+    altaYear:(req,res) =>{
+        let array = [ {
+            id:0,
+            year_name :" "
+        }]
+        db.ProductYear.findAll({
+            order : [
+                ['id', 'ASC']
+            ]         
+        }) 
+        .then(function(productYears){
+            if (productYears) {
+            res.render('altaYearDb', {array:productYears});}
+            else{
+                res.render("altaYearDb",{array})
+            }
+        }); 
+    },
+    creaYear: (req,res) =>{
+        // inicializo Variables
+        let array = [ {
+            id:0,
+            year_name :" "
+        }] ;        
+        const errors = validationResult(req);        
+        console.log("la lenght de errores es : " + errors.errors.length)
+        
+        //    
+        db.ProductYear.findAll({
+                order : [
+                    ['id', 'ASC']
+                ]      
+            }) 
+            .then(function(productYear){                
+                //chequea errores
+                 if(errors.errors.length > 0){   
+                     // SIGO CON ERROR FANTASMA          
+                     res.render("altaYearDb", {errorsProd: errors.mapped(),array:productYear})
+                    } 
+                    else{                                 
+                        console.log("está en else de alta " + req.body.name)           
+                        let newYear = {            
+                            year_name: req.body.name                      
+                        };
+                    console.log(newYear.year_name + "es el req.body")
+                    db.ProductYear.create(newYear); 
+                            res.render("enlacesDB") ;              
+                               
+                }; // termina el IF                   
+                } ) 
+            },
+    listYear:(req,res) =>{
+                let array = [ {
+                    id:0,
+                    type_name :" "
+                }]
+                db.ProductYear.findAll({
+                    order : [
+                        ['id', 'ASC']
+                    ]         
+                }) 
+                .then(function(productYears){
+                    if (productYears) {
+                    res.render('listYearDb', {array:productYears});}
+                    else{
+                        res.render("listYearDb",{array})
+                    }
+                }); 
+    },
+    deleteYear: (req,res) =>{ 
+        db.ProductYear.destroy({
+            where:{
+                id: req.params.id
+            }
+        })
+        .then (function(){
+            res.send("baja existosa")
+     } ) 
     }       
- 
 }
 module.exports = controller

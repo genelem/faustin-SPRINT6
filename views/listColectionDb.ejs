@@ -21,59 +21,49 @@
 <body> 
         <%- include('partials/header') %>
 <main>
-            <div class="altaProductLogo">
-                <h3>DAR ALTA TIPO DE PRODUCTO  </h3>
-                <ul>      
-                <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
-                <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
-                </ul>            
-            </div> 
-            
-          
-            <form action="/bproduct/creaType?_method=PUT" method="POST" >   
-                <div class="descriptionProduct">
-                   
-                    <p><label id="" for ="nombreProducto">Tipo De Producto</label>
-                    <input placeholder="" type="text" name="name" id="user1" ></p>
-                    <% if(locals.errorsProd && locals.errorsProd.name){ %>
-                        <span id="errorMsge" > <%= errorsProd.name.msg  %> </span>
-                <% } %>
+        <div class="altaProductLogo">
+            <h3> COLECCIONES  registradas actualmente  </h3>
+         <ul>      
+            <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
+            <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
+            </ul>            
+        </div>
+   
+           <!--- <form action="/bproduct/delete/id?_method=DELETE" method="POST" >  --> 
+                <div class="descriptionProduct"> 
                     <br/>                     
-                    <p >TIPOS DE PRODUCTOS ACTUALES </p> 
-                    <%- include('partials/listadoEnBase') %>   
-            <!---        <div class = "listadoEnBase">
+                    <p >COLECCIONES ACTUALES </p> 
+                    <div class = "listadoEnBase">
                     <ul>
                         <% for( let i = 0; i < array.length; i++ ) { %>
-                            <li> <%= array[i].type_name %> </li>
-
+                            <li><a href="/bproduct/deleteColection/<%= array[i].id %>">
+                            <spam>ID:<%= array[i].id %> <spam>Decripción:<%= array[i].colection_name %> </spam></spam></a> 
+                            </li>                              
                             <br/> 
-
                         <% } %>
                     </ul> 
-                    </div> -->               
-    
-                </div>
-                
+                </div>                
                 
                 <div id="modal2" class="modalmask">            
                     <div class="modalbox rotate">
                         <a href="#close" title="Close" class="close">X</a>
                         <h2>IMPORTANTE</h2>
-                        <p> Ud está a punto de ELIMINAR REGISTRO
-                            Del producto </p>
-                        <p> Verifique cuidadosamente si es lo que quiere hacer</p>                    
+                        <p> Clickee el tipo de producto
+                            que desea dar de BAJA 
+                             </p>
+                        <p> Luego se le solicitará CONFIRMACIÓN</p>                    
                          
                         </div>
                 </div>
                 
-                <div class="submitMasEnviar">          
-                    <input type="submit" name="submit" id="irBaja" value="DAR ALTA TIPO DE PRODUCTO "> </input>
-                </div>        
+          <!---      <div class="submitMasEnviar">          
+                    <input type="submit" name="submit" id="irBaja" value="DAR BAJA TIPO DE PRODUCTO "> </input>
+                </div> -->        
                 <div class= "closeMain" >
                 <a href="/" id="vuelvo">Volver a Pagina Principal</a>
-                </div>
+                </div> 
                
-        </form>
+       <!--- </form> -->
          
 </main>
 </body>
@@ -82,5 +72,4 @@
             <%- include('partials/footer') %>                
         </footer>   
 
-   </html > 
-     
+</html
