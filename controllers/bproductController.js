@@ -182,6 +182,86 @@ const controller = {
         .then (function(){
             res.send("baja existosa")
      } ) 
-    }       
+    },
+
+    altaColection:(req,res) =>{
+        let array = [ {
+            id:0,
+            year_name :" "
+        }]
+        db.ProductColection.findAll({
+            order : [
+                ['id', 'ASC']
+            ]         
+        }) 
+        .then(function(productColections){
+            if (productColections) {
+            res.render('altaColectionDb', {array:productColections});}
+            else{
+                res.render("altaColectionDb",{array})
+            }
+        }); 
+    },
+    creaColection: (req,res) =>{
+        // inicializo Variables
+        let array = [ {
+            id:0,
+            colection_name :" "
+        }] ;        
+        const errors = validationResult(req);        
+        console.log("la lenght de errores es : " + errors.errors.length)
+        
+        //    
+        db.ProductColection.findAll({
+                order : [
+                    ['id', 'ASC']
+                ]      
+            }) 
+            .then(function(productColections){                
+                //chequea errores
+                 if(errors.errors.length > 0){   
+                           
+                     res.render("altaColectionDb", {errorsProd: errors.mapped(),array:productColections})
+                    } 
+                    else{                                 
+                        console.log("está en else de alta " + req.body.name)           
+                        let newColection = {            
+                            colection_name: req.body.name                      
+                        };
+                    console.log(newColection.colection_name + "es el req.body")
+                    db.ProductColection.create(newColection); 
+                            res.render("enlacesDB") ;              
+                               
+                }; // termina el IF                   
+                } ) 
+            },
+    listColection:(req,res) =>{
+                let array = [ {
+                    id:0,
+                    type_name :" "
+                }]
+                db.ProductColection.findAll({
+                    order : [
+                        ['id', 'ASC']
+                    ]         
+                }) 
+                .then(function(productColections){
+                    if (productColections) {
+                    res.render('listColectionDb', {array:productColections});}
+                    else{
+                        res.render("listColectionDb",{array})
+                    }
+                }); 
+    },
+    deleteColection: (req,res) =>{ 
+        db.ProductColection.destroy({
+            where:{
+                id: req.params.id
+            }
+        })
+        .then (function(){
+            res.send("baja existosa")
+     } ) 
+    }      
 }
 module.exports = controller

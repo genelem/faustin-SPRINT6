@@ -42,6 +42,24 @@ const validatorPDB = {
          })        
      } )
 ],
+altaColection :[
+    check("name")
+    .notEmpty()
+    .withMessage("Complete Colección")
+    .bail() 
+    .custom(function(value){
+        return db.ProductColection.findOne({
+            where:{
+                colection_name :value
+            } 
+         }) 
+         .then (productColection =>{
+             if(productColection){
+                 return Promise.reject("Esta COLECCIÓN  de Producto ya está en la base")
+             }
+         })        
+     } )
+    ],
 
     altaProducto:[
         check("name")

@@ -19,5 +19,10 @@ router.get("/altaYear",bproductController.altaYear);
 router.put("/creaYear",validatorPDB.altaYear,bproductController.creaYear)
 router.get("/listYear",bproductController.listYear);
 router.get("/deleteYear/:id",bproductController.deleteYear)
+// COLECCIÓN PRODUCTO
+router.get("/altaColection",bproductController.altaColection);
+router.put("/creaColection",validatorPDB.altaColection,bproductController.creaColection)
+router.get("/listColection",bproductController.listColection);
+router.get("/deleteColection/:id",bproductController.deleteColection);
 
 module.exports = router
