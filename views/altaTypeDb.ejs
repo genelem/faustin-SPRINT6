@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/stylesheets/altaProducto.css">
         <link rel="stylesheet" href="/stylesheets/updateProducto.css">
         <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+        <link rel="stylesheet" href="/stylesheets/listadosContenidosTablas.css">
 
         <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>
         <title>Faustine</title>
@@ -28,24 +29,27 @@
                 </ul>            
             </div> 
             
-            <form action="/bproduct/creaType/?_method=PUT" method="POST">
-                
+          
+            <form action="/bproduct/creaType?_method=PUT" method="POST" >   
                 <div class="descriptionProduct">
                    
                     <p><label id="" for ="nombreProducto">Tipo De Producto</label>
                     <input placeholder="" type="text" name="name" id="user1" ></p>
-                    <% if(locals.errorsProd && locals.errorsProd.tipo){ %>
-                        <span id="errorMsge" > <%= errorsProd.tipo.msg  %> </span>
+                    <% if(locals.errorsProd && locals.errorsProd.name){ %>
+                        <span id="errorMsge" > <%= errorsProd.name.msg  %> </span>
                 <% } %>
-                    <br/> 
-                    <p>TIPOS DE PRODUCTOS ACTUALES </p> 
+                    <br/>                     
+                    <p >TIPOS DE PRODUCTOS ACTUALES </p> 
+                    <div class = "listadoEnBase">
                     <ul>
-                        <% for( let i = 0; i < productTypes.length; i++ ) { %>
-                            <li> <%= productTypes[i]-type_name %> </li>
-                              <!--  <a href="/movies/detail/<%=productTypes[i].id%>"><%= productTypes[i].type_name %> </a> <br> -->
+                        <% for( let i = 0; i < array.length; i++ ) { %>
+                            <li> <%= array[i].type_name %> </li>
+
+                            <br/> 
 
                         <% } %>
-                    </ul>                 
+                    </ul> 
+                    </div>                
     
                 </div>
                 

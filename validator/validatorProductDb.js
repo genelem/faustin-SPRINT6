@@ -12,11 +12,17 @@ const validatorPDB = {
    .withMessage("Complete Campo Producto")
    .bail() 
    .custom(function(value){
-       if (productType){
-           return Promise.reject ("Este nombre-tipo de Producto ya está en la base")
-       }
-   })
-    
+       return db.ProductType.findOne({
+           where:{
+               type_name :value
+           } 
+        }) 
+        .then (productType =>{
+            if(productType){
+                return Promise.reject("Este nombre-tipo de Producto ya está en la base")
+            }
+        })        
+    } )
    ],
     altaProducto:[
         check("name")

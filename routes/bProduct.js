@@ -9,6 +9,7 @@ const validatorPDB = require("../validator/validatorProductDb");
 
 
 router.get('/opciones', bproductController.enlaces);
+
 router.get("/altaType",bproductController.altaType);
 router.put("/creaType",validatorPDB.altaType,bproductController.creaType)
 
