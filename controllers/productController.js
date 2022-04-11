@@ -109,17 +109,7 @@ const controller = {
         const errors = validationResult(req);        
         console.log("la lenght de errores es : " + errors.errors.length)
         if(errors.errors.length > 1){
-            /*ver esto porque hay un error que no encuentro y puse 1 */
-            console.log("los errores en store Alta son: " )
-            console.log(errors.errors.name + "error en el nombre del producto")
-            console.log(errors.errors.description + "description")
-            console.log(errors.errors.description2 + "error descriocion 2")
-            console.log(errors.errors.price + "price")
-            console.log(errors.errors.anio + "error en anio")
-            console.log(errors.errors.color + "error color")
-            console.log(errors.errors.colection + "error en colection")
-            console.log(errors.errors.tipo + "error en tipo")
-            console.log(errors.errors.cantidad + "error en cantidad")
+            /*ver esto porque hay un error que no encuentro y puse 1 */            
 
             /*armo valores para modificar falta CUANDO HAGA MODIFICAFR */
             res.render("altaProducto", {errorsProd: errors.mapped()})

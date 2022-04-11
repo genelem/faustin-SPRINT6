@@ -28,26 +28,22 @@
                 </ul>            
             </div> 
             
-            <form action="/bproduct/altaType" method="POST">
+            <form action="/bproduct/creaType/?_method=PUT" method="POST">
+                
                 <div class="descriptionProduct">
-                    <ul>
-                        <% for( let i = 0; i < productTypes.length; i++ ) { %>
-                            <li>
-                                <a href="/movies/detail/<%=productTypes[i].id%>"><%= productTypes[i].type_name %> </a> <br>
-                                
-                            </li>
-                        <% } %>
-                    </ul>
+                   
                     <p><label id="" for ="nombreProducto">Tipo De Producto</label>
                     <input placeholder="" type="text" name="name" id="user1" ></p>
+                    <% if(locals.errorsProd && locals.errorsProd.tipo){ %>
+                        <span id="errorMsge" > <%= errorsProd.tipo.msg  %> </span>
+                <% } %>
                     <br/> 
                     <p>TIPOS DE PRODUCTOS ACTUALES </p> 
                     <ul>
                         <% for( let i = 0; i < productTypes.length; i++ ) { %>
-                            <li>
-                                <a href="/movies/detail/<%=productTypes[i].id%>"><%= productTypes[i].type_name %> </a> <br>
-                                
-                            </li>
+                            <li> <%= productTypes[i]-type_name %> </li>
+                              <!--  <a href="/movies/detail/<%=productTypes[i].id%>"><%= productTypes[i].type_name %> </a> <br> -->
+
                         <% } %>
                     </ul>                 
     

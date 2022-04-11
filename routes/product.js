@@ -6,8 +6,8 @@ const authMiddle = require("../middlewares/authMiddle.js");
 const multer = require("multer")
 const productController = require("../controllers/productController")
 const {body, check} = require('express-validator')
-const validatorP = require("../validator/validatorProduct");
 
+const validatorP = require("../validator/validatorProduct");
 
 router.get('/detail/:id', productController.detail);
 /*router.get("/login",productController.login)
