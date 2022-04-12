@@ -262,6 +262,87 @@ const controller = {
         .then (function(){
             res.send("baja existosa")
      } ) 
+    },      
+    altaColor:(req,res) =>{
+        let array = [ {
+            id:0,
+            year_name :" "
+        }]
+        db.ProductColor.findAll({
+            order : [
+                ['id', 'ASC']
+            ]         
+        }) 
+        .then(function(productColors){
+            if (productColors) {
+            res.render('altaColorDb', {array:productColors});}
+            else{
+                res.render("altaColorDb",{array})
+            }
+        }); 
+    },
+    creaColor: (req,res) =>{
+        // inicializo Variables
+        let array = [ {
+            id:0,
+            color_name :" ",
+            color_image:" "
+        }] ;        
+        const errors = validationResult(req);        
+        console.log("la lenght de errores es : " + errors.errors.length)
+        
+        //    
+        db.ProductColor.findAll({
+                order : [
+                    ['id', 'ASC']
+                ]      
+            }) 
+            .then(function(productColors){                
+                //chequea errores
+                 if(errors.errors.length > 0){   
+                           
+                     res.render("altaColorDb", {errorsProd: errors.mapped(),array:productColors})
+                    } 
+                    else{                                 
+                        console.log("está en else de alta " + req.body.name)           
+                        let newColor = {            
+                            color_name: req.body.name ,
+                            color_image:req.body.image                    
+                        };
+                    console.log(newColor.color_name + "es el req.body")
+                    db.ProductColor.create(newColor); 
+                            res.render("enlacesDB") ;              
+                               
+                }; // termina el IF                   
+                } ) 
+            },
+    listColor:(req,res) =>{
+                let array = [ {
+                    id:0,
+                    type_name :" "
+                }]
+                db.ProductColor.findAll({
+                    order : [
+                        ['id', 'ASC']
+                    ]         
+                }) 
+                .then(function(productColors){
+                    if (productColors) {
+                    res.render('listColorDb', {array:productColors});}
+                    else{
+                        res.render("listColorDb",{array})
+                    }
+                }); 
+    },
+    deleteColor: (req,res) =>{ 
+        db.ProductColor.destroy({
+            where:{
+                id: req.params.id
+            }
+        })
+        .then (function(){
+            res.send("baja existosa")
+     } ) 
     }      
 }
 module.exports = controller

@@ -60,6 +60,27 @@ altaColection :[
          })        
      } )
     ],
+    altaColor :[
+        check("name")
+        .notEmpty()
+        .withMessage("Complete nombre COLOR")
+        .bail() 
+        .custom(function(value){
+            return db.ProductColor.findOne({
+                where:{
+                    color_name :value
+                } 
+             }) 
+             .then (productColor =>{
+                 if(productColor){
+                     return Promise.reject("Esta NOMBRE COLOR ya está en la base")
+                 }
+             })        
+         } ),
+        check("image")
+         .notEmpty()
+         .withMessage("Debe Ingresar el LINK A ARCHIVOS IMAGENES-COLORES")
+    ],
 
     altaProducto:[
         check("name")

@@ -24,5 +24,10 @@ router.get("/altaColection",bproductController.altaColection);
 router.put("/creaColection",validatorPDB.altaColection,bproductController.creaColection)
 router.get("/listColection",bproductController.listColection);
 router.get("/deleteColection/:id",bproductController.deleteColection);
+// TABLA COLORES . cARGA EL LINK A ARCHIVO json 
+router.get("/altaColor",bproductController.altaColor);
+router.put("/creaColor",validatorPDB.altaColor,bproductController.creaColor)
+router.get("/listColor",bproductController.listColor);
+router.get("/deleteColor/:id",bproductController.deleteColor);
 
 module.exports = router

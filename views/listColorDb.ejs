@@ -32,14 +32,15 @@
            <!--- <form action="/bproduct/delete/id?_method=DELETE" method="POST" >  --> 
                 <div class="descriptionProduct"> 
                     <br/>                     
-                    <p >COLECCIONES ACTUALES </p> 
+                    <p >COLORES ACTUALES </p> 
                     <div class = "listadoEnBase">
                     <ul>
                         <% for( let i = 0; i < array.length; i++ ) { %>
-                            <li><a href="/bproduct/deleteColection/<%= array[i].id %>">
-                            <spam>ID:<%= array[i].id %> <spam>Decripción:<%= array[i].colection_name %></spam></spam></a>
-                          
-                            </li>                              
+                            <li><a href="/bproduct/deleteColor/<%= array[i].id %>">
+                            <spam>ID:<%= array[i].id %> <spam>Decripción:<%= array[i].color_name %> Imagen: <img src="/images/<%=array[i].color_image %>"></spam></spam></a> 
+                            
+                            </li> 
+                             
                             <br/> 
                         <% } %>
                     </ul> 
