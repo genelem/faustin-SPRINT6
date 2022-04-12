@@ -29,5 +29,8 @@ router.get("/altaColor",bproductController.altaColor);
 router.put("/creaColor",validatorPDB.altaColor,bproductController.creaColor)
 router.get("/listColor",bproductController.listColor);
 router.get("/deleteColor/:id",bproductController.deleteColor);
+// TABLA PRODUCTOS 
+router.get("/altaProduct",bproductController.altaProduct);
+router.put("/creaProduct",validatorPDB.altaColor,bproductController.creaProduct)
 
 module.exports = router

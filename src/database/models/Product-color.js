@@ -25,6 +25,15 @@ module.exports = (sequelize, dataTypes) => {
     }
     const ProductColor = sequelize.define(alias, cols, config); 
 
+    ProductColor.associate = function (models) {
+        ProductColor.belongsToMany(models.Product, { // models.Movie -> Movies es el valor de alias en movie.js
+            as: "coloresC",
+            through: 'product-color-product',
+            foreignKey: 'id_color',
+            otherKey: 'id_product',
+            timestamps: false
+        })
+    }
 
     return ProductColor
 };

@@ -28,13 +28,7 @@ module.exports = (sequelize, dataTypes) => {
         
     }
     const ProductStock = sequelize.define(alias, cols, config); 
-
-    ProductStock.associate = function (models) {
-        ProductStock.belongsTo(models.Product, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "stock",
-            foreignKey: "id_product"
-        })
-    }
+    
 
     return ProductStock
 };

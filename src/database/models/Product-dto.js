@@ -30,7 +30,8 @@ module.exports = (sequelize, dataTypes) => {
         
     }
 
-    const ProductDto = sequelize.define(alias, cols, config); 
+    const ProductDto = sequelize.define(alias, cols, config);
+     
     ProductDto.associate = function (models) {
         ProductDto.belongsTo(models.Product, { // models.Genre -> Genres es el valor de alias en genres.js
             as: "dtoP",

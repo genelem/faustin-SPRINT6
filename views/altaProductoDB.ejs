@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/home.css">
+        <link rel="stylesheet" href="/stylesheets/global.css">
+        <link rel="stylesheet" href="/stylesheets/altaProducto.css">
+        <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+
+        <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>
+        <title>Faustine</title>
+       
+    </head>
+ 
+<body> 
+        <%- include('partials/header') %>
+<main>
+            <div class="altaProductLogo">
+                <h3>ALTA DE PRODUCTO</h3>
+                <ul>      
+                <li id="altaLogo"><i class="fas fa-file-alt"></i></li>
+                <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
+                </ul>            
+            </div>          
+           
+        <!--<form action="/product/altaProducto" method="POST" enctype = "multipart/form-data">-->
+         
+            <form action="/bproduct/creaProduct?_method=PUT" method="POST" >  
+                <div class="descriptionProduct">
+                    <p><label id="" for ="nombreProducto">NOMBRE DEL PRODUCTO</label>
+                    <input placeholder="" type="text"  name="name" id="user1" ></p>
+                    <% if(locals.errorsProd && locals.errorsProd.name){ %>
+                        <span id="errorMsge" > <%= errorsProd.name.msg  %> </span>
+                      <% } %> 
+                    <br/>
+                    <p><label id="" for ="descripcionProducto">DESCRIPCION PRINCIPAL </label>
+                        <input placeholder="" type="text"  name="description" id="user1" ></p>
+                    <% if(locals.errorsProd && locals.errorsProd.description){ %>
+                        <span id="errorMsge" > <%= errorsProd.description.msg  %> </span>
+                    <% } %>       
+                    <br/>                       
+                    <p><label id="" for ="descripcionProducto">DESCRIPCION detalle 1 </label>
+                        <input placeholder="" type="text"  name="description2" id="user1" ></p>
+                    <% if(locals.errorsProd && locals.errorsProd.description2){ %>
+                        <span id="errorMsge" > <%= errorsProd.description2.msg  %> </span>
+                    <% } %>   
+                    <br/> 
+                    
+                    <label id="" for="file">Imagen Principal del Producto</label>
+                    <input type="file" name="imagenPPAL" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none"> 
+                    <br/>  
+                    <label id="" for="file">Imagen DORSO del Producto</label>
+                    <input type="file" name="imagenDORSO" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none"> 
+                    <br/>
+                    <label id="" for="file">Imagen DETALLE 1 </label>
+                    <input type="file" name="imagenDetalle1" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none">
+                    <br/> 
+                    <label id="" for="file">Imagen DETALLE 2</label>
+                    <input type="file" name="imagenDetalle2" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none">
+                    <br/> 
+                    <label id="" for="file">Imagen DETALLE 3</label>
+                    <input type="file" name="imagenDetalle3" id="archivo" accept=".png, .jpeg, .jpg, .gif" sytle="display:none">     
+                </div>
+                <div>                  
+                    <div class="licencias">
+                        <h3>Indicá COLECCIÓN</h3>
+                        <% for (i=0 ; i< colections.length ; i++){ %>   
+                        <label></label>        
+                            <input type="checkbox" name="colection" value="<%= colections[i].colection_name %>"> <%= colections[i].colection_name %>
+                        <% } %>
+                     
+                    <% if(locals.errorsProd && locals.errorsProd.colection){ %>
+                            <span id="errorMsge" > <%= errorsProd.colection.msg  %> </span>
+                    <% } %>   
+                            <p>Nueva Colección<a href="/bproduct/altaColection"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                            </p>                              
+                    </div>
+                    <div class="tipoProducto">
+                        <h3>Indicá TIPO de Producto</h3>                    
+                        <label></label> 
+                        <% for (i=0 ; i< types.length ; i++){ %>       
+                            <input type="checkbox" name="tipo" value="<%= types[i].type_name %>"><%= types[i].type_name %> 
+                        <% } %>
+                            
+                    <% if(locals.errorsProd && locals.errorsProd.tipo){ %>
+                            <span id="errorMsge" > <%= errorsProd.tipo.msg  %> </span>
+                    <% } %> 
+                            <p>"TIPO"nuevo<a href="/bproduct/altaType"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                            </p>              
+                     </div>          
+                    <div class="seleccionColor">
+                        <h3>Color del Producto</h3>
+                 <% if(locals.errorsProd && locals.errorsProd.color){ %>
+                            <br/>
+                            <p id="errorMsge"> <%= errorsProd.color.msg  %> </p>
+                 <% } %> 
+                        <br/>
+                        <div class="colores">
+                    <% for (i=0 ; i< colors.length ; i++){ %>  
+                        <input type="checkbox" id = "amarillo" name="color" value="<% colors[i].color_name %>" >
+                        <label for=""><img id="colorList" src="/images/<%= colors[i].color_image %>"></label>  
+                    <% } %>                    
+                
+                        </div>
+                        <p>Nuevo COLOR<a href="/bproduct/altaColor"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                        </p>
+                    </div>
+                    <div class="seleccionAnio">
+                        <h3>Año Colección</h3>
+                        <div id="anio">
+                        <select name ="anio" id ="talles">
+                            <% for (i=0 ; i< years.length ; i++){ %>
+                            <option value = "<%= years[i].year_name %>"><%= years[i].year_name %> </option>
+                            <% } %>
+                  
+                    <% if(locals.errorsProd && locals.errorsProd.anio){ %>
+                            <span id="errorMsge" > <%= errorsProd.anio.msg  %> </span>
+                    <% } %> 
+                        </select>
+                        <p>Nueva COLECCIÖN <a href="/bproduct/altaColection"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                        </p>
+                        </div>
+
+                    <div class="productValores">            
+                    <div class="otrosValores">
+                        <p><label id="" for ="precioProducto">PRECIO</label>
+                        <input placeholder="" type="number"  name="price" id="user" ></p>
+                    <% if(locals.errorsProd && locals.errorsProd.price){ %>
+                        <span id="errorMsge" > <%= errorsProd.price.msg  %> </span>
+                    <% } %> 
+                        <br/>
+                        <p><label id="" for ="cantidadProducto">CANTIDAD</label>
+                        <input placeholder="" type="number"  name="cantidad" id="user"></p>
+                    <% if(locals.errorsProd && locals.errorsProd.cantidadProducto){ %>
+                        <span id="errorMsge" > <%= errorsProd.cantidadProducto.msg  %> </span>
+                    <% } %> 
+                    </div>
+                    <div class="ofertaPorcentaje">
+                        <h2><a href="#modal4"><img id="sale" src="/images/icono.sale.png"></a></h2>
+                       
+                        <p><label id="" for ="ofertaPorcentaje">DESCUENTO</label>
+                            <input placeholder="" type="number"  name="descuento" id="user"></p>
+                    <% if(locals.errorsProd && locals.errorsProd.descuento){ %>
+                            <span id="errorMsge" > <%= errorsProd.descuento.msg  %> </span>
+                    <% } %> 
+                    </div>
+                    </div>
+         
+                </div>
+               
+                <div id="modal2" class="modalmask">            
+                    <div class="modalbox rotate">
+                        <a href="#close" title="Close" class="close">X</a>
+                        <h2>RECUERDA</h2>
+                        <p>Si alguna de las características del producto son NUEVAS(ej:un nuevo color, tipo,etc)
+                            deberás proceder a dar el alta:</p>
+                        <p> Está indicado en cada Item.- </p>
+                        <p>Busca el ICONO</p>
+                         
+                    </div>
+                </div>
+                <div id="modal4" class="modalmask">            
+                    <div class="modalbox rotate">
+                        <a href="#close" title="Close" class="close">X</a>
+                        <h2>Oferta/NO Ofertar</h2>
+                        <p>OFERTAR producto:  ingresar un número entero mayor que 1
+                            y menor a  90.-</p>
+                          <p>Si NO DESEA OFERTAR ingrese 1</p>
+                       
+                    </div>
+                </div>
+                <div class="submitMasEnviar">          
+                    <input type="submit" name="submit" id="enviar" value="CREAR PRODUCTO"> </input>
+                </div>        
+                <div class= "closeMain" >
+                <a href="/" id="vuelvo">Volver a Pagina Principal</a>
+                </div>
+               
+        </form>
+         
+</main>
+</body>
+        <footer>
+                         
+           <!--</header> -->
+          <!-- cambio el footer más arribA -->
+          <!--<footer>-->
+
+            <%- include('partials/footer') %>
+               
+           </footer>     
+       
+   </html > 

@@ -7,19 +7,42 @@ const { validationResult,body} = require("express-validator")
 const db = require('../src/database/models');
 const sequelize = db.sequelize;
 
-/*function Todos(nombre,nombre2){  
-    // busca productos que haya y los pone en array
-    db.nombre.findAll({
-        order : [
-            ['id', 'ASC']
-        ],
-        limit: 8
-    }) 
-    .then(function(nombre2){ 
-        return        
-        res.render('altaTypeDb', {array:productTypes});}         
-    );    
-}*/
+function colorVer(){  
+    // QUEDA EN STAND BY 
+    // aquí tengo que buscar para este producto qué colores hay en tabla Pivot
+    // primero busco en tabla qué colores Pivot con id
+   let arrayColors = [ {
+        id:0,
+        id_color :" ",
+        id_product :""
+    }];
+    let arrayColorsImage = [ {
+        id:0,
+        color_name :" ",
+        color_image:""
+    }];
+    db.ProductColorProduct.findAll({
+        where: {
+            id_product: id}
+        },            
+    )
+    .then(function(productColorProducts){
+        if (productColorProducts) {
+            arrayColors = productColorProducts
+            for (i=0 ; i< arrayColors.length ;i++){
+               db.ProductColor.findAll({
+                   where : {
+                       id_color : arrayColors[i].id
+                   }
+               }) 
+               .then (function(productColors){
+                   arrayColorsImage = productColors
+               })
+            } // cierro el for 
+        } } ); // cierro el IF
+        return arrayColorsImage 
+     };
+
 
 const controller = {
     enlaces: (req,res) =>{
@@ -343,6 +366,58 @@ const controller = {
         .then (function(){
             res.send("baja existosa")
      } ) 
+    },
+    altaProduct: (req,res) => {     
+        //VER LA AUTORIZACIÓN SEGURAMENTE LA PONGO EN ENLACES.. POR AHORA SIN AUTO   
+    /*    let autorizacion = userModel.find(req.session.usuarioLogueado.id)       
+        if (autorizacion.categoria !== "administrador"){
+            res.send("NO ESTÁ AUTORIZADO A REALIZAR ESTA OPERACIÓN")
+        } 
+        else{res.render("altaProductoDb")}*/
+        // FALTA VER QUE PASA CON UN PRODUCTO QUE TIENE VARIOS COLORES . ver en VALIDATOR
+        let colors = db.ProductColor.findAll();
+        let years = db.ProductYear.findAll();
+        let types = db.ProductType.findAll();
+        let colections = db.ProductColection.findAll();
+        
+
+        Promise.all([colors,years,types,colections])
+        .then(function([productColors, productYears,productTypes,productColections]){
+            return res.render('altaProductoDb', {colors: productColors, years:productYears,types:productTypes,colections:productColections});
+        }); 
+       
+    },   
+    creaProduct: (req,res) =>{        
+
+       /* const errors = validationResult(req);        
+        console.log("la lenght de errores es : " + errors.errors.length)
+        if(errors.errors.length > 1){
+            /*ver esto porque hay un error que no encuentro y puse 1 */            
+
+            /*armo valores para modificar falta CUANDO HAGA MODIFICAFR */
+      /*      res.render("altaProductoDb", {errorsProd: errors.mapped()})
+             };
+         if (errors.errors.length == 1 ){         
+            console.log("está en else de alta " + req.body.name)           
+            let newProduct = {            
+                name: req.body.name ,
+                description :req.body.description,
+                description2 :req.body.description2,
+                //description3 : req.body.description3, 
+                price: req.body.price,
+                descuento :req.body.descuento,
+                colection :req.body.colection,
+                anio: req.body.anio,
+                color : req.body.color,
+                tipo : req.body.tipo,
+                cantidad : req.body.cantidad 
+                };
+            
+                console.log (newProduct.name + " es el nombre del producto alta");
+                console.log(newProduct.colection + newProduct.color + newProduct.tipo + newProduct.price)
+                let data = productModel.create(newProduct);                 
+                res.render ("altaProductoDb",{data})                    
+        }; /*acá termina el else */ 
     }      
 }
 module.exports = controller

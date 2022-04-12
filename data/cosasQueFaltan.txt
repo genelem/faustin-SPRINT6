@@ -21,6 +21,13 @@ ese tema
 SPRINT 6 tengo un jambourd como implementar 9-04-22
 - volver a cargar pdf y esquema de Base porque modifiqué 2 cosas 
 -cargo base producto / type /year y colection 
+----------------------------
+12-04-2022
+VOLVER A CARGAR LA BASE PORQUE HICE MODIFICACIONES EN PIVOT PRODUCT-COLOR-PRODUCT
+FALTA VER COMO CARGO EL BREAK-POINT EN TABLA PRODUCT-STOCK
+
+
+
 
 
 
