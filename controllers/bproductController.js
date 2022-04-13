@@ -7,6 +7,34 @@ const { validationResult,body} = require("express-validator")
 const db = require('../src/database/models');
 const sequelize = db.sequelize;
 
+function buscarEnTablas(color,year,colection,type){
+    let color1 = db.ProductColor.findOne({
+        where : {
+            color_name:color
+        }
+    });
+    let year1 = db.ProductYear.findOne({
+        where : {
+            year_name : year
+        }
+    });
+    let type1 = db.ProductType.findOne({
+        where :{
+            type_name: type
+        }
+    });
+    let colection1 = db.ProductColection.findOne({
+        where :{
+            colection_name :colection
+        }
+    });        
+
+        Promise.all([color1,year1,type1,colection1])
+        .then(function([productColor, productYear,productType,productColection]){
+            return  [productColor, productYear,productType,productColection ];
+        }); 
+    
+}
 function colorVer(){  
     // QUEDA EN STAND BY 
     // aquí tengo que buscar para este producto qué colores hay en tabla Pivot
@@ -388,7 +416,91 @@ const controller = {
        
     },   
     creaProduct: (req,res) =>{        
+        
+        const errors = validationResult(req);        
+        console.log("la lenght de errores es : " + errors.errors.length)
+        console.log("en body CreaProduct colection es : "+ req.body.colection)
+        console.log("en body CreaProduct type es : "+ req.body.tipo)
+        console.log("en body CreaProduct año es : "+ req.body.anio)
+        console.log("en body CreaProduct color es : "+ req.body.color)
+        if( req.body.color == undefined){
+            req.body.color = "guinda"};
+        if(errors.errors.length > 1){
+            /*ver esto porque hay un error que no encuentro y puse 1 */            
 
+            /*armo valores para modificar falta CUANDO HAGA MODIFICAFR */
+            let colors = db.ProductColor.findAll();
+            let years = db.ProductYear.findAll();
+            let types = db.ProductType.findAll();
+            let colections = db.ProductColection.findAll();
+        
+
+            Promise.all([colors,years,types,colections])
+            .then(function([productColors, productYears,productTypes,productColections]){
+            return res.render('altaProductoDb', {errorsProd: errors.mapped(),colors: productColors, years:productYears,types:productTypes,colections:productColections});
+            });             
+        }
+         if (errors.errors.length == 2 ){      
+             // revisar el tema del color que no veo el error  + error fantasma  
+            console.log("está en else de alta " + req.body.name)
+            //no funciona buscarEnTablas así que voy con promise all
+            let colors1 = db.ProductColor.findOne({
+                where : {
+                    color_name : req.body.color
+                }
+            });
+            let years1 = db.ProductYear.findOne({
+                where : {
+                    year_name : req.body.anio
+                }
+            });
+            let colections1 = db.ProductColection.findOne({
+                where : {
+                    colection_name : req.body.colection
+                }
+            });
+            let types1 = db.ProductColection.findOne({
+                where : {
+                    colection_name : req.body.colection
+                }
+            });
+
+            Promise.all([colors1,years1,types1,colections1])
+            .then(function([productColor, productYear,productType,productColection]){
+            return {colors1: productColor, years1:productYear,types1:productType,colections1:productColection};
+            });  
+            //let tablas = buscarEnTablas(req.body.color,req.body.anio,req.body.colection,req.body.tipo)
+            
+            console.log("en create productColection.id = "+ colections1.productColection.id)
+            let newProduct = {            
+                name: req.body.name ,
+                description :req.body.description,
+                description2 :req.body.description2,                
+                price: req.body.price,
+                //falta tema imagenes
+                descuento :req.body.descuento,
+                id_colection :colections1.productColection.id,
+                id_year: years1.productYear.id,
+                id_color : colors1.productColor.id,
+                id_tipo : types1.productType.id,
+                //cantidad : req.body.cantidad ver como manejo esto en stock
+                };
+            let newDto ={
+                dto: req.body.descuento
+            };
+            let newStock ={
+                quantity : req.body.cantidad
+            };
+            let prodNuevo = Promise.resolve(db.Product.create(newProduct));
+            let descuento = db.ProductDto.create(newDto);
+            let upStock = db.ProductStock.create(newStock);
+            Promise.all([prodNuevo,descuento,upStock])
+            .then (function(){
+                res.send("alta Existosa")
+            } )
+           
+                                   
+        }; /*acá termina el 
        /* const errors = validationResult(req);        
         console.log("la lenght de errores es : " + errors.errors.length)
         if(errors.errors.length > 1){

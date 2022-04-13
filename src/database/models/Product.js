@@ -22,6 +22,10 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(100),
             allowNull: true
         },
+        price: {
+            type: dataTypes.INTEGER(10),
+            allowNull: true
+        },
         id_type: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: true
@@ -33,6 +37,14 @@ module.exports = (sequelize, dataTypes) => {
         id_product_year: {
         type: dataTypes.BIGINT(10).UNSIGNED,
         allowNull: true
+        },
+        id_stock: {
+            type: dataTypes.BIGINT(10).UNSIGNED,
+            allowNull: true
+        },
+        id_dto: {
+            type: dataTypes.BIGINT(10).UNSIGNED,
+            allowNull: true
         },
         created: {
             type: dataTypes.DATE,
@@ -101,7 +113,7 @@ module.exports = (sequelize, dataTypes) => {
         })
     },
     Product.associate = function (models) {
-        ProductStock.belongsTo(models.ProductStock, { // models.Genre -> Genres es el valor de alias en genres.js
+        Product.belongsTo(models.ProductStock, { // models.Genre -> Genres es el valor de alias en genres.js
             as: "pstock",
             foreignKey: "id_stock"
         })

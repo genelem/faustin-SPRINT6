@@ -6,6 +6,7 @@ const multer = require("multer")
 const bproductController = require("../controllers/bproductController")
 const {body, check} = require('express-validator')
 const validatorPDB = require("../validator/validatorProductDb"); 
+const validatorSOLOProduct = require("../validator/validatorSOLOProduct");
 
 
 router.get('/opciones', bproductController.enlaces);
@@ -31,6 +32,6 @@ router.get("/listColor",bproductController.listColor);
 router.get("/deleteColor/:id",bproductController.deleteColor);
 // TABLA PRODUCTOS 
 router.get("/altaProduct",bproductController.altaProduct);
-router.put("/creaProduct",validatorPDB.altaColor,bproductController.creaProduct)
+router.put("/creaProduct",validatorSOLOProduct.altaProducto,bproductController.creaProduct)
 
 module.exports = router
