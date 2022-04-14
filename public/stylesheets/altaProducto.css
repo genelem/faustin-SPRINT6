@@ -183,6 +183,12 @@ main div.submitMasEnviar{
 input{
     background-color:#F4F1DE ;
     border-radius: 1px;
+    width: 8rem;
+}
+#inputColor{
+    background-color:#F4F1DE ;
+    border-radius: 1px;
+    width: 8rem; 
 }
 
 option #anio option{

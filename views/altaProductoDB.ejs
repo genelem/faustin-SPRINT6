@@ -68,11 +68,13 @@
                 <div>                  
                     <div class="licencias">
                         <h3>Indicá COLECCIÓN</h3>
+                        <ul>
                         <% for (i=0 ; i< colections.length ; i++){ %>   
-                        <label></label>        
-                            <input type="checkbox" name="colection" value="<%= colections[i].colection_name %>"> <%= colections[i].colection_name %>
+                                               
+                           <li><%= colections[i].colection_name %> </li>
                         <% } %>
-                     
+                        </ul>
+                        <input placeholder="" type="" name="colection" value="">
                     <% if(locals.errorsProd && locals.errorsProd.colection){ %>
                             <span id="errorMsge" > <%= errorsProd.colection.msg  %> </span>
                     <% } %>   
@@ -82,10 +84,13 @@
                     <div class="tipoProducto">
                         <h3>Indicá TIPO de Producto</h3>                    
                         <label></label> 
-                        <% for (i=0 ; i< types.length ; i++){ %>       
-                            <input type="checkbox" name="tipo" value="<%= types[i].type_name %>"><%= types[i].type_name %> 
-                        <% } %>
-                            
+                        <ul>
+                        <% for (i=0 ; i< types.length ; i++){ %>                                 
+                           <li>"<%= types[i].type_name %></li>
+                        <% } %> 
+                           </ul>  
+                            <input placeholder = "" type="text" name="tipo" value=""></li>
+                        </ul>                            
                     <% if(locals.errorsProd && locals.errorsProd.tipo){ %>
                             <span id="errorMsge" > <%= errorsProd.tipo.msg  %> </span>
                     <% } %> 
@@ -100,24 +105,26 @@
                  <% } %> 
                         <br/>
                         <div class="colores">
-                        <label></label>
+                    <ul>
                     <% for (i=0 ; i< colors.length ; i++){ %>  
-                        <input type="checkbox" id = "amarillo" name="color" value="<% colors[i].color_name %>"><%= colors[i].color_name %> 
-                        <spam><img id="colorList" src="/images/<%= colors[i].color_image %>"> </spam>
+                      <li> <%=colors[i].color_name %> </li>
                     <% } %>                    
-                
-                        </div>
+                      </ul>   
+                        <input placeholder="" id = "imputColor" name="color" value="">
+                    </div>
                         <p>Nuevo COLOR<a href="/bproduct/altaColor"><i class="fas fa-arrow-alt-circle-right"></i></a>
                         </p>
-                    </div>
+                   
                     <div class="seleccionAnio">
                         <h3>Año Colección</h3>
                         <div id="anio">
-                        <select name ="anio" id ="talles">
+                        <!--<select name ="anio" id ="talles">-->
+                        <ul>                            
                             <% for (i=0 ; i< years.length ; i++){ %>
-                            <option value = "<%= years[i].year_name %>"><%= years[i].year_name %> </option>
+                            <li> <%= years[i].year_name %> </li>                           
                             <% } %>
-                  
+                        </ul>
+                        <input placeholder="" name ="anio" value = ""> 
                     <% if(locals.errorsProd && locals.errorsProd.anio){ %>
                             <span id="errorMsge" > <%= errorsProd.anio.msg  %> </span>
                     <% } %> 

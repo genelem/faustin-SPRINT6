@@ -428,15 +428,13 @@ const controller = {
             return res.render('altaProductoDb', {errorsProd: errors.mapped(),colors: productColors, years:productYears,types:productTypes,colections:productColections});
             });             
         }
-         if (errors.errors.length == 2 ){      
+         if (errors.errors.length == 1 ){      
              // revisar el tema del color que no veo el error  + error fantasma  
             console.log("está en else de alta " + req.body.name)
             console.log(req.body.anio)
             // es temporal este if hasta que arregle el view
             
-            if (req.body.color == undefined){
-                req.body.color = "guinda"
-            } 
+           
             /*     db.ProductYear.findOne({
                     where : {
                         year_name:req.body.anio
@@ -480,7 +478,7 @@ const controller = {
                 .then(function([productColor, productYear,productType,productColection]){
                    console.log("los valore son ")
                    console.log(req.body.name)
-                   console.log(req.body.type)
+                   console.log(req.body.tipo)
                    console.log(req.body.color)
                     let newProduct = {            
                              name: req.body.name ,
