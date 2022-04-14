@@ -5,73 +5,59 @@ const path = require('path');
 const { validationResult,body} = require("express-validator")
 
 const db = require('../src/database/models');
+//const { DATE } = require('sequelize/types');
 const sequelize = db.sequelize;
 
-function buscarEnTablas(color,year,colection,type){
-    let color1 = db.ProductColor.findOne({
+/*function buscarEnProductColor(color){
+    db.ProductColor.findOne({
         where : {
             color_name:color
         }
-    });
-    let year1 = db.ProductYear.findOne({
-        where : {
-            year_name : year
-        }
-    });
-    let type1 = db.ProductType.findOne({
-        where :{
-            type_name: type
-        }
-    });
-    let colection1 = db.ProductColection.findOne({
-        where :{
-            colection_name :colection
-        }
-    });        
-
-        Promise.all([color1,year1,type1,colection1])
-        .then(function([productColor, productYear,productType,productColection]){
-            return  [productColor, productYear,productType,productColection ];
-        }); 
-    
+    }).then( (productColor) =>{
+        return productColor.id
+    } );
 }
-function colorVer(){  
-    // QUEDA EN STAND BY 
-    // aquí tengo que buscar para este producto qué colores hay en tabla Pivot
-    // primero busco en tabla qué colores Pivot con id
-   let arrayColors = [ {
-        id:0,
-        id_color :" ",
-        id_product :""
-    }];
-    let arrayColorsImage = [ {
-        id:0,
-        color_name :" ",
-        color_image:""
-    }];
-    db.ProductColorProduct.findAll({
-        where: {
-            id_product: id}
-        },            
-    )
-    .then(function(productColorProducts){
-        if (productColorProducts) {
-            arrayColors = productColorProducts
-            for (i=0 ; i< arrayColors.length ;i++){
-               db.ProductColor.findAll({
-                   where : {
-                       id_color : arrayColors[i].id
-                   }
-               }) 
-               .then (function(productColors){
-                   arrayColorsImage = productColors
-               })
-            } // cierro el for 
-        } } ); // cierro el IF
-        return arrayColorsImage 
-     };
-
-
+function buscarEnProductYear(year){
+     db.ProductYear.findOne({
+        where : {
+            year_name:year
+        }
+    }).then( (productYear) =>{
+        if (!productYear){
+            console.log("no encontró year")
+        }
+         else{
+            
+             console.log(productYear.id)
+             
+         }
+        return productYear.id
+    } );
+}
+function buscarEnProductType(type){
+     db.ProductType.findOne({
+        where : {
+            type_name:type
+        }
+    }).then( (productType) =>{
+        console.log("en función type es "+ productType.id)
+        return productType.id
+    } );
+}
+function buscarEnProductColection(colection){
+    console.log("entró a buscar colección")
+    console.log("valor de :" + colection)
+    db.ProductColection.findOne({
+       where : {
+           colection_name:colection
+       }
+   }).then( (productColection) =>{
+       console.log(productColection.id+ "en función es")
+       return productColection.id
+   } );
+}   */ 
+    
+ 
 const controller = {
     enlaces: (req,res) =>{
         res.render("enlacesDB")
@@ -411,8 +397,9 @@ const controller = {
 
         Promise.all([colors,years,types,colections])
         .then(function([productColors, productYears,productTypes,productColections]){
-            return res.render('altaProductoDb', {colors: productColors, years:productYears,types:productTypes,colections:productColections});
+           return res.render('altaProductoDb', {colors: productColors, years:productYears,types:productTypes,colections:productColections});
         }); 
+      
        
     },   
     creaProduct: (req,res) =>{        
@@ -423,13 +410,14 @@ const controller = {
         console.log("en body CreaProduct type es : "+ req.body.tipo)
         console.log("en body CreaProduct año es : "+ req.body.anio)
         console.log("en body CreaProduct color es : "+ req.body.color)
+        console.log("en body el dto es : "+ req.body.descuento)
         if( req.body.color == undefined){
             req.body.color = "guinda"};
         if(errors.errors.length > 1){
             /*ver esto porque hay un error que no encuentro y puse 1 */            
 
             /*armo valores para modificar falta CUANDO HAGA MODIFICAFR */
-            let colors = db.ProductColor.findAll();
+           let colors = db.ProductColor.findAll();
             let years = db.ProductYear.findAll();
             let types = db.ProductType.findAll();
             let colections = db.ProductColection.findAll();
@@ -443,93 +431,182 @@ const controller = {
          if (errors.errors.length == 2 ){      
              // revisar el tema del color que no veo el error  + error fantasma  
             console.log("está en else de alta " + req.body.name)
-            //no funciona buscarEnTablas así que voy con promise all
-            let colors1 = db.ProductColor.findOne({
-                where : {
-                    color_name : req.body.color
-                }
-            });
-            let years1 = db.ProductYear.findOne({
-                where : {
-                    year_name : req.body.anio
-                }
-            });
-            let colections1 = db.ProductColection.findOne({
-                where : {
-                    colection_name : req.body.colection
-                }
-            });
-            let types1 = db.ProductColection.findOne({
-                where : {
-                    colection_name : req.body.colection
-                }
-            });
-
-            Promise.all([colors1,years1,types1,colections1])
-            .then(function([productColor, productYear,productType,productColection]){
-            return {colors1: productColor, years1:productYear,types1:productType,colections1:productColection};
-            });  
-            //let tablas = buscarEnTablas(req.body.color,req.body.anio,req.body.colection,req.body.tipo)
+            console.log(req.body.anio)
+            // es temporal este if hasta que arregle el view
             
-            console.log("en create productColection.id = "+ colections1.productColection.id)
-            let newProduct = {            
-                name: req.body.name ,
-                description :req.body.description,
-                description2 :req.body.description2,                
-                price: req.body.price,
+            if (req.body.color == undefined){
+                req.body.color = "guinda"
+            } 
+            /*     db.ProductYear.findOne({
+                    where : {
+                        year_name:req.body.anio
+                    }
+                })
+                .then( (productYear) =>{
+                    if (!productYear){
+                        res.send("no encontró year")
+                    }
+                     else{
+                        console.log(productYear.id + "es el id de promesa")
+                        
+                        return ({anio:productYear})
+                     }
+                   
+                } ); */
+                let colorn = db.ProductColor.findOne({
+                    where: {
+                        color_name:req.body.color
+                    }
+                } 
+                );
+                let year = db.ProductYear.findOne({
+                    where:{
+                        year_name:req.body.anio
+                    }
+                });
+                let type = db.ProductType.findOne({
+                    where:{
+                        type_name: req.body.tipo
+                    }
+                });
+                let colection = db.ProductColection.findAll({
+                    where:{
+                        colection_name:req.body.colection
+                    }
+                });
+            
+    
+                Promise.all([colorn,year,type,colection])
+                .then(function([productColor, productYear,productType,productColection]){
+                   console.log("los valore son ")
+                   console.log(req.body.name)
+                   console.log(req.body.type)
+                   console.log(req.body.color)
+                    let newProduct = {            
+                             name: req.body.name ,
+                            description :req.body.description,
+                            description2 :req.body.description2,                
+                            price: req.body.price,
+                            //falta tema imagenes
+                            dto :req.body.descuento,
+                            //created : new DATE(),
+                            id_colection : productColection.id,                
+                   
+                            id_year : productYear.id,             
+            
+                            id_type : productType.id
+            
+                           };
+                        //
+                        let stock ={
+                            quantity : req.body.cantidad
+                        };
+                        //
+                        let constDto ={ 
+                            dto: req.body.descuento};
+                        //
+                        //actualizo tablas 
+                        let prodNuevo = Promise.resolve(db.Product.create(newProduct)); 
+                        let upStock = db.ProductStock.create(stock);
+                        let descuento = db.ProductDto.create(constDto);
+                        Promise.all([prodNuevo,upStock,descuento])
+                        .then (function(product){
+                            // para actualizar la Product-color-Product
+                           return product.setProductColor(product)
+                           
+                        } )
+                        .then (function(){
+                         res.send("alta exitosa")
+                        })
+                    })       
+               
+             
+
+         //   }
+
+           // let coleccion =buscarEnProductColection(req.body.colection);
+           // console.log("coleccion en crear " + coleccion)
+          //  let anio = buscarEnProductYear(req.body.year);
+        
+           //let tipo = buscarEnProductType(req.body.type);
+           // let color = buscarEnProductType(req.body.type);
+           // console.log("los valores de id son: "+ coleccion+" " +anio+" " +tipo+" "+color)
+            //console.log("el valor de id year es " + productYear.id)
+            //let newProduct = {            
+            //    name: req.body.name ,
+            //    description :req.body.description,
+            //    description2 :req.body.description2,                
+            //   price: req.body.price,
                 //falta tema imagenes
-                descuento :req.body.descuento,
-                id_colection :colections1.productColection.id,
-                id_year: years1.productYear.id,
-                id_color : colors1.productColor.id,
-                id_tipo : types1.productType.id,
-                //cantidad : req.body.cantidad ver como manejo esto en stock
-                };
-            let newDto ={
-                dto: req.body.descuento
-            };
-            let newStock ={
-                quantity : req.body.cantidad
-            };
-            let prodNuevo = Promise.resolve(db.Product.create(newProduct));
-            let descuento = db.ProductDto.create(newDto);
-            let upStock = db.ProductStock.create(newStock);
-            Promise.all([prodNuevo,descuento,upStock])
-            .then (function(){
-                res.send("alta Existosa")
-            } )
-           
-                                   
-        }; /*acá termina el 
-       /* const errors = validationResult(req);        
-        console.log("la lenght de errores es : " + errors.errors.length)
-        if(errors.errors.length > 1){
-            /*ver esto porque hay un error que no encuentro y puse 1 */            
+            //    dto :req.body.descuento,
+              
+            //    id_colection : coleccion.id,                
+       
+            //    id_year : anio.id,             
 
-            /*armo valores para modificar falta CUANDO HAGA MODIFICAFR */
-      /*      res.render("altaProductoDb", {errorsProd: errors.mapped()})
-             };
-         if (errors.errors.length == 1 ){         
-            console.log("está en else de alta " + req.body.name)           
-            let newProduct = {            
-                name: req.body.name ,
-                description :req.body.description,
-                description2 :req.body.description2,
-                //description3 : req.body.description3, 
-                price: req.body.price,
-                descuento :req.body.descuento,
-                colection :req.body.colection,
-                anio: req.body.anio,
-                color : req.body.color,
-                tipo : req.body.tipo,
-                cantidad : req.body.cantidad 
-                };
+            //    id_type : tipo.id
+
+            //    };
             
-                console.log (newProduct.name + " es el nombre del producto alta");
-                console.log(newProduct.colection + newProduct.color + newProduct.tipo + newProduct.price)
-                let data = productModel.create(newProduct);                 
-                res.render ("altaProductoDb",{data})                    
-        }; /*acá termina el else */ 
-    }      
+            
+            //actualizo tablas 
+           // let prodNuevo = Promise.resolve(db.Product.create(newProduct)); 
+           // let upStock = db.ProductStock.create(newStock);
+           // Promise.all([prodNuevo,upStock])
+           // .then (function(product){
+                // para actualizar la Product-color-Product
+            //    return product.setProductColor(color.id)
+               
+           // } )
+           // .then (function(){
+           
+            //})
+            
+        }                         
+        
+    },
+    listarProduct:(req,res) =>{
+        let array = []
+           
+        db.Product.findAll({
+            order : [
+                ['id', 'ASC']
+            ]         
+        }) 
+        .then(function(products){
+            if (products) {
+            res.render('listProductsDb', {array:products});}
+            else{
+                res.render("listColorDb",{array})
+            }
+        }); 
+    },
+    detailOneDB : (req,res) =>{
+        let id = req.params.id
+        let colors = db.ProductColor.findAll();
+        let years = db.ProductYear.findAll();
+        let types = db.ProductType.findAll();
+        let colections = db.ProductColection.findAll();
+        let productoDetail = db.Product.findByPk({
+            where :{
+                id : req.params.id
+            } 
+        });
+        
+
+        Promise.all([colors,years,types,colections,productoDetail])
+        .then(function([productColors, productYears,productTypes,productColections,product]){
+            return res.render('altaProductoDb', {colors: productColors, years:productYears,types:productTypes,colections:productColections,producto:product});
+        }); 
+
+        console.log(id + "  es el id a modificar estoy en detailOne")
+        let producto = productModel.find(id); 
+  
+        res.render("updateProductoDB",{producto:producto,colors,years,types,colections}) 
+    }, 
+    storeUpdate: ( req,res) =>{
+        id=req.body
+        res.send("en construcción")
+      }    
 }
 module.exports = controller

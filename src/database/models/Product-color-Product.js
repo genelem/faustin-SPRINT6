@@ -1,11 +1,7 @@
 module.exports = (sequelize, dataTypes) => {
     let alias = 'ProductColorProduct';
     let cols = {
-        id: {
-            type: dataTypes.BIGINT(10).UNSIGNED,
-            primaryKey: true,
-            autoIncrement: true
-        },
+      
         // created_at: dataTypes.TIMESTAMP,
         // updated_at: dataTypes.TIMESTAMP,
         id_color: {
@@ -20,7 +16,7 @@ module.exports = (sequelize, dataTypes) => {
     }; 
     let config = {
         timestamps: false,
-        tableName:"Product-color-product"
+        tableName:"product-color-product"
         
     }
     const ProductColorProduct = sequelize.define(alias, cols, config); 

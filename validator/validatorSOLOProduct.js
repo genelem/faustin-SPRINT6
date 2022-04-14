@@ -106,7 +106,7 @@ const validatorSOLOP = {
                     } 
                  }) 
                  .then (productColor =>{
-                     if( ! productColor){
+                     if(!productColor){
                          return Promise.reject("COLOR INVALIDDO. OPCION: dar alta")
                      }
                  })        

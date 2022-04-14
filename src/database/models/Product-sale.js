@@ -1,16 +1,16 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = 'ProductDto';
+    let alias = 'ProductSale';
     let cols = {
         id: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             primaryKey: true,
             autoIncrement: true
         },        
-        start_dto_date: {
+        date_week_max: {
             type: dataTypes.DATE,
             allowNull: true
-        },   
-        end_dto_date: {
+        },
+        date_week_min: {
             type: dataTypes.DATE,
             allowNull: true
         },
@@ -18,7 +18,7 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.BIGINT(10),
             allowNull: true
         },
-        dto: {
+        dtoSale: {
             type: dataTypes.BIGINT(3),
             allowNull: true
         }        
@@ -26,19 +26,11 @@ module.exports = (sequelize, dataTypes) => {
     
     let config = {
         timestamps: false,
-        tableName:"Product-dto"
+        tableName:"Product-sale"
         
     }
 
-    const ProductDto = sequelize.define(alias, cols, config);
-     
-    ProductDto.associate = function (models) {
-        ProductDto.belongsTo(models.Product, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "dtoP",
-            foreignKey: "id_product"
-        })
-    }
-
-
-    return ProductDto
+    const ProductSale = sequelize.define(alias, cols, config);
+ 
+    return ProductSale
 };

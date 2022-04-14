@@ -33,5 +33,9 @@ router.get("/deleteColor/:id",bproductController.deleteColor);
 // TABLA PRODUCTOS 
 router.get("/altaProduct",bproductController.altaProduct);
 router.put("/creaProduct",validatorSOLOProduct.altaProducto,bproductController.creaProduct)
+//LISTAR Y ACTUALIZAR PRODUCTO
+router.get("/listProduct",bproductController.listarProduct);
+router.get("/detailOneDB/:id",bproductController.detailOneDB)
+router.post("/updateOneDB/:id",validatorSOLOProduct.updateProducto,bproductController.storeUpdate)
 
 module.exports = router

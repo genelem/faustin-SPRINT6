@@ -38,12 +38,9 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.BIGINT(10).UNSIGNED,
         allowNull: true
         },
-        id_stock: {
-            type: dataTypes.BIGINT(10).UNSIGNED,
-            allowNull: true
-        },
-        id_dto: {
-            type: dataTypes.BIGINT(10).UNSIGNED,
+        
+        dto: {
+            type: dataTypes.INTEGER,
             allowNull: true
         },
         created: {
@@ -104,24 +101,19 @@ module.exports = (sequelize, dataTypes) => {
         })
     },
     Product.associate = function (models) {
+        Product.hasOne(models.ProductStock, { // models.Genre -> Genres es el valor de alias en genres.js
+            as: "pstock",
+            foreignKey: "id_product"
+        })
+    },
+    Product.associate = function (models) {
         Product.belongsToMany(models.ProductColor, { // models.Movie -> Movies es el valor de alias en movie.js
             as: "coloresP",
-            through: 'product-color-product',
+            
+            through: 'ProductColorProduct',
             foreignKey: 'id_product',
             otherKey: 'id_color',
             timestamps: false
-        })
-    },
-    Product.associate = function (models) {
-        Product.belongsTo(models.ProductStock, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "pstock",
-            foreignKey: "id_stock"
-        })
-    },
-    Product.associate = function (models) {
-        Product.belongsTo(models.ProductDto, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "pdto",
-            foreignKey: "id_dto"
         })
     }
 

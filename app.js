@@ -20,7 +20,7 @@ const productRouter = require("./routes/product");
 const usersRouter = require('./routes/users');
 // abajo vienen los routers de BASE DE DATOS 
 const bproductRouter = require("./routes/bproduct");
-
+const busersRouter = require('./routes/busers');
 var app = express();
 
 // view engine setup
@@ -48,7 +48,7 @@ app.use("/product", productRouter);
 app.use("/bproduct", bproductRouter)
 
 app.use('/users', usersRouter);
-
+app.use("/busers", busersRouter)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
