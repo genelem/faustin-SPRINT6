@@ -170,8 +170,8 @@ const controller = {
                 }
             })
             .then(function(userCategory){
-                console.log("req.userName antes de create"+req.body.usuario)
-                db.User.create({
+                return (                   
+             db.User.create({
                     userName: req.body.usuario,             
                     first_name: req.body.primerNombre,
                     last_name: req.body.apellido,
@@ -183,13 +183,13 @@ const controller = {
                     password: bcrypt.hashSync(req.body.contraseña, 10),               
                     avatar: req.file ? req.file.filename :"DEFAULT.jpg"
                 } )
-                res.send("alta existosa")
-                
-            } )
-            //let fecha = date.now() igual después usaré timesstamp
+                .then (function(){
+                    res.send("alta existosa") } )
+                )
+            }) 
         }
 
-    res.redirect("/busers/login")         
+        res.redirect("/busers/login")         
     },
     
     list:function(req, res){
