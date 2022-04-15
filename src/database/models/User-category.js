@@ -22,14 +22,14 @@ module.exports = (sequelize, dataTypes) => {
         tableName:"user-category"
         
     }
-    /*const ProductStock = sequelize.define(alias, cols, config); 
-    ProductStock.associate = function (models) {
-        ProductStock.belongsTo(models.Product, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "stockp",
-            foreignKey: "id_product"
-        })
-    }*/
+    
     const UserCategory = sequelize.define(alias, cols, config); 
-
+    
+    UserCategory.associate = function (models) {
+        UserCategory.belongsTo(models.User, { // models.Genre -> Genres es el valor de alias en genres.js
+            as: "categoryU",
+            foreignKey: "id_user"
+        })
+    }
     return UserCategory
 };

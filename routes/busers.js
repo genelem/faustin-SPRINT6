@@ -5,7 +5,7 @@ const authMiddle = require("../middlewares/authMiddle.js");
 
 const buserController = require("../controllers/buserController")
 const {body, check} = require('express-validator')
-const validatorU = require("../validator/validatorUser");
+const validatorUserDb = require("../validator/validatorUserDb");
 
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get("/login",buserController.login);
-router.post("/login",validatorU.login,buserController.processLogin);
+router.post("/login",validatorUserDb.login,buserController.processLogin);
  /* falta actualizar ROUTER cuando pueda leer el body CON LOS DOS MIDDLEWARE */
 /*router.get("/register",userController.register)
 router.post("/register", upload.single("avatar"),validatorU.register,userController.altaRegister);

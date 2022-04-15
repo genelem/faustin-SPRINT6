@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = 'UserCards';
+    let alias = 'UserCard';
     let cols = {
         id: {
             type: dataTypes.BIGINT(10).UNSIGNED,
@@ -22,14 +22,16 @@ module.exports = (sequelize, dataTypes) => {
         timestamps: false        
         
     }
-    /*const ProductStock = sequelize.define(alias, cols, config); 
-    ProductStock.associate = function (models) {
-        ProductStock.belongsTo(models.Product, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "stockp",
-            foreignKey: "id_product"
-        })
-    }*/
-    const UserCards = sequelize.define(alias, cols, config); 
+     const UserCard = sequelize.define(alias, cols, config); 
 
-    return UserCards
+        UserCard.associate = function (models) {
+        UserCard.belongsTo(models.TypeCard, { // models.Genre -> Genres es el valor de alias en genres.js
+            as: "tcard",
+            foreignKey: "type_card"
+        })
+
+    }
+    
+
+    return UserCard
 };
