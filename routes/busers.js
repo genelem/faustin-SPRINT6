@@ -19,32 +19,37 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage });
-
+//alta tabla categoria
+router.get("/altaCategory",buserController.altaCategory);
+router.put("/creaCategory",validatorUserDb.altaCategory,buserController.creaCategory)
+router.get("/listCategory",buserController.listCategory);
+router.get("/deleteCategory/:id",buserController.deleteCategory)
+// login
 router.get("/login",buserController.login);
 router.post("/login",validatorUserDb.login,buserController.processLogin);
- /* falta actualizar ROUTER cuando pueda leer el body CON LOS DOS MIDDLEWARE */
-/*router.get("/register",userController.register)
-router.post("/register", upload.single("avatar"),validatorU.register,userController.altaRegister);
+ /* alta usuario */
+router.get("/register",buserController.register)
+router.put("/register", upload.single("avatar"),validatorUserDb.register,buserController.altaRegister);
 //* si se olvidó la contraseña ( ver )
-router.get("/olvido",userController.forgot)
-router.post("/olvido",validatorU.olvidoV,userController.activarSesion)
+//router.get("/olvido",userController.forgot)
+//router.post("/olvido",validatorU.olvidoV,userController.activarSesion)
 //*cambiar contraseña
-router.get("/cambio",userController.cambioPass)
-router.post("/cambio",validatorU.login,userController.processLoginCambio)
-router.post("/cambioPass/:id",validatorU.cambioP,userController.processCambioP)
+//router.get("/cambio",userController.cambioPass)
+//router.post("/cambio",validatorU.login,userController.processLoginCambio)
+//router.post("/cambioPass/:id",validatorU.cambioP,userController.processCambioP)
 
 //
 
 
-router.get("/borrar",userController.baja)
-router.post("/borrar",validatorU.olvidoV,userController.delete)
+//router.get("/borrar",userController.baja)
+//router.post("/borrar",validatorU.olvidoV,userController.delete)
 
-router.get("/listUsuarios",authMiddle,userController.list);
-router.get("/detailOne/:id",userController.detailOne)
-router.post("/updateOne/:id",validatorU.updateUser,userController.storeUpdate)
+//router.get("/listUsuarios",authMiddle,userController.list);
+//router.get("/detailOne/:id",userController.detailOne)
+//router.post("/updateOne/:id",validatorU.updateUser,userController.storeUpdate)
 //
-router.get("/cerrarSesion",userController.ConfirmLogout)
-router.post("/cerrarSesion",userController.logout)
-*/
+//router.get("/cerrarSesion",userController.ConfirmLogout)
+//router.post("/cerrarSesion",userController.logout)
+
 
 module.exports = router;

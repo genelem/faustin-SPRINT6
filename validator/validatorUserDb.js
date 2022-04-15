@@ -8,6 +8,11 @@ const db = require('../src/database/models');
 const sequelize = db.sequelize;
 
 const validatorUDB = {
+    altaCategory:[
+        check ("name")
+        .notEmpty()
+        .withMessage("Debe ingresar CATEGORIA")
+    ],
     login:[
         check("usuario")
             .notEmpty()
@@ -35,17 +40,18 @@ const validatorUDB = {
         .bail()
         .isLength({min:8}). withMessage('Nombre De usuario MINIMO 8 caractres')
         .bail()
-        .custom(function(value){  
-            //busco al usuario
-            console.log("el valor del custom es value = "+ value)
-            let userFound = userModel.findUser(value);                            
-            //si existe un usuario devuelvo el error
-            if(userFound){
-                throw new Error("USUARIO  ya registrado!");
-            }
-            //sino devuelvo true
-            return true
-        })
+        .custom(function(value){              
+            return db.User.findOne({
+                where:{
+                    userName :value
+                } 
+             }) 
+             .then (user =>{
+                 if(user){
+                     return Promise.reject("Usuario INEXISTENTE ") 
+                 }
+             })        
+         } )
         ,
         check('primerNombre')
         .notEmpty().withMessage ("Debe Ingresar NOMBRE ")
@@ -64,17 +70,19 @@ const validatorUDB = {
         .bail()     
         .isEmail().withMessage('Mail NO Válido')
         .bail()
-        .custom(function(value){  
-            //busco al usuario
-            let userFound= userModel.findMail(value);                            
-            //si existe un usuario devuelvo el error
-            if(userFound){
-                throw new Error("Email ya registrado!");
-            }
-            //sino devuelvo true
-            return true
-        })
-        ,
+        .custom(function(value){              
+            return db.User.findOne({
+                where:{
+                    email :value
+                } 
+             }) 
+             .then (user =>{
+                 if(user){
+                     return Promise.reject("EMAIL ya está regitrado -Verifique")
+                 }
+             })        
+         } ),
+       
         check('fechaNacimiento')
         .notEmpty().withMessage ("Fecha de Nacimiento DEBE SER COMPLETADA ")
         .bail()
@@ -83,16 +91,18 @@ const validatorUDB = {
         check('categoria')
         .notEmpty().withMessage ("Debe ingresar Categoría ")
         .bail()
-        .custom(function(value){  
-            //valores posibles usuario/administrador                         
-            //si existe un usuario devuelvo el error
-            console.log("el valor custom-categoria es :" + value)
-            if ((value !== "usuario") && (value !== "administrador")){
-                throw new Error("Categoría debe ser :usuario o administrador");
-            }
-            //sino devuelvo true
-            return true
-        }), 
+        .custom(function(value){              
+            return db.UserCategory.findOne({
+                where:{
+                    category_name :value
+                } 
+             }) 
+             .then (userCategory =>{
+                 if(!userCategory){
+                     return Promise.reject("CATEGORÍA INVÁLIDA")
+                 }
+             })        
+         } ),
         check('terminos')
         .notEmpty().withMessage('Debe aceptar Términos y condiciones ')
 

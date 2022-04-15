@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/stylesheets/home.css">
+        <link rel="stylesheet" href="/stylesheets/global.css">
+        <link rel="stylesheet" href="/stylesheets/altaProducto.css">
+        <link rel="stylesheet" href="/stylesheets/updateProducto.css">
+        <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+        <link rel="stylesheet" href="/stylesheets/listadosContenidosTablas.css">
+
+        <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>
+        <title>Faustine</title>
+       
+    </head>
+ 
+<body> 
+        <%- include('partials/header') %>
+<main>
+            <div class="altaProductLogo">
+                <h3>Dar CATEGORIA USUARIOS  </h3>
+                <ul>      
+                <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
+                <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
+                </ul>            
+            </div> 
+            
+          
+            <form action="/busers/creaCategory?_method=PUT" method="POST" >   
+                <div class="descriptionProduct">
+                   
+                    <p><label id="" for ="nombreProducto">Nombre CATEGORIA</label>
+                    <input placeholder="" type="text" name="name" id="user1" ></p>
+                    <% if(locals.errorsProd && locals.errorsProd.name){ %>
+                        <span id="errorMsge" > <%= errorsProd.name.msg  %> </span>
+                <% } %>
+                    <br/>                     
+                    <p >CATEGORIAS REGISTRADAS EN LA BASE </p> 
+                    <div class = "listadoEnBase">
+                        <ul>
+                            <% for( let i = 0; i < array.length; i++ ) { %>
+                                <li> <%= array[i].category_name %> </li>
+                    
+                                <br/> 
+                    
+                            <% } %>
+                        </ul> 
+                    </div>                                               
+                </div>                
+                
+                <div id="modal2" class="modalmask">            
+                    <div class="modalbox rotate">
+                        <a href="#close" title="Close" class="close">X</a>
+                        <h2>IMPORTANTE</h2>
+                        <p> AÑOS anteriores a 2020 corresponde EN STOCK 
+                             </p>
+                        <p> Verifique cuidadosamente si es lo que quiere hacer</p>                    
+                         
+                        </div>
+                </div>
+                
+                <div class="submitMasEnviar">          
+                    <input type="submit" name="submit" id="irBaja" value=" ALTA CATEGORIA "> </input>
+                </div>        
+                <div class= "closeMain" >
+                <a href="/" id="vuelvo">Volver a Pagina Principal</a>
+                </div>
+               
+        </form>
+         
+</main>
+</body>
+        <footer>                          
+          
+            <%- include('partials/footer') %>                
+        </footer>   
+
+   </html > 

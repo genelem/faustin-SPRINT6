@@ -86,5 +86,27 @@
   "contraseña": "$2a$10$w1fFPdplt.Tl//a0o7S3IOzCxaGLvBBya5SSF3n7SCs6EAqXdixlC",
   "avatar": "nuevo-1649159210655.jpg",
   "id": 8
+ },
+ {
+  "usuario": "usuarioCarlos",
+  "primerNombre": "carlos",
+  "apellido": "rodriguez",
+  "mail": "carlos@gmail.com",
+  "fechaNacimiento": "1975-02-11",
+  "categoria": "administrador",
+  "contraseña": "$2a$10$/Q71OELEUx4dU1ZO.uDtg.ejA4M4.GVPtWehckQEn3CNVoooYzzGW",
+  "avatar": "nuevo-1650027669641.png",
+  "id": 9
+ },
+ {
+  "usuario": "usuarioAdministra",
+  "primerNombre": "jefecito",
+  "apellido": "bigChief",
+  "mail": "eljefe@gmail.com",
+  "fechaNacimiento": "1978-02-20",
+  "categoria": "administrador",
+  "contraseña": "$2a$10$4jiR.yEvA6Bv2uGB2Qdt3OmpBkmQiHVbiaXimV8jtK3VN/ZFGfsuO",
+  "avatar": "nuevo-1650031916811.png",
+  "id": 10
  }
 ]

@@ -2,12 +2,15 @@ const fs = require('fs');
 const path = require('path');
 const { urlencoded } = require("express")
 const {validationResult, body} = require("express-validator")
-const modelCrud = require('../data/modelCrud');
+//const modelCrud = require('../data/modelCrud');
 const bcrypt = require("bcryptjs")
 const res = require('express/lib/response');
 const { redirect } = require('express/lib/response');
 
-const userModel = modelCrud("userJson");
+const db = require('../src/database/models');
+const sequelize = db.sequelize
+
+//const userModel = modelCrud("userJson");
 // función validar Contraseña
 function validarContraseña(userID,bodycontraseña){     
        // con idUsuario  verifica contraseña         
@@ -16,7 +19,73 @@ function validarContraseña(userID,bodycontraseña){
 }
 //************************** */
 const controller = {
-    
+    altaCategory:(req,res) =>{
+        let array = [ {
+            id:0,
+            category_name :" "
+        }]
+        db.UserCategory.findAll({                   
+        }) 
+        .then(function(userCategorys){
+            if (userCategorys) {
+            res.render('altaCategoryDb', {array:userCategorys});}
+            else{
+                res.render("altaCategoryDb",{array})
+            }
+        }); 
+    },
+    creaCategory: (req,res) =>{
+        // inicializo Variables
+        let array = [ {
+            id:0,
+            category_name :" "
+        }] ;        
+        const errors = validationResult(req);        
+        console.log("la lenght de errores es : " + errors.errors.length)
+        
+        //    
+        db.UserCategory.findAll()                 
+            .then(function(userCategorys){                
+                //chequea errores
+                 if(errors.errors.length > 0){   
+                     res.render("altaCategoryDb", {errorsProd: errors.mapped(),array:userCategorys})
+                    } 
+                    else{                                 
+                        console.log("está en else de alta " + req.body.name)           
+                        let newCategory = {            
+                            category_name: req.body.name                      
+                        };
+                    console.log(newCategory.category_name + "es el req.body")
+                    db.UserCategory.create(newCategory); 
+                            res.render("enlacesDB") ;              
+                               
+                }; // termina el IF                   
+                } ) 
+            },
+    listCategory:(req,res) =>{
+                let array = [ {
+                    id:0,
+                    category_name :" "
+                }]
+                db.UserCategory.findAll()
+                .then(function(userCategorys){
+                    if (userCategorys) {
+                    res.render('listCategoryDb', {array:userCategorys});}
+                    else{
+                        res.render("listCategoryDb",{array})
+                    }
+                }); 
+    },
+    deleteCategory: (req,res) =>{ 
+        db.UserCategory.destroy({
+            where:{
+                id: req.params.id
+            }
+        })
+        .then (function(){
+            res.send("baja existosa")
+     } ) 
+    },   
     login: (req,res) =>{            
         res.render("login")
     }, 
@@ -24,45 +93,50 @@ const controller = {
         const errors = validationResult(req);        
         
         if(errors.errors.length > 0){
-            res.render("login", {errorsLogin: errors.mapped()})
+            res.render("loginDB", {errorsLogin: errors.mapped()})
         }    
         console.log("en register el req.usuario="+ req.body.usuario)
-        let userID =  userModel.findUser(req.body.usuario); 
-        //if (validarContraseña(userID)){
-       
-        let bodycontraseña= req.body.contraseña;
-      
-        let resultado= validarContraseña(userID,bodycontraseña);
-      
-        if (validarContraseña(userID,bodycontraseña)){
+        //let userID =  userModel.findUser(req.body.usuario); 
+        db.User.findOne({
+            where : {
+              userName :req.body.usuario
+            }        
+        }) 
+        .then(function(user){
+            return ({usuario:user})
+        });
+        if (usuario) {
+            let bodycontraseña= req.body.contraseña;
+                if (validarContraseña(usuario,bodycontraseña)){
            
-             if (req.body) {
-                //proceso session
-                let user = {
-                //aquí
-                    id: userID.id,
-                    usuario :req.body.usuario,
-                    primerNombre: req.body.primerNombre,
-                    apellido: req.body.apellido,
-                    mail: req.body.mail,
-                    fechaNacimiento:req.body.fechaNacimiento,
-                    categoria: req.body.categoria          
-                    //avatar: userFound.avatar,
+                    if (req.body) {
+                       //proceso session
+                       let userlog = {
+                       //aquí
+                           id: userID.id,
+                           usuario:req.body.usuario,
+                           primerNombre: req.body.primerNombre,
+                           apellido: req.body.apellido,
+                           mail: req.body.mail,
+                           fechaNacimiento:req.body.fechaNacimiento,
+                           categoria: req.body.categoria          
+                           //avatar: userFound.avatar,
+                           }
+       
+                       req.session.usuarioLogueado = userlog
+                       console.log("en alta P.usuarioLogueado" + req.session.usuarioLogueado)
+       
+                       if(req.body.recordame){
+                       res.cookie("user", user.id, {maxAge: 50000 * 24})
+                       }
+                       res.redirect("/");
+                       
                     }
-
-                req.session.usuarioLogueado = user
-                console.log("en alta P.usuarioLogueado" + req.session.usuarioLogueado)
-
-                if(req.body.recordame){
-                res.cookie("user", user.id, {maxAge: 50000 * 24})
-                }
-                res.redirect("/");
-                
-        }
-        }else{
-            
-            res.send("Credenciales Incorrectas")
-        } 
+               }else{
+                   
+                   res.send("Credenciales Incorrectas")
+               } 
+           ;}   
     },
     
     forgot: (req,res) =>{        
@@ -78,36 +152,44 @@ const controller = {
         res.render("login")
     }, 
     register: (req,res) =>{
-        res.render("formularioRegistro")
+        res.render("formularioRegistroDb")
     },
     altaRegister: (req,res) =>{
         let errors =[];
         errors = validationResult(req); 
         console.log(errors.errors.length + "errores length")
         if(errors.errors.length > 0){
-           return res.render("formularioRegistro", {errorsReg: errors.mapped()})
+           return res.render("formularioRegistroDb", {errorsReg: errors.mapped()})
         }      
         
         else {
             console.log("entró al else en alta")
+            db.UserCategory.findOne({
+                where:{
+                    category_name:req.body.categoria
+                }
+            })
+            .then(function(userCategory){
+                console.log("req.userName antes de create"+req.body.usuario)
+                db.User.create({
+                    userName: req.body.usuario,             
+                    first_name: req.body.primerNombre,
+                    last_name: req.body.apellido,
+                    email: req.body.mail,
+                    bornDate:req.body.fechaNacimiento,
+                    id_category: userCategory.id,
+                   // fechaAlta: fecha,
+                   //req.file ? req.file.filename : "image-default"
+                    password: bcrypt.hashSync(req.body.contraseña, 10),               
+                    avatar: req.file ? req.file.filename :"DEFAULT.jpg"
+                } )
+                res.send("alta existosa")
+                
+            } )
             //let fecha = date.now() igual después usaré timesstamp
-            let userAlta = {   
-                usuario: req.body.usuario,             
-                primerNombre: req.body.primerNombre,
-                apellido: req.body.apellido,
-                mail: req.body.mail,
-                fechaNacimiento:req.body.fechaNacimiento,
-                categoria: req.body.categoria,
-               // fechaAlta: fecha,
-               //req.file ? req.file.filename : "image-default"
-                contraseña: bcrypt.hashSync(req.body.contraseña, 10),               
-                avatar: req.file ? req.file.filename :"DEFAULT.jpg"
-            }
-            console.log(req.body.contraseña + "es la que voy a encriptar")
-            console.log(userAlta.contraseña)
-            userModel.create(userAlta);
-        
-            res.redirect("/users/login")};         
+        }
+
+    res.redirect("/busers/login")         
     },
     
     list:function(req, res){

@@ -15,8 +15,7 @@ function validarContraseña(userID,bodycontraseña){
     return bcrypt.compareSync(bodycontraseña,contraseñaGuardada)
 }
 //************************** */
-const controller = {
-    
+const controller = {   
     login: (req,res) =>{            
         res.render("login")
     }, 
@@ -24,9 +23,10 @@ const controller = {
         const errors = validationResult(req);        
         
         if(errors.errors.length > 0){
-            res.render("login", {errorsLogin: errors.mapped()})
+            res.render("loginDB", {errorsLogin: errors.mapped()})
         }    
         console.log("en register el req.usuario="+ req.body.usuario)
+        
         let userID =  userModel.findUser(req.body.usuario); 
         //if (validarContraseña(userID)){
        
@@ -78,14 +78,14 @@ const controller = {
         res.render("login")
     }, 
     register: (req,res) =>{
-        res.render("formularioRegistro")
+        res.render("formularioRegistroDB")
     },
     altaRegister: (req,res) =>{
         let errors =[];
         errors = validationResult(req); 
         console.log(errors.errors.length + "errores length")
         if(errors.errors.length > 0){
-           return res.render("formularioRegistro", {errorsReg: errors.mapped()})
+           return res.render("formularioRegistroDB", {errorsReg: errors.mapped()})
         }      
         
         else {

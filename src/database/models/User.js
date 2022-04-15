@@ -26,6 +26,14 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING(100),
             allowNull: true
         },
+        password: {
+            type: dataTypes.STRING(100),
+            allowNull: true
+        },
+        bornDate: {
+            type: dataTypes.DATE,
+            allowNull: true
+        },
         terminos: {
             type: dataTypes.INTEGER,
             allowNull: true
@@ -48,11 +56,10 @@ module.exports = (sequelize, dataTypes) => {
             timestamps: false
         }) }
         User.associate = function (models) {
-            User.belongsTo(models.UserCategory, { // models.Genre -> Genres es el valor de alias en genres.js
-                as: "Ucategory",
-                foreignKey: "id_category"
-            })
-        }
+            User.belongsTo(models.UserCategory,{// -> Movies es el valor de alias en movie.js
+                foreignKey: 'id_category'       
+            }) }
+       
 
     return User
 };

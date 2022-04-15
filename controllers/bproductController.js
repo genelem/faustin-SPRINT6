@@ -5,7 +5,7 @@ const path = require('path');
 const { validationResult,body} = require("express-validator")
 
 const db = require('../src/database/models');
-//const { DATE } = require('sequelize/types');
+
 const sequelize = db.sequelize;
 
 /*function buscarEnProductColor(color){
