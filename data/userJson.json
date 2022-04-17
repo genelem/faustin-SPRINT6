@@ -66,15 +66,15 @@
   "id": 6
  },
  {
+  "id": 7,
   "usuario": "usuarioLucas",
   "primerNombre": "Lucas",
   "apellido": "Jefecito",
   "mail": "lucas@gmail.com",
   "fechaNacimiento": "1966-02-23",
   "categoria": "administrador",
-  "contraseña": "$2a$10$k.ozHz7.cDZ./TKctmzYX.3B6WRancGFWOsDcm9YZSSEHS7SbVRPm",
-  "avatar": "nuevo-1649123784899.png",
-  "id": 7
+  "contraseña": "$2a$10$8DRNPuoC6OVRiebEQtXK7elO3MVqY./8wtjbnxaD4shL0W8OOKlP.",
+  "avatar": "nuevo-1649123784899.png"
  },
  {
   "usuario": "usuarioMara",

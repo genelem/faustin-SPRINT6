@@ -1,0 +1,25 @@
+
+            
+    <!-- FALTA ARREGLAR QUE ESTÁN OTRA VEZ SEPARADOS.. VER OTRO DÍA-->
+    <div class="etiquetasDeLogin">
+        <!--<p>Puede ingresar con Nombre de Usuario o con Mail REGISTRADOS</p>-->
+        <p><label class="usuario"for ="usuario">Nombre Usuario</label>
+            <input placeholder="" type="text"  name="usuario" class="barraDeUsuario" ></p>
+            <% if(locals.errorsLogin && locals.errorsLogin.usuario){ %>
+                <span id="errorMsge" > <%= errorsLogin.usuario.msg  %> </span>
+              <% } %> 
+            <br/>
+       <!--- <p><label class="usuario"for ="email">EMAIL</label>
+            <input placeholder="" type="text"  name="mail" class="barraDeUsuario" ></p>-->
+             
+            <br/>
+        <p><label class="usuario"for ="contraseña">Ingrese CONTRASEÑA</label>
+            <input placeholder="" type="password"  name="contraseña" class="barraDeUsuario" ></p>
+            <% if(locals.errorsLogin && locals.errorsLogin.contraseña){ %>
+                <span id="errorMsge" > <%= errorsLogin.contraseña.msg  %> </span>
+            <% } %> 
+            <br/>
+            <label for="recordame" class="usuario">Recordame</label>
+            <input type="checkbox" name="recordame" >
+    </div>
+        

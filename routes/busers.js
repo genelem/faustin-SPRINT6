@@ -34,9 +34,9 @@ router.put("/register", upload.single("avatar"),validatorUserDb.register,buserCo
 router.get("/olvido",buserController.forgot)
 router.post("/olvido",validatorUserDb.olvidoV,buserController.activarSesion)
 //*cambiar contraseña
-//router.get("/cambio",userController.cambioPass)
-//router.post("/cambio",validatorU.login,userController.processLoginCambio)
-//router.post("/cambioPass/:id",validatorU.cambioP,userController.processCambioP)
+router.get("/cambio",buserController.cambioPass)
+router.post("/cambio",validatorUserDb.login,buserController.processLoginCambio)
+router.post("/cambioPass/:id",validatorUserDb.cambioP,buserController.processCambioP)
 
 //router.get("/borrar",userController.baja)
 //router.post("/borrar",validatorU.olvidoV,userController.delete)

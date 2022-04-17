@@ -288,17 +288,75 @@ const controller = {
        
     }, 
     cambioPass: (req,res) =>{
-        res.render("loginIrCambioPass")
+        res.render("loginIrCambioPassDB")
     },
     processLoginCambio :(req,res) =>{
         /***** todo igual a LOGIN pero MANDA A PAGINA DE CAMBIAR CONTRASEÑA  */
         const errors = validationResult(req);        
         
         if(errors.errors.length > 0) {
-            res.render("loginIrCambioPass", {errorsLogin: errors.mapped()})
+            res.render("loginIrCambioPassDB", {errorsLogin: errors.mapped()})
         }  
-        
-     
+        /*** */
+        db.User.findOne({
+            where : {
+              userName :req.body.usuario
+            }        
+        }) 
+        .then(function(user){  
+           // return ({
+                if (user) {
+                console.log("entró en IF usuario luego de promesa")
+                console.log(req.body.contraseña)
+                let bodycontraseña= req.body.contraseña;
+                let result = validarContraseña(user,bodycontraseña)
+                console.log(result)
+                if (validarContraseña(user,bodycontraseña)){
+                    
+                    if (req.body) {
+                        // aquí buscar el id de categoría.
+                       //proceso session
+                       let userlog = {
+                       //aquí
+                           id: user.id,
+                           usuario:req.body.usuario,
+                           primerNombre: user.first_name,
+                           apellido: user.last_name,
+                           mail: user.email,
+                           fechaNacimiento:user.bornDate,
+                           categoria: user.id_category
+                           //avatar: userFound.avatar,
+                           }
+       
+                       req.session.usuarioLogueado = userlog
+                       console.log("en alta P.usuarioLogueado" + req.session.usuarioLogueado)
+       
+                       if(req.body.recordame){
+                       res.cookie("user", user.id, {maxAge: 50000 * 24})
+                       }
+                       res.render("loginCambiaPassDB",{user:user});
+                       //res.redirect("/");
+                       
+                    }
+               }else{
+                   
+                   res.send("Credenciales Incorrectas")
+               } 
+           ;}   })
+    },
+    
+    forgot: (req,res) =>{        
+        res.render("loginOlvideDB")
+    },  
+    
+    activarSesion: (req,res) =>{ 
+        let errors =[];
+        errors = validationResult(req);       
+        if(errors.errors.length > 0){
+           return res.render("loginOlvideDB", {errorsOlvido: errors.mapped()})
+        }          
+        res.render("loginDB")
+     /************************************* */
         let userID =  userModel.findUser(req.body.usuario); 
         //if (validarContraseña(userID)){
        
@@ -328,7 +386,7 @@ const controller = {
                 res.cookie("user", user.id, {maxAge: 50000 * 24})
                 }
               
-                res.render("loginCambiaPass",{user:user});
+                res.render("loginCambiaPassDB",{user:user});
                 
         }
         }else{
@@ -338,36 +396,49 @@ const controller = {
     },
     processCambioP: (req,res) =>{
         const errors = validationResult(req);        
-        
+        /*** */
         if(errors.errors.length > 0){
-            res.render("loginCambiaPass", {errorsLogin: errors.mapped()})
+            res.render("loginCambiaPassDB", {errorsLogin: errors.mapped()})
         } 
         else { 
             if( req.body.contraseña1 !== req.body.contraseña2 ){
             res.send ("contraseñas Ingresadas SON DISTINTAS ")
         } ;} ;
-        console.log(req.session.usuarioLogueado.id + "  es  el ID")
-        let userID =  userModel.find(req.session.usuarioLogueado.id); 
-        if ((userID) && (validarContraseña(userID,req.body.contraseña1)) ){
-           
+        //**** */
+        console.log(req.session.usuarioLogueado.id + "  es  el ID");
+        //let userID =  userModel.find(req.session.usuarioLogueado.id);
+        db.User.findByPk(req.session.usuarioLogueado.id)
+        .then(function(user){
+            if ((user) && (validarContraseña(user,req.body.contraseña1)) ){           
                 res.send("NUEVA CONTRASEÑA debe ser DIFERENTE a la registrada")
+            } else{
+                db.User.update({             
+                
+                    first_name:req.body.primerNombre,
+                    last_name : req.body.apellido,
+                    email: req.body.mail,
+                    password: bcrypt.hashSync(req.body.contraseña1, 10),
+                    //avatar: req.body.avatar,
+                    bornDate:req.body.fechaNacimiento,
+                    id_category: req.body.categoria
+                 
+            },{
+                where:{
+                    id: req.session.usuarioLogueado.id
+                }
+            })
+            .then(function(){
+                return db.User.findByPk(req.session.usuarioLogueado.id)
+                
+            })
+            .then(function(){
+                return res.send("modificación exitosa")
+            } )
+           
             }
-            else {
-                let user = {
-                    //aquí
-                        id: userID.id,
-                        usuario :userID.usuario,
-                        primerNombre: userID.primerNombre,
-                        apellido: userID.apellido,
-                        mail: userID.mail,
-                        fechaNacimiento:userID.fechaNacimiento,
-                        categoria: userID.categoria, 
-                        contraseña : bcrypt.hashSync(req.body.contraseña1, 10),         
-                        avatar: userID.avatar
-                        }
-                 userModel.update(user) 
-                 res.redirect("/") 
-            } ;        
+        }) 
+        res.redirect("/")
+            
     },   
     
     ConfirmLogout:function(req, res){
