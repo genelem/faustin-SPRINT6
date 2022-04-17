@@ -68,14 +68,12 @@
                 <div>                  
                     <div class="licencias">
                         <h3>Indicá COLECCIÓN</h3>
-                        <ul>
+                       
                         <% for (i=0 ; i< colections.length ; i++){ %>   
-                                               
-                           <li><%= colections[i].colection_name %> </li>
+  
+                        <input type ="radio" name="colection" value="<%= colections[i].colection_id %>"><label><%= colections[i].colection_name %></label>
                         <% } %>
-                        </ul>
-                        <input placeholder="" type="" name="colection" value="">
-                    <% if(locals.errorsProd && locals.errorsProd.colection){ %>
+                        <% if(locals.errorsProd && locals.errorsProd.colection){ %>
                             <span id="errorMsge" > <%= errorsProd.colection.msg  %> </span>
                     <% } %>   
                             <p>Nueva Colección<a href="/bproduct/altaColection"><i class="fas fa-arrow-alt-circle-right"></i></a>

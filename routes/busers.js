@@ -31,22 +31,19 @@ router.post("/login",validatorUserDb.login,buserController.processLogin);
 router.get("/register",buserController.register)
 router.put("/register", upload.single("avatar"),validatorUserDb.register,buserController.altaRegister);
 //* si se olvidó la contraseña ( ver )
-//router.get("/olvido",userController.forgot)
-//router.post("/olvido",validatorU.olvidoV,userController.activarSesion)
+router.get("/olvido",buserController.forgot)
+router.post("/olvido",validatorUserDb.olvidoV,buserController.activarSesion)
 //*cambiar contraseña
 //router.get("/cambio",userController.cambioPass)
 //router.post("/cambio",validatorU.login,userController.processLoginCambio)
 //router.post("/cambioPass/:id",validatorU.cambioP,userController.processCambioP)
 
-//
-
-
 //router.get("/borrar",userController.baja)
 //router.post("/borrar",validatorU.olvidoV,userController.delete)
 
-//router.get("/listUsuarios",authMiddle,userController.list);
-//router.get("/detailOne/:id",userController.detailOne)
-//router.post("/updateOne/:id",validatorU.updateUser,userController.storeUpdate)
+router.get("/list",authMiddle,buserController.list);
+router.get("/detailOne/:id",buserController.detailOne)
+router.post("/updateOne/:id",validatorUserDb.updateUser,buserController.storeUpdate)
 //
 //router.get("/cerrarSesion",userController.ConfirmLogout)
 //router.post("/cerrarSesion",userController.logout)

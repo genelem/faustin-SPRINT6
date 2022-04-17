@@ -17,27 +17,9 @@
 </head>
 
 <body>
-   <!--- <header class="header">
-        <div class="cointainer, logo-nav-container">
-            <div class="barra">
-                <input type="text" id="searchterm" placeholder="¿Qué estas buscando?" class="barra1" >
-
-            </div>
-            <nav class="Faustine">
-                <h3> Faustine </h3>
-            </nav>
-                <div class="logoF">
-                <img width="80" height="80" src="images/LogoFaustine-header.jpg">
-            </div>
-            <nav class="imgs">
-            <button><a href= "#"> <img width="50" height="50" src="images/usuario.jpg"></a></button>
-            <button><a href= "#"> <img width="50" height="50" src="images/logoCompras.jpg"></button></a>
-            </nav>
-        </div>
-    </header>-->
+  
     <%- include('partials/header') %>
-<div class="cuerpoLogin">
-          
+<div class="cuerpoLogin">          
     <form action="/busers/login" method="POST">
         <div class ="paginaLogin">
         <%- include('partials/cuerpoLogin') %>  
@@ -50,14 +32,14 @@
         
         <div class="cuentaYContraseña">                     
             <p>
-                <a href= "/users/olvido" class="linkCrearCuenta">¿Olvidaste tu contraseña?</a>
+                <a href= "/busers/olvido" class="linkCrearCuenta">¿Olvidaste tu contraseña?</a>
             </p>
             <p>
-                <a href= "/users/register" class="linkCrearCuenta">Crea tu cuenta</a>
+                <a href= "/busers/register" class="linkCrearCuenta">Crea tu cuenta</a>
             </p>            
                        
             <p>
-                <a href= "/users/cambio" class="linkCrearCuenta">Modificar Contraseña</a>
+                <a href= "/busers/cambio" class="linkCrearCuenta">Modificar Contraseña</a>
             </p>
         </div>
     </fom>

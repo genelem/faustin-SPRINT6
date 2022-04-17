@@ -14,7 +14,8 @@ const sequelize = db.sequelize
 // función validar Contraseña
 function validarContraseña(userID,bodycontraseña){     
        // con idUsuario  verifica contraseña         
-    let contraseñaGuardada = userID.contraseña;  
+    let contraseñaGuardada = userID.password;  
+    console.log(contraseñaGuardada +"es contraseña guardada")
     return bcrypt.compareSync(bodycontraseña,contraseñaGuardada)
 }
 //************************** */
@@ -87,7 +88,7 @@ const controller = {
      } ) 
     },   
     login: (req,res) =>{            
-        res.render("login")
+        res.render("loginDB")
     }, 
     processLogin :(req,res) =>{
         const errors = validationResult(req);        
@@ -102,24 +103,28 @@ const controller = {
               userName :req.body.usuario
             }        
         }) 
-        .then(function(user){
-            return ({usuario:user})
-        });
-        if (usuario) {
-            let bodycontraseña= req.body.contraseña;
-                if (validarContraseña(usuario,bodycontraseña)){
-           
+        .then(function(user){  
+           // return ({
+                if (user) {
+                console.log("entró en IF usuario luego de promesa")
+                console.log(req.body.contraseña)
+                let bodycontraseña= req.body.contraseña;
+                let result = validarContraseña(user,bodycontraseña)
+                console.log(result)
+                if (validarContraseña(user,bodycontraseña)){
+                    
                     if (req.body) {
+                        // aquí buscar el id de categoría.
                        //proceso session
                        let userlog = {
                        //aquí
-                           id: userID.id,
+                           id: user.id,
                            usuario:req.body.usuario,
-                           primerNombre: req.body.primerNombre,
-                           apellido: req.body.apellido,
-                           mail: req.body.mail,
-                           fechaNacimiento:req.body.fechaNacimiento,
-                           categoria: req.body.categoria          
+                           primerNombre: user.first_name,
+                           apellido: user.last_name,
+                           mail: user.email,
+                           fechaNacimiento:user.bornDate,
+                           categoria: user.id_category
                            //avatar: userFound.avatar,
                            }
        
@@ -136,20 +141,20 @@ const controller = {
                    
                    res.send("Credenciales Incorrectas")
                } 
-           ;}   
+           ;}   })
     },
     
     forgot: (req,res) =>{        
-        res.render("loginOlvide")
+        res.render("loginOlvideDB")
     },  
     
     activarSesion: (req,res) =>{ 
         let errors =[];
         errors = validationResult(req);       
         if(errors.errors.length > 0){
-           return res.render("loginOlvide", {errorsOlvido: errors.mapped()})
+           return res.render("loginOlvideDB", {errorsOlvido: errors.mapped()})
         }          
-        res.render("login")
+        res.render("loginDB")
     }, 
     register: (req,res) =>{
         res.render("formularioRegistroDb")
@@ -183,25 +188,36 @@ const controller = {
                     password: bcrypt.hashSync(req.body.contraseña, 10),               
                     avatar: req.file ? req.file.filename :"DEFAULT.jpg"
                 } )
-                .then (function(){
-                    res.send("alta existosa") } )
+                //.then (function(){
+                 //  res.send("alta existosa") } )
                 )
             }) 
         }
-
-        res.redirect("/busers/login")         
+        res.redirect("/busers/login")
+        //res.redirect("/")
+        //res.render("loginDB")
+       
     },
-    
     list:function(req, res){
-        let autorizacion = userModel.find(req.session.usuarioLogueado.id)       
-        if (autorizacion.categoria !== "administrador"){
-            res.send("NO ESTÁ AUTORIZADO A REALIZAR ESTA OPERACIÓN")
-        } 
-        else {let usersFound = userModel.all();  
-        console.log(usersFound) ;           
-        res.render("listadoUsuarios",{users:usersFound}); }
-    } ,   
-    detailOne:function(req, res){
+        db.User.findOne({
+            where:{
+                id:req.session.usuarioLogueado.id,               
+            }
+        })
+        .then(function(user){
+            if(user.id_category !==3){
+                res.send("NO ESTÁ AUTORIZADO A REALIZAR ESTA OPERACIÓN")
+            }else{
+                db.User.findAll()
+                .then (function(users){
+                    res.render("listUsuariosDB",{array:users})
+                } )
+            }    
+        })  
+   },
+    
+   
+    detailOne:function(req,res){
         let errors =[];
         errors = validationResult(req); 
           
@@ -211,31 +227,49 @@ const controller = {
         else {
             let id = req.params.id
             console.log(id + "  es el id a modificar estoy en detailOne")
-            let user = userModel.find(id); 
+           
+            let usuario = db.User.findOne({
+                where:{
+                    id:req.params.id
+                }
+            });
+            let categorias = db.UserCategory.findAll();       
+
+            Promise.all([usuario,categorias])
+            .then(function([user, categorias]){
+            return res.render("updateUsuarioDB", {user:user, categorias:categorias});
+            }); 
+            //let user = userModel.find(id); 
        
-            res.render("updateUsuario",{user:user}) 
+            //res.render("updateUsuario",{user:user}) 
         }
     },  
     storeUpdate: function(req,res){
         let id = req.params.id
         console.log(id + "  es el id a modificar estoy en detailOne")
-      
-        let user = userModel.find(id); 
-        console.log("en storeUpdate el usuario es :" + user.id)
-        console.log("storeUpdate "+ user.usuario)
-        let userMod = {
-            id:user.id,
-            usuario:user.usuario,
-            contraseña : user.contraseña,
-            primerNombre:req.body.primerNombre,
-            apellido : req.body.apellido,
-            mail: req.body.mail,
-            //avatar: req.body.avatar,
-            fechaNacimiento:req.body.fechaNacimiento,
-            categoria: req.body.categoria
-        }  
-        userModel.update(userMod);   
-        res.redirect("/");
+        db.User.update({             
+                
+                first_name:req.body.primerNombre,
+                last_name : req.body.apellido,
+                email: req.body.mail,
+                //avatar: req.body.avatar,
+                bornDate:req.body.fechaNacimiento,
+                id_category: req.body.categoria
+             
+        },{
+            where:{
+                id: req.params.id
+            }
+        })
+        .then(function(){
+            return db.User.findByPk(req.params.id)
+            
+        })
+        .then(function(){
+            return res.send("modificación exitosa")
+        }
+        ) 
+       
     },
     baja:function(req, res){
         // usuario = session.usuarioLogueado.usuario

@@ -21,7 +21,7 @@ const validatorUDB = {
             .custom(function(value){              
                     return db.User.findOne({
                         where:{
-                            user_name :value
+                            username :value
                         } 
                      }) 
                      .then (user =>{
@@ -108,22 +108,7 @@ const validatorUDB = {
 
     ],
     updateUser: [
-        /*check('usuario') 
-        .notEmpty().withMessage ("debe Ingresar USUARIO ")
-        .bail()
-        .isLength({min:8}). withMessage('Nombre De usuario MINIMO 8 caractres')
-        .bail()
-        .custom(function(value){  
-            //busco al usuario
-            let userFound = userModel.findUser(value);                            
-            //si existe un usuario devuelvo el error
-            if(userFound){
-                throw new Error("USUARIO  ya registrado!");
-            }
-            //sino devuelvo true
-            return true
-        })
-        , */
+        
         check('primerNombre')
         .notEmpty().withMessage ("Debe Ingresar NOMBRE ")
         .bail()
@@ -152,16 +137,18 @@ const validatorUDB = {
         .bail()     
         .isEmail().withMessage('Mail NO Válido')
         .bail()
-        .custom(function(value){  
-            //busco al usuario
-            let userFound= userModel.findMail(value);                            
-            //si existe un usuario devuelvo el error
-            if (!userFound){
-                throw new Error("Este Mail NO ESTÄ REGISTRADO en nuestra Base De Datos");
-            }
-            //sino devuelvo true
-            return true
-        })
+        .custom(function(value){              
+            return db.User.findOne({
+                where:{
+                    email :value
+                } 
+             }) 
+             .then (user =>{
+                 if(!user){
+                     return Promise.reject("MAIL INEXISTENTE")
+                 }
+             })        
+         } )
 
     ],
     cambioP :[

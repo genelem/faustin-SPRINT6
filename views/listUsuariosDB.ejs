@@ -21,7 +21,7 @@
 <main>
 <div class="cuerpoLogin">    
     <%- include('partials/header') %>
-    <h3>RECUPERAR CONTRASEÑA</h3>  
+    <h3>LISTADO de USUARIOS registrados</h3>  
             <div class="altaProductLogo">
               
                 <ul>      
@@ -29,26 +29,31 @@
                 <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
                 </ul>            
             </div>
-    <div class="paginaLogin">  
-        <form action="/busers/olvido" method="POST">        
-         
-            <div class="etiquetasDeLogin">
-              
-                <p><label class="usuario"for ="amil">Ingrese Mail Registrado</label>
-                    <input placeholder="" type="text"  name="mail" class="barraDeUsuario" ></p>
-                    <% if(locals.errorsOlvido && locals.errorsOlvido.mail){ %>
-                        <span id="errorMsge" > <%= errorsOlvido.mail.msg  %> </span>
-                      <% } %> 
-                    <br/>
-            </div>     
-        
+    <div class="paginaLogin"> 
+        <section class="errores">
+            <% if(typeof data!='undefined'){ %>
+                <ul>                  
+                    <li style="color: red;">USUARIO  Modificado Existosamente
+            <% } %>
+                </ul>            
+        </section>
+        <div class = "ppal">
+            <br>
+        <ul>
+            <% for( let i = 0; i < array.length; i++ ) { %>
+            <li> <img id="imgAvatar" src="/images/avatars/<%= array[i].avatar %>" >
+            
+            <a href="/busers/detailOne/<%= array[i].id %>"><%= array[i].userName %></a>
+            </li>
+            <% } %> 
+        </ul>
+        </div> 
             <div id="modal2" class="modalmask">            
                 <div class="modalbox rotate">
                     <a href="#close" title="Close" class="close">X</a>
-                    <h2>OLVIDO SU CONTRASEÑA</h2>
-                    <p>Le será enviado un mail a su casilla de Correo con la Contraseña
-                    Registrada para ese mail. Confirme desde su casilla y recuperará 
-                    la constraseña. Luego Proceda a realizar el LOGIN 
+                    <h2>MODIFICAR UN USUARIO</h2>
+                    <p> Ud. puede clickear sobre USUARIO que desea
+                        modificar. 
                   </p>
                
                  </div>
@@ -56,8 +61,8 @@
         </div>
         
         <div class="button">    
-            <input type="submit" name="submit" class="boton1" value="Recibir Contraseña Registrada"> </input>
-             <br/>         
+           <!--- <input type="submit" name="submit" class="boton1" value="Recibir Contraseña Registrada"> </input>
+             <br/>   -->      
            <p id="volver"><a href="/" class= "boton1">Volver a Pagina Principal</a></p>
         </div>            
     </div> 

@@ -107,11 +107,11 @@ module.exports = (sequelize, dataTypes) => {
         })
     },
     Product.associate = function (models) {
-        Product.belongsToMany(models.TypeCard, { // models.Movie -> Movies es el valor de alias en movie.js
-            as: "tarjetasUser",            
-            through: 'UserCard',
-            foreignKey: 'id_user',
-            otherKey: 'type_card',
+        Product.belongsToMany(models.ProductColor, { // models.Movie -> Movies es el valor de alias en movie.js
+            as: "colores",            
+            through: 'ProductColorProduct',
+            foreignKey: 'id_product',
+            otherKey: 'id_color',
             timestamps: false
         })
     }

@@ -5,6 +5,6 @@ function authMiddle(req,res,next){
         console.log(req.session.usuarioLogueado)
         return next() }
     console.log("en elmiddleware salió por else")
-    return res.redirect("/users/login")
+    return res.redirect("/busers/login")
     }
 module.exports = authMiddle

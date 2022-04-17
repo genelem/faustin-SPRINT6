@@ -417,7 +417,7 @@ const controller = {
             /*ver esto porque hay un error que no encuentro y puse 1 */            
 
             /*armo valores para modificar falta CUANDO HAGA MODIFICAFR */
-           let colors = db.ProductColor.findAll();
+            let colors = db.ProductColor.findAll();
             let years = db.ProductYear.findAll();
             let types = db.ProductType.findAll();
             let colections = db.ProductColection.findAll();
@@ -434,8 +434,32 @@ const controller = {
             console.log(req.body.anio)
             // es temporal este if hasta que arregle el view
             
-           
-            /*     db.ProductYear.findOne({
+        db.Product.create({
+            name: req.body.name ,
+            description :req.body.description,
+            description2 :req.body.description2,                
+            price: req.body.price,
+            //falta tema imagenes
+            dto :req.body.descuento,
+            //created : new DATE(),
+            id_colection : req.body.coleccion,                
+   
+            id_year : productYear.id,             
+
+            id_type : productType.id
+        })  
+        .then(function (product){
+            // tengo que pasar un array 
+            //tengo armar el input como una array y modificar en validator
+             return product.setColores(req.body.colores)    
+        } )
+        .then(function(){
+            res.send("alta exitosa ")
+        })
+        
+    }
+       
+            /*    db.ProductYear.findOne({
                     where : {
                         year_name:req.body.anio
                     }
@@ -451,7 +475,9 @@ const controller = {
                      }
                    
                 } ); */
-                let colorn = db.ProductColor.findOne({
+///******************************************* */
+
+               /* let colorn = db.ProductColor.findOne({
                     where: {
                         color_name:req.body.color
                     }
@@ -516,53 +542,10 @@ const controller = {
                         .then (function(){
                          res.send("alta exitosa")
                         })
-                    })       
+                    })   ****************************************************+/    
                
-             
-
-         //   }
-
-           // let coleccion =buscarEnProductColection(req.body.colection);
-           // console.log("coleccion en crear " + coleccion)
-          //  let anio = buscarEnProductYear(req.body.year);
-        
-           //let tipo = buscarEnProductType(req.body.type);
-           // let color = buscarEnProductType(req.body.type);
-           // console.log("los valores de id son: "+ coleccion+" " +anio+" " +tipo+" "+color)
-            //console.log("el valor de id year es " + productYear.id)
-            //let newProduct = {            
-            //    name: req.body.name ,
-            //    description :req.body.description,
-            //    description2 :req.body.description2,                
-            //   price: req.body.price,
-                //falta tema imagenes
-            //    dto :req.body.descuento,
-              
-            //    id_colection : coleccion.id,                
-       
-            //    id_year : anio.id,             
-
-            //    id_type : tipo.id
-
-            //    };
-            
-            
-            //actualizo tablas 
-           // let prodNuevo = Promise.resolve(db.Product.create(newProduct)); 
-           // let upStock = db.ProductStock.create(newStock);
-           // Promise.all([prodNuevo,upStock])
-           // .then (function(product){
-                // para actualizar la Product-color-Product
-            //    return product.setProductColor(color.id)
-               
-           // } )
-           // .then (function(){
-           
-            //})
-            
-        }                         
-        
-    },
+  , */
+},
     listarProduct:(req,res) =>{
         let array = []
            

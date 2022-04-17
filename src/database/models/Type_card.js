@@ -21,6 +21,13 @@ module.exports = (sequelize, dataTypes) => {
         
     }
     const TypeCard = sequelize.define(alias, cols, config); 
-
+    TypeCard.associate = function (models) {
+        TypeCard.belongsToMany(models.User, { // models.Movie -> Movies es el valor de alias en movie.js
+            as: "cardsU",            
+            through: 'UserCard',
+            foreignKey: 'type_card',
+            otherKey: 'id_user',
+            timestamps: false
+        }) }
     return TypeCard
 };
