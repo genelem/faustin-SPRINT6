@@ -272,7 +272,35 @@ const controller = {
                 }; // termina el IF                   
                 } ) 
             },
-    listColection:(req,res) =>{
+     listColection:(req,res) =>{
+                let array = [ {
+                    id:0,
+                    colection_name :" "
+                }]
+                db.ProductColection.findAll({
+                    order : [
+                        ['id', 'ASC']
+                    ]         
+                }) 
+                .then(function(productYears){
+                    if (productColections) {
+                    res.render('listColectionDb', {array:productColections});}
+                    else{
+                        res.render("listColectionDb",{array})
+                    }
+                }); 
+    },
+    deleteYear: (req,res) =>{ 
+        db.ProductYear.destroy({
+            where:{
+                id: req.params.id
+            }
+        })
+        .then (function(){
+            res.send("baja existosa")
+     } ) 
+    },
+            Colection:(req,res) =>{
                 let array = [ {
                     id:0,
                     type_name :" "
@@ -411,8 +439,7 @@ const controller = {
         console.log("en body CreaProduct año es : "+ req.body.anio)
         console.log("en body CreaProduct color es : "+ req.body.color)
         console.log("en body el dto es : "+ req.body.descuento)
-        if( req.body.color == undefined){
-            req.body.color = "guinda"};
+        
         if(errors.errors.length > 1){
             /*ver esto porque hay un error que no encuentro y puse 1 */            
 
@@ -444,9 +471,9 @@ const controller = {
             //created : new DATE(),
             id_colection : req.body.coleccion,                
    
-            id_year : productYear.id,             
+            id_year : req.body.anio,             
 
-            id_type : productType.id
+            id_type : req.body.tipo
         })  
         .then(function (product){
             // tengo que pasar un array 
@@ -458,93 +485,9 @@ const controller = {
         })
         
     }
-       
-            /*    db.ProductYear.findOne({
-                    where : {
-                        year_name:req.body.anio
-                    }
-                })
-                .then( (productYear) =>{
-                    if (!productYear){
-                        res.send("no encontró year")
-                    }
-                     else{
-                        console.log(productYear.id + "es el id de promesa")
-                        
-                        return ({anio:productYear})
-                     }
-                   
-                } ); */
-///******************************************* */
 
-               /* let colorn = db.ProductColor.findOne({
-                    where: {
-                        color_name:req.body.color
-                    }
-                } 
-                );
-                let year = db.ProductYear.findOne({
-                    where:{
-                        year_name:req.body.anio
-                    }
-                });
-                let type = db.ProductType.findOne({
-                    where:{
-                        type_name: req.body.tipo
-                    }
-                });
-                let colection = db.ProductColection.findAll({
-                    where:{
-                        colection_name:req.body.colection
-                    }
-                });
-            
-    
-                Promise.all([colorn,year,type,colection])
-                .then(function([productColor, productYear,productType,productColection]){
-                   console.log("los valore son ")
-                   console.log(req.body.name)
-                   console.log(req.body.tipo)
-                   console.log(req.body.color)
-                    let newProduct = {            
-                             name: req.body.name ,
-                            description :req.body.description,
-                            description2 :req.body.description2,                
-                            price: req.body.price,
-                            //falta tema imagenes
-                            dto :req.body.descuento,
-                            //created : new DATE(),
-                            id_colection : productColection.id,                
-                   
-                            id_year : productYear.id,             
-            
-                            id_type : productType.id
-            
-                           };
-                        //
-                        let stock ={
-                            quantity : req.body.cantidad
-                        };
-                        //
-                        let constDto ={ 
-                            dto: req.body.descuento};
-                        //
-                        //actualizo tablas 
-                        let prodNuevo = Promise.resolve(db.Product.create(newProduct)); 
-                        let upStock = db.ProductStock.create(stock);
-                        let descuento = db.ProductDto.create(constDto);
-                        Promise.all([prodNuevo,upStock,descuento])
-                        .then (function(product){
-                            // para actualizar la Product-color-Product
-                           return product.setProductColor(product)
-                           
-                        } )
-                        .then (function(){
-                         res.send("alta exitosa")
-                        })
-                    })   ****************************************************+/    
-               
-  , */
+///******************************************* */
+ 
 },
     listarProduct:(req,res) =>{
         let array = []
@@ -556,9 +499,9 @@ const controller = {
         }) 
         .then(function(products){
             if (products) {
-            res.render('listProductsDb', {array:products});}
+            res.render('listProductsDB', {array:products});}
             else{
-                res.render("listColorDb",{array})
+                res.render("listProductsDB",{array})
             }
         }); 
     },

@@ -100,12 +100,7 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: "product_year"
         })
     },
-    Product.associate = function (models) {
-        Product.hasOne(models.ProductStock, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "pstock",
-            foreignKey: "id_product"
-        })
-    },
+   
     Product.associate = function (models) {
         Product.belongsToMany(models.ProductColor, { // models.Movie -> Movies es el valor de alias en movie.js
             as: "colores",            

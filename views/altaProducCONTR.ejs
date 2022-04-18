@@ -16,8 +16,7 @@
        
     </head>
  
-<body>
-
+<body> 
         <%- include('partials/header') %>
 <main>
             <div class="altaProductLogo">
@@ -29,7 +28,7 @@
             </div>          
            
         <!--<form action="/product/altaProducto" method="POST" enctype = "multipart/form-data">-->
-       
+         
             <form action="/bproduct/creaProduct?_method=PUT" method="POST" >  
                 <div class="descriptionProduct">
                     <p><label id="" for ="nombreProducto">NOMBRE DEL PRODUCTO</label>
@@ -69,31 +68,31 @@
                 <div>                  
                     <div class="licencias">
                         <h3>Indicá COLECCIÓN</h3>
+                       
                         <% for (i=0 ; i< colections.length ; i++){ %>   
-                                
-                            <input type="checkbox" name="colection" value="<%= colections[i].id %>"><label><%= colections[i].colection_name %></label>
-                        <% } %> 
-                        <!---    <input type="checkbox" name="colection" value="otoño">Otoño
-                            <input type="checkbox" name="colection" value="invierno">Invierno                   
-                            <input type="checkbox" name="colection" value="primavera">Primavera-->
-                    <% if(locals.errorsProd && locals.errorsProd.colection){ %>
+  
+                        <input type ="radio" name="colection" value="<%= colections[i].colection_id %>"><label><%= colections[i].colection_name %></label>
+                        <% } %>
+                        <% if(locals.errorsProd && locals.errorsProd.colection){ %>
                             <span id="errorMsge" > <%= errorsProd.colection.msg  %> </span>
                     <% } %>   
-                            <p>Nueva Colección<a href="/bproduct/altaColeccion"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                            <p>Nueva Colección<a href="/bproduct/altaColection"><i class="fas fa-arrow-alt-circle-right"></i></a>
                             </p>                              
                     </div>
                     <div class="tipoProducto">
-                        <h3>Indicá TIPO de Producto</h3>                     
-                        <% for (i=0 ; i< types.length ; i++){ %>      
-                            <input type="checkbox" name="tipo" value="<%= types[i].id %>"><label><%= types[i].type_name %></label>
-                        <% } %>
-                        <!--    <input type="checkbox" name="tipo" value="cartera">Cartera
-                            <input type="checkbox" name="tipo" value="bandolera">Bandolera 
-                            <input type="checkbox" name="tipo" value="mochila">Mochila -->
+                        <h3>Indicá TIPO de Producto</h3>                    
+                        <label></label> 
+                        <ul>
+                        <% for (i=0 ; i< types.length ; i++){ %>                                 
+                           <li>"<%= types[i].type_name %></li>
+                        <% } %> 
+                           </ul>  
+                            <input placeholder = "" type="text" name="tipo" value=""></li>
+                        </ul>                            
                     <% if(locals.errorsProd && locals.errorsProd.tipo){ %>
                             <span id="errorMsge" > <%= errorsProd.tipo.msg  %> </span>
                     <% } %> 
-                            <p>"TIPO"nuevo<a href="/bprodut/altaType"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                            <p>"TIPO"nuevo<a href="/bproduct/altaType"><i class="fas fa-arrow-alt-circle-right"></i></a>
                             </p>              
                      </div>          
                     <div class="seleccionColor">
@@ -101,49 +100,37 @@
                  <% if(locals.errorsProd && locals.errorsProd.color){ %>
                             <br/>
                             <p id="errorMsge"> <%= errorsProd.color.msg  %> </p>
-                <% } %> 
+                 <% } %> 
                         <br/>
                         <div class="colores">
-                        <% for (i=0 ; i< colors.length ; i++){ %>   
-                       
-                        <p>Cantidad por Color:<input placeholder="" id ="inputColor" name="<% colors[i].cantidad %>"></p>
-                        <p><label><img id="etiquetaColor" src="/images/<=% colors[i].color_image %>">COLOR:<%= colors[i].color_name %><input type="checkbox" id = "" name="color" value="<%= colors[i].id %>"></label>
-                        <% } %>
-                      <!---  <label for=""><img id="colorList" src="/images/etiqueta11Beige1.png"></label>          
-                        <input type="checkbox" id="azul" name="color" value="azul">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Azul.png"></label>          
-                        <input type="checkbox" id="aqua" name="color" value="verde">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Verde.png"></label>          
-                        <input type="checkbox" id ="verde" name="color" value="guinda">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Guinda.png"></label>
-                        <input type="checkbox" id ="negra" name="color" value="suela">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Suela.png"></label>
-                        <input type="checkbox" id ="gris" name="color" value="brue">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Brue.png"></label>-->
-                
-                        </div>
+                    <ul>
+                    <% for (i=0 ; i< colors.length ; i++){ %>  
+                      <li> <%=colors[i].color_name %> </li>
+                    <% } %>                    
+                      </ul>   
+                        <input placeholder="" id = "imputColor" name="color" value="">
+                    </div>
                         <p>Nuevo COLOR<a href="/bproduct/altaColor"><i class="fas fa-arrow-alt-circle-right"></i></a>
                         </p>
-                    </div>
+                   
                     <div class="seleccionAnio">
                         <h3>Año Colección</h3>
                         <div id="anio">
-                      
-                        <% for (i=0 ; i< years.length ; i++){ %> 
-                            <input type="checkbox" name="anio" id="talles" value="<%= years[i].id %>"><label><%= years[i].year_name %></label>
-                          
-                        <% }%>
-                     <!---       <option value = "2022">2022</option>
-                            <option value = "2021">2021</option>
-                            <option value = "2020">2020</option>
-                            <option value = "EN STOCK">EN STOCK </option> -->
-                      
+                        <!--<select name ="anio" id ="talles">-->
+                        <ul>                            
+                            <% for (i=0 ; i< years.length ; i++){ %>
+                            <li> <%= years[i].year_name %> </li>                           
+                            <% } %>
+                        </ul>
+                        <input placeholder="" name ="anio" value = ""> 
                     <% if(locals.errorsProd && locals.errorsProd.anio){ %>
                             <span id="errorMsge" > <%= errorsProd.anio.msg  %> </span>
                     <% } %> 
-                       
-                        <p>Nuevo COLOR<a href="/bproduct/altaYear"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                        </select>
+                        <p>Nueva COLECCIÖN <a href="/bproduct/altaColection"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                        </p>
                         </div>
+
                     <div class="productValores">            
                     <div class="otrosValores">
                         <p><label id="" for ="precioProducto">PRECIO</label>
@@ -154,8 +141,8 @@
                         <br/>
                         <p><label id="" for ="cantidadProducto">CANTIDAD</label>
                         <input placeholder="" type="number"  name="cantidad" id="user"></p>
-                    <% if(locals.errorsProd && locals.errorsProd.cantidadProducto){ %>
-                        <span id="errorMsge" > <%= errorsProd.cantidadProducto.msg  %> </span>
+                    <% if(locals.errorsProd && locals.errorsProd.cantidad){ %>
+                        <span id="errorMsge" > <%= errorsProd.cantidad.msg  %> </span>
                     <% } %> 
                     </div>
                     <div class="ofertaPorcentaje">

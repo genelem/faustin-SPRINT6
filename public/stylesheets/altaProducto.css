@@ -87,15 +87,27 @@ main div.seleccionColor p{
     text-align: center;
 }
 div.colores{
-    display:flex;
-    flex-wrap:wrap;  
-    justify-content: flex-start;
-    height: 6rem;  
+    display: flex;
+    flex-wrap: wrap;
+    /* height: 6rem; */
     padding: 5px 5px 5px 5px;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+  
+    padding: 1px 1px 1px 1px;
 }
 div.colores label{
     width: 5%;
     height: 0.5rem;
+}
+#etiquetaColor{
+    width: 2rem;
+    height: 2rem;
+}
+#inputColor{
+    width: 0.5rem;
+    height: 1rem;
 }
 
 div.seleccionAnio{
@@ -225,10 +237,10 @@ div.closeMain{
 */
 /*************************************************/
 /* probando el buble para colores */
-#colorList{
+/*#colorList{
     width: 5rem;
     height: 5rem;
  
-}
+}*/
  
  

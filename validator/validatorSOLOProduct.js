@@ -21,7 +21,7 @@ const validatorSOLOP = {
 
              return db.ProductType.findOne({
                      where:{
-                            type_name :value
+                            id :value
                         } 
                      }) 
                      .then (productType=>{
@@ -47,7 +47,7 @@ const validatorSOLOP = {
             .custom(function(value){
                 return db.ProductColection.findOne({
                     where:{
-                        colection_name :value
+                        id :value
                     } 
                  }) 
                  .then (productColection =>{
@@ -64,7 +64,7 @@ const validatorSOLOP = {
             .custom(function(value){
                 return db.ProductType.findOne({
                     where:{
-                        type_name :value
+                        id :value
                     } 
                  }) 
                  .then (productType =>{
@@ -74,9 +74,9 @@ const validatorSOLOP = {
                  })        
              } )
              ,
-        check("cantidad")
-            .notEmpty()
-            .withMessage("Es OBLIGATORIO INGRESAR CANTIDAD "),
+        //check("cantidad")
+           // .notEmpty()
+          //  .withMessage("Es OBLIGATORIO INGRESAR CANTIDAD "),
         check("anio")
             .notEmpty()               
             .withMessage("Debe Completar el AÑO/Colección  ")
@@ -84,7 +84,7 @@ const validatorSOLOP = {
             .custom(function(value){
                 return db.ProductYear.findOne({
                     where:{
-                        year_name :value
+                        id :value
                     } 
                  }) 
                  .then (productYear =>{
@@ -94,7 +94,7 @@ const validatorSOLOP = {
                  })        
              } )
              ,
-        check("color")
+        /*check("color")
             .notEmpty()               
             .withMessage("Debe Seleciona COLOR ")  
             .bail()
@@ -110,7 +110,7 @@ const validatorSOLOP = {
                          return Promise.reject("COLOR INVALIDDO. OPCION: dar alta")
                      }
                  })        
-             } )
+             } )*/
     ],
     updateProducto:[
         //todo igual que ALTA pero el CUSTOM NO VA PORQUE ES UN PRODUCTO EXISTENTE 

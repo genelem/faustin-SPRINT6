@@ -11,6 +11,10 @@ module.exports = (sequelize, dataTypes) => {
         id_product: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: true
+        },
+        quantity: {
+            type: dataTypes.INTEGER(10),
+            allowNull: true
         }
              
     }; 
