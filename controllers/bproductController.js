@@ -506,27 +506,23 @@ const controller = {
         }); 
     },
     detailOneDB : (req,res) =>{
-        let id = req.params.id
-        let colors = db.ProductColor.findAll();
+        
+        let colors = db.ProductColorProduct.findAll();
         let years = db.ProductYear.findAll();
         let types = db.ProductType.findAll();
         let colections = db.ProductColection.findAll();
-        let productoDetail = db.Product.findByPk({
-            where :{
-                id : req.params.id
-            } 
-        });
-        
+        let productoDetail = db.Product.findByPk(req.params.id);
+       
 
         Promise.all([colors,years,types,colections,productoDetail])
-        .then(function([productColors, productYears,productTypes,productColections,product]){
-            return res.render('altaProductoDb', {colors: productColors, years:productYears,types:productTypes,colections:productColections,producto:product});
+        .then(function([productColorProducts, productYears,productTypes,productColections,product]){
+            return res.render('updateProductoDB', {colors: productColorProducts, years:productYears,types:productTypes,colections:productColections,producto:product});
         }); 
 
-        console.log(id + "  es el id a modificar estoy en detailOne")
-        let producto = productModel.find(id); 
+       
+        //let producto = productModel.find(id); 
   
-        res.render("updateProductoDB",{producto:producto,colors,years,types,colections}) 
+        //res.render("updateProductoDB",{producto:producto,colors,years,types,colections}) 
     }, 
     storeUpdate: ( req,res) =>{
         id=req.body
