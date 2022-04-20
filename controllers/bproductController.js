@@ -417,6 +417,7 @@ const controller = {
         } 
         else{res.render("altaProductoDb")}*/
         // FALTA VER QUE PASA CON UN PRODUCTO QUE TIENE VARIOS COLORES . ver en VALIDATOR
+        let cantidades =[]
         let colors = db.ProductColor.findAll();
         let years = db.ProductYear.findAll();
         let types = db.ProductType.findAll();
@@ -425,7 +426,7 @@ const controller = {
 
         Promise.all([colors,years,types,colections])
         .then(function([productColors, productYears,productTypes,productColections]){
-           return res.render('altaProductoDb', {colors: productColors, years:productYears,types:productTypes,colections:productColections});
+           return res.render('altaProductoDb', {colors: productColors, years:productYears,types:productTypes,colections:productColections,cantidades});
         }); 
       
        
@@ -437,13 +438,14 @@ const controller = {
         console.log("en body CreaProduct colection es : "+ req.body.colection)
         console.log("en body CreaProduct type es : "+ req.body.tipo)
         console.log("en body CreaProduct año es : "+ req.body.anio)
-        console.log("en body CreaProduct color es : "+ req.body.color)
+        console.log("en body CreaProduct color es : "+ req.body.colores)
         console.log("en body el dto es : "+ req.body.descuento)
         
         if(errors.errors.length > 1){
             /*ver esto porque hay un error que no encuentro y puse 1 */            
 
             /*armo valores para modificar falta CUANDO HAGA MODIFICAFR */
+           
             let colors = db.ProductColor.findAll();
             let years = db.ProductYear.findAll();
             let types = db.ProductType.findAll();
@@ -456,11 +458,12 @@ const controller = {
             });             
         }
          if (errors.errors.length == 1 ){      
-             // revisar el tema del color que no veo el error  + error fantasma  
+               
             console.log("está en else de alta " + req.body.name)
-            console.log(req.body.anio)
+         
             // es temporal este if hasta que arregle el view
-            
+            console.log("EL BODY COLORES ES :")
+        console.log(req.body.colores)     
         db.Product.create({
             name: req.body.name ,
             description :req.body.description,
@@ -469,16 +472,17 @@ const controller = {
             //falta tema imagenes
             dto :req.body.descuento,
             //created : new DATE(),
-            id_colection : req.body.coleccion,                
+            id_colection : req.body.colection,                
    
-            id_year : req.body.anio,             
+            id_product_year : req.body.anio,             
 
             id_type : req.body.tipo
         })  
-        .then(function (product){
+        .then(function (product){   
+            
             // tengo que pasar un array 
             //tengo armar el input como una array y modificar en validator
-             return product.setColores(req.body.colores)    
+             return product.setColoresDB(req.body.colores)    
         } )
         .then(function(){
             res.send("alta exitosa ")

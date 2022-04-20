@@ -70,7 +70,7 @@
                     <div class="licencias">
                         <h3>Indicá COLECCIÓN</h3>
                         <% for (i=0 ; i< colections.length ; i++){ %>   
-                                
+                           
                             <input type="checkbox" name="colection" value="<%= colections[i].id %>"><label><%= colections[i].colection_name %></label>
                         <% } %> 
                         <!---    <input type="checkbox" name="colection" value="otoño">Otoño
@@ -104,10 +104,14 @@
                 <% } %> 
                         <br/>
                         <div class="colores">
-                        <% for (i=0 ; i< colors.length ; i++){ %>   
-                       
-                        <p>Cantidad por Color:<input placeholder="" id ="inputColor" name="<% colors[i].cantidad %>"></p>
-                        <p><label><img id="etiquetaColor" src="/images/<=% colors[i].color_image %>">COLOR:<%= colors[i].color_name %><input type="checkbox" id = "" name="color" value="<%= colors[i].id %>"></label>
+                        <% for (i=0 ; i< colors.length ; i++){ %> 
+                        <!--<p><img id="colorList" src="public/images/<=% colors[i].color_image %>"></p> -->
+                        <label for="<%= colors[i].color_name %>"><%= colors[i].color_name %></label>
+                        <br/>  
+                        <input id="<% colors[i].color_name %>" type="checkbox" name="colores" class="" value="<%= colors[i].id %>">
+                        <br/>
+                        
+                           
                         <% } %>
                       <!---  <label for=""><img id="colorList" src="/images/etiqueta11Beige1.png"></label>          
                         <input type="checkbox" id="azul" name="color" value="azul">
@@ -130,6 +134,7 @@
                         <div id="anio">
                       
                         <% for (i=0 ; i< years.length ; i++){ %> 
+                            
                             <input type="checkbox" name="anio" id="talles" value="<%= years[i].id %>"><label><%= years[i].year_name %></label>
                           
                         <% }%>
@@ -204,10 +209,7 @@
 </main>
 </body>
         <footer>
-                         
-           <!--</header> -->
-          <!-- cambio el footer más arribA -->
-          <!--<footer>-->
+          
 
             <%- include('partials/footer') %>
                

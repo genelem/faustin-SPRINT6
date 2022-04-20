@@ -86,30 +86,24 @@ module.exports = (sequelize, dataTypes) => {
             as: "pType",
             foreignKey: "product_type"
         })
-    },
-   
-    Product.associate = function (models) {
         Product.belongsTo(models.ProductColection, { // models.Genre -> Genres es el valor de alias en genres.js
             as: "pColection",
             foreignKey: "product_colection"
-        })
-    },
-    Product.associate = function (models) {
-        Product.belongsTo(models.ProductYear, { // models.Genre -> Genres es el valor de alias en genres.js
-            as: "pYear",
-            foreignKey: "product_year"
-        })
-    },
-   
-    Product.associate = function (models) {
+        }) 
+        Product.associate = function (models) {
+            Product.belongsTo(models.ProductYear, { // models.Genre -> Genres es el valor de alias en genres.js
+                as: "pYear",
+                foreignKey: "product_year"
+         })  
         Product.belongsToMany(models.ProductColor, { // models.Movie -> Movies es el valor de alias en movie.js
-            as: "colores",            
-            through: 'ProductColorProduct',
+            as: "coloresDB",            
+            through: 'product-color-product',
             foreignKey: 'id_product',
             otherKey: 'id_color',
             timestamps: false
-        })
+        }) 
     }
 
+    }
     return Product
 };

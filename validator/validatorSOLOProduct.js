@@ -94,7 +94,7 @@ const validatorSOLOP = {
                  })        
              } )
              ,
-        /*check("color")
+     /*   check("color")
             .notEmpty()               
             .withMessage("Debe Seleciona COLOR ")  
             .bail()

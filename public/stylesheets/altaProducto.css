@@ -105,9 +105,9 @@ div.colores label{
     width: 2rem;
     height: 2rem;
 }
-#inputColor{
-    width: 0.5rem;
-    height: 1rem;
+.inputColor{
+    width: 3rem;
+    height: 2rem;
 }
 
 div.seleccionAnio{

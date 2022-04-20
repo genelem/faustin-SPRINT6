@@ -205,7 +205,7 @@ const controller = {
             }
         })
         .then(function(user){
-            if(user.id_category !==3){
+            if(user.id_category !==2){
                 res.send("NO ESTÁ AUTORIZADO A REALIZAR ESTA OPERACIÓN")
             }else{
                 db.User.findAll()

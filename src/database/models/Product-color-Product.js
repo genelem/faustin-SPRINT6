@@ -15,6 +15,10 @@ module.exports = (sequelize, dataTypes) => {
         quantity: {
             type: dataTypes.INTEGER(10),
             allowNull: true
+        },
+        dispach: {
+            type: dataTypes.STRING(100),
+            allowNull: true
         }
              
     }; 
