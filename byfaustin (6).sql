@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2022 a las 17:58:24
+-- Tiempo de generación: 20-04-2022 a las 23:49:46
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `byfaustin`
 --
+CREATE DATABASE IF NOT EXISTS `byfaustin` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `byfaustin`;
 
 -- --------------------------------------------------------
 
@@ -103,8 +105,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `description`, `description2`, `price`, `id_type`, `id_colection`, `id_product_year`, `dto`, `created`, `updated`, `image_ppal`, `image_back`, `image_det1`, `image_det2`, `image_det3`) VALUES
-(2, 'probando ahora', 'cartera cuero repujado', 'manija trenzada', 50000, 4, NULL, NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'BOLSO FAUSTIN LOCO', 'cartera cuero repujado', 'manija trenzada', 30000, 1, NULL, NULL, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(3, 'CARTERA FASHION CROWN', 'cuero piel ultra soft', 'ajustable a diferentes largos', 25000, 4, 5, 2, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'BOLSO ABRIL BEATTY', 'cuero engrasado', 'manija ajustable', 38000, 1, 6, 1, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -158,8 +160,18 @@ INSERT INTO `product-color` (`id`, `color_name`, `color_image`) VALUES
 CREATE TABLE `product-color-product` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_color` int(10) UNSIGNED DEFAULT NULL,
-  `id_product` int(10) UNSIGNED DEFAULT NULL
+  `id_product` int(10) UNSIGNED DEFAULT NULL,
+  `quantity` int(10) DEFAULT NULL,
+  `dispach` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `product-color-product`
+--
+
+INSERT INTO `product-color-product` (`id`, `id_color`, `id_product`, `quantity`, `dispach`) VALUES
+(1, 5, 4, NULL, NULL),
+(2, 7, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -169,7 +181,9 @@ CREATE TABLE `product-color-product` (
 
 CREATE TABLE `product-dto` (
   `id` int(10) UNSIGNED NOT NULL,
-  `id_product` int(10) UNSIGNED DEFAULT NULL,
+  `start_dto_date` date DEFAULT NULL,
+  `end_dto_date` date DEFAULT NULL,
+  `id_product` int(10) DEFAULT NULL,
   `dto` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='descuento de producto';
 
@@ -183,8 +197,8 @@ CREATE TABLE `product-sale` (
   `id` int(10) UNSIGNED NOT NULL,
   `date_week_max` date DEFAULT NULL,
   `date_week_min` date DEFAULT NULL,
-  `dtoSale` int(3) DEFAULT NULL,
-  `id_product` int(10) UNSIGNED NOT NULL
+  `dto` int(3) NOT NULL,
+  `id_product` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -195,18 +209,9 @@ CREATE TABLE `product-sale` (
 
 CREATE TABLE `product-stock` (
   `id` int(10) UNSIGNED NOT NULL,
-  `id_product` int(10) UNSIGNED DEFAULT NULL,
-  `quantity` int(8) DEFAULT NULL
+  `quantity` int(8) DEFAULT NULL,
+  `break_point` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `product-stock`
---
-
-INSERT INTO `product-stock` (`id`, `id_product`, `quantity`) VALUES
-(1, NULL, 150),
-(2, NULL, 500),
-(3, NULL, 300);
 
 -- --------------------------------------------------------
 
@@ -266,14 +271,24 @@ CREATE TABLE `type-card` (
 
 CREATE TABLE `user` (
   `id` int(10) UNSIGNED NOT NULL,
-  `userName` varchar(12) DEFAULT NULL,
-  `first_name` varchar(100) DEFAULT NULL,
-  `last_name` varchar(100) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `password` varchar(10) DEFAULT NULL,
+  `userName` varchar(12) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `id_category` int(10) UNSIGNED DEFAULT NULL,
+  `password` varchar(100) NOT NULL,
   `avatar` varchar(100) DEFAULT NULL,
-  `terminos` varchar(2) DEFAULT NULL
+  `bornDate` date DEFAULT NULL,
+  `terminos` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='maestro de usuarios';
+
+--
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`id`, `userName`, `first_name`, `last_name`, `email`, `id_category`, `password`, `avatar`, `bornDate`, `terminos`) VALUES
+(1, 'usuarioPepe', 'PEPE', 'español', 'pepito@gmail.com', 1, '$2a$10$KwGzQpVhar97qy.AUD8HTuHB0bUoweNA1nzyBNX2j.ZHLzViF0qoC', 'nuevo-1650456416697.png', '1979-01-25', ''),
+(2, 'usuarioJefe', 'jefecito', 'dorsen', 'jefecito@gmail.com', 2, '$2a$10$rng5orz9re9tOQbNpoV46ua8ujjxv7DhhVvuurno7M3txjJmhEwKu', 'nuevo-1650456510853.png', '1994-02-22', '');
 
 -- --------------------------------------------------------
 
@@ -285,8 +300,8 @@ CREATE TABLE `user-cards` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_user` int(10) UNSIGNED NOT NULL,
   `type_card` int(10) UNSIGNED NOT NULL,
-  `number_card` int(100) DEFAULT NULL,
-  `bank-card` varchar(100) DEFAULT NULL
+  `number_card` int(100) NOT NULL,
+  `bank-card` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -299,6 +314,14 @@ CREATE TABLE `user-category` (
   `id` int(10) UNSIGNED NOT NULL,
   `category_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='categoria de usuarios';
+
+--
+-- Volcado de datos para la tabla `user-category`
+--
+
+INSERT INTO `user-category` (`id`, `category_name`) VALUES
+(1, 'usuario'),
+(2, 'administrador');
 
 -- --------------------------------------------------------
 
@@ -395,8 +418,7 @@ ALTER TABLE `product-sale`
 -- Indices de la tabla `product-stock`
 --
 ALTER TABLE `product-stock`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_product` (`id_product`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `product-type`
@@ -420,7 +442,8 @@ ALTER TABLE `type-card`
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_category` (`id_category`);
 
 --
 -- Indices de la tabla `user-cards`
@@ -475,7 +498,7 @@ ALTER TABLE `invoice-item`
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `product-colection`
@@ -493,7 +516,7 @@ ALTER TABLE `product-color`
 -- AUTO_INCREMENT de la tabla `product-color-product`
 --
 ALTER TABLE `product-color-product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `product-dto`
@@ -511,7 +534,7 @@ ALTER TABLE `product-sale`
 -- AUTO_INCREMENT de la tabla `product-stock`
 --
 ALTER TABLE `product-stock`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `product-type`
@@ -535,7 +558,7 @@ ALTER TABLE `type-card`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `user-cards`
@@ -547,7 +570,7 @@ ALTER TABLE `user-cards`
 -- AUTO_INCREMENT de la tabla `user-category`
 --
 ALTER TABLE `user-category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `user-taxes`
@@ -597,20 +620,19 @@ ALTER TABLE `product-color-product`
 -- Filtros para la tabla `product-sale`
 --
 ALTER TABLE `product-sale`
-  ADD CONSTRAINT `product-sale_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `product-sale_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`);
 
 --
--- Filtros para la tabla `product-stock`
+-- Filtros para la tabla `user`
 --
-ALTER TABLE `product-stock`
-  ADD CONSTRAINT `product-stock_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `user-category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `user-cards`
 --
 ALTER TABLE `user-cards`
   ADD CONSTRAINT `user-cards_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `user-cards_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user-cards_ibfk_3` FOREIGN KEY (`type_card`) REFERENCES `type-card` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
