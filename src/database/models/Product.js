@@ -79,24 +79,20 @@ module.exports = (sequelize, dataTypes) => {
   const Product = sequelize.define(alias, cols, config);
 
   Product.associate = function (models) {
-    Product.belongsTo(models.ProductType, {
-      // models.Genre -> Genres es el valor de alias en genres.js
+    Product.belongsTo(models.ProductType, {    
       as: "pType",
-      foreignKey: "product_type",
+      foreignKey: "id_type",
     });
-    Product.belongsTo(models.ProductColection, {
-      // models.Genre -> Genres es el valor de alias en genres.js
+    Product.belongsTo(models.ProductColection, {       
       as: "pColection",
-      foreignKey: "product_colection",
+      foreignKey: "id_colection",
     });
 
-    Product.belongsTo(models.ProductYear, {
-      // models.Genre -> Genres es el valor de alias en genres.js
+    Product.belongsTo(models.ProductYear, {      
       as: "pYear",
-      foreignKey: "product_year",
+      foreignKey: "id_product_year",
     });
-    Product.belongsToMany(models.ProductColor, {
-      // models.Movie -> Movies es el valor de alias en movie.js
+    Product.belongsToMany(models.ProductColor, {      
       as: "coloresDB",
       through: "product-color-product",
       foreignKey: "id_product",

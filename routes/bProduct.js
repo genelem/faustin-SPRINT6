@@ -11,6 +11,7 @@ const validatorSOLOProduct = require("../validator/validatorSOLOProduct");
 
 router.get('/opciones', bproductController.enlaces);
 // TIPO DE PRODUCTO
+
 router.get("/altaType",bproductController.altaType);
 router.put("/creaType",validatorPDB.altaType,bproductController.creaType)
 router.get("/listType",bproductController.listType);
@@ -36,6 +37,10 @@ router.put("/creaProduct",validatorSOLOProduct.altaProducto,bproductController.c
 //LISTAR Y ACTUALIZAR PRODUCTO
 router.get("/listProduct",bproductController.listarProduct);
 router.get("/detailOneDB/:id",bproductController.detailOneDB)
-//router.post("/updateOneDB/:id",validatorSOLOProduct.updateProducto,bproductController.storeUpdate)
+router.post("/updateOneDB/:id",validatorSOLOProduct.updateProducto,bproductController.storeUpdate)
+// eliminar producto
+router.get("/bajaProducto/:id",bproductController.bajaProducto)
+router.post("/bajaProducto/:id", bproductController.storeDelete)
+
 
 module.exports = router

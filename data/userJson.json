@@ -13,13 +13,12 @@
  {
   "id": 2,
   "usuario": "usuarioPerfecto",
-  "primerNombre": "perfecto",
-  "apellido": "esalisto",
-  "mail": "perfecto@gmail.com",
-  "fechaNacimiento": "1983-02-23",
-  "categoria": "usuario",
   "contraseña": "$2a$10$8wZFXUqalxevn6nT/f4F4uCL2eIorI7CdPlp95JPYyAVoIKvCao3O",
-  "avatar": "avatarHombre1.png"
+  "primerNombre": "perfecto",
+  "apellido": "",
+  "mail": " perfecto@gmail.com",
+  "fechaNacimiento": "",
+  "categoria": ""
  },
  {
   "usuario": "usuarioAhoraSI",

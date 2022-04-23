@@ -133,16 +133,11 @@ const validatorSOLOP = {
         check("tipo")
             .notEmpty()            
             .withMessage("campo TIPO DE PRODUCTO debe ser completado "),
-        check("cantidad")
-            .notEmpty() 
-            .isInt()           
-            .withMessage("Es OBLIGATORIO INGRESAR CANTIDAD ingreso Producto "),
+       
         check("anio")
             .notEmpty()               
-            .withMessage("Debe Completar el AÑO/Colección  "),
-        check("color")
-            .notEmpty()               
-            .withMessage("Debe Seleciona COLOR ")  
+            .withMessage("Debe Completar el AÑO/Colección  ") 
+       //falta tema color 
           
     ]
 }

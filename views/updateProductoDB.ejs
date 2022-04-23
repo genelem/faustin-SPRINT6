@@ -70,80 +70,65 @@
                 </div>
                 <div>                  
                     <div class="licencias">                      
-                        <p id="actual">COLECCION  actual: <%= producto.colection %></p> 
-                        <p> RECUERDE COLECCIONES POSIBLES :verano/otoño/invierno/primavera
-                            <ul>
-                                <% for (i=0; i < colections.length; i++){ %>
-                                <li> <%= colections[i].colection_name %> </li>
-                                <% } %>
-                            </ul>
-                        </p>
-                        <p><label id="" for ="colection"></label>
-                        <input placeholder="" type="text"  name="colection" id="user2" value="<%= producto.colection %>" ></p>     
-                     
+                     <p id="actual">COLECCION  actual: <%= producto.pColection.id %> "*"<%=producto.pColection.colection_name %></p> 
+                       
+                            <h3>Indicá COLECCIÓN</h3>
+                            <% for (i=0 ; i< colections.length ; i++){ %>    
+                                <input type="checkbox" name="colection" value="<%= colections[i].id %>"><label><%= colections[i].colection_name %></label>
+                            <% } %> 
+                    
                     <% if(locals.errorsProd && locals.errorsProd.colection){ %>
                             <span id="errorMsge" > <%= errorsProd.colection.msg  %> </span>
                     <% } %>   
                             <p>Nueva Colección<a href="/bproduct/altaColection"><i class="fas fa-arrow-alt-circle-right"></i></a>
                             </p>                              
                     </div>
+
                     <div class="tipoProducto">                      
-                        <p id="actual">TIPO de Producto Actual: <%= producto.tipo %></p>                    
-                        <p> RECUERDE TIPOS de PRoductos :bolso/cartera/bandolera/mochila</p>
-                        <ul>
-                            <% for (i=0; i < types.length; i++){ %>
-                            <li> <%= types[i].types_name %> </li>
+ 
+                        <p id="actual">TIPO de Producto Actual: <%= producto.pType.id %>"*"<%= producto.pType.type_name %> </p>                   
+                        <p> TIPOS de Productos: seleccione</p>
+                         <label id="" for ="tipo"></label>
+                            <% for (i=0 ; i< types.length ; i++){ %>             
+                             <input type="checkbox" name="tipo" value="<%= types[i].id %>"><label><%= types[i].type_name %></label>
                             <% } %>
-                        </ul>
-                        <p><label id="" for ="colection"></label>
-                        <input placeholder="" type="text"  name="tipo" id="user2" value="<%= producto.tipo %>" ></p>          
-                      
+    
                     <% if(locals.errorsProd && locals.errorsProd.tipo){ %>
                             <span id="errorMsge" > <%= errorsProd.tipo.msg  %> </span>
                     <% } %> 
                             <p>"TIPO"nuevo<a href="/bproduct/altaType"><i class="fas fa-arrow-alt-circle-right"></i></a>
                             </p>              
-                     </div>          
-                    <div class="seleccionColor">                        
-                        <p id="actual">COLOR de Producto Actual: <%= producto.color %></p>   
-                 <% if(locals.errorsProd && locals.errorsProd.color){ %>
-                            <br/>
-                            <p id="errorMsge"> <%= errorsProd.color.msg  %> </p>
-                <% } %> 
+                     </div>
+
+                    <div class="seleccionColor">  
+                        <% for(i=0 ;i< producto.coloresDB.length ; i++ ){ %>                    
+                        <p id="actual">COLORES de Producto: <%= producto.coloresDB[i].id %>"*"<%= producto.coloresDB[i].color_name %> </p>
+                        <% } %>
+                        <p>no pueden ser modificados</p>   
                         <br/>
-                        <p> RECUERDE COLORES  :beige/azul/verde/guinda/suela/brue</p>
-                        <ul>
-                            <% for (i=0; i < colors.length; i++){ %>
-                            <li> <%= colors[i].color_name %> </li>
-                            <% } %>
-                        </ul>
-                        <p><label id="" for ="color"></label>
-                        <input placeholder="" type="text"  name="color" id="user2" value="<%= producto.color %>" ></p>     
-                        <!--<div class="colores">  
-                        
-                        </div>-->
-                        <p>Nuevo COLOR<a href="/altacolor"><i class="fas fa-arrow-alt-circle-right"></i></a>
+                   <!---     <p> COLORES ACTIVOS seleccione:</p>
+                     <% for (i=0; i < colors.length; i++){ %>
+                      <input type="checkbox" name="colores" value="<%= colors[i].id %>"><label><%= colors[i].id %> <%= colors[i].color_name %></label>
+  
+                    <% } %>-->
+                    <% if(locals.errorsProd && locals.errorsProd.color){ %>
+                        <br/>
+                        <p id="errorMsge"> <%= errorsProd.color.msg  %> </p>
+                     <% } %> 
+                     
+
+                        <p>Nuevo COLOR<a href="/bproduct/altaColor"><i class="fas fa-arrow-alt-circle-right"></i></a>
                         </p>
                     </div>
                     <div class="seleccionAnio">
                        
-                        <p id="actual">AÑO ACTUAL : <%= producto.anio %></p>  
-                        <p> RECUERDE AÑOS POSIBLES :2023/2022/2021/EN STOCK</p>
-                        <ul>
-                            <% for (i=0; i < years.length; i++){ %>
-                            <li> <%= years[i].year_name %> </li>
-                            <% } %>
-                        </ul>
-                        <p><label id="" for ="anio"></label>
-                        <input placeholder="" type="text"  name="anio" id="user2" value="<%= producto.anio %>" ></p>      
-                        <!--<div id="anio">
+                        <p id="actual">AÑO PRODUCTO ACTUAL : <%= producto.pYear.id %>"*"<%= producto.pYear.year_name %> </p>  
+                        <p>AÑOS POSIBLES :</p>
+                        <% for (i=0; i < years.length; i++){ %>
+                            <input type="checkbox" name="anio" value="<%= years[i].id %>"><label><%= years[i].year_name %></label>
+                              
+                        <% } %> 
 
-                        <select name ="anio" id ="talles">
-                            <option value = "2023">2023 </option>
-                            <option value = "2022">2022</option>
-                            <option value = "2021">2021</option>
-                            <option value = "2020">2020</option>
-                            <option value = "EN STOCK">EN STOCK </option>-->
                     <% if(locals.errorsProd && locals.errorsProd.anio){ %>
                             <span id="errorMsge" > <%= errorsProd.anio.msg  %> </span>
                     <% } %>
@@ -160,18 +145,13 @@
                         <span id="errorMsge" > <%= errorsProd.price.msg  %> </span>
                     <% } %> 
                         <br/>
-                        <p>Cantidad registrada: <%= producto.cantidad  %></p>   
-                        <label id="" for ="cantidadProducto"></label>
-                        <input placeholder="" type="number"  name="cantidad" id="user2" value="<%= producto.cantidad %>"></p>
-                    <% if(locals.errorsProd && locals.errorsProd.cantidadProducto){ %>
-                        <span id="errorMsge" > <%= errorsProd.cantidadProducto.msg  %> </span>
-                    <% } %> 
+                        
                     </div>
                     <div class="ofertaPorcentaje">
                         <h2><a href="#modal4"><img id="sale" src="/images/icono.sale.png"></a></h2>
                         <p>DESCUENTO registrado: <%= producto.descuento %></p>   
                         <label id="" for ="ofertaPorcentaje"></label>
-                            <input placeholder="" type="number"  name="descuento" id="user2" value="<%= producto.descuento %>"></p>
+                            <input placeholder="" type="number"  name="descuento" id="user2" value="<%= producto.dto %>"></p>
                     <% if(locals.errorsProd && locals.errorsProd.descuento){ %>
                             <span id="errorMsge" > <%= errorsProd.descuento.msg  %> </span>
                     <% } %> 
@@ -204,7 +184,7 @@
                 <div class="submitMasEnviar">          
                     <input type="submit" name="submit" id="enviar" value="ACTUALIZAR  PRODUCTO"> </input>
                     <br/>
-                <a href="/product/bajaProducto/<%= producto.id%>" id="irBaja">DESEA DAR DE BAJA ESTE PRODUCTO ? </a>
+                <a href="/bproduct/bajaProducto/<%= producto.id %>" id="irBaja">DESEA DAR DE BAJA ESTE PRODUCTO ? </a>
                 <br/>
                 </div>        
                 <div class= "closeMain" >

@@ -66,13 +66,16 @@
                 <% if(locals.errorsUp && locals.errorsUp.fechaNacimiento){ %>
                     <span id="errorMsge" > <%= errorsUp.fechaNacimiento.msg  %> </span>
                  <% } %> 
-                    <br/> 
-                <p><label id="" for="categoria">Categoria</label>
-                    <% for (i=0 ; i< categorias.length ;i++) { %> 
-                        <p>Categoria Nombre:<%= categorias.category_name %></p>                   
-                    <input class="todosLosBotones" type="checkbox" name="categoria" id="archivo" value ="<%= categorias.id %>"><span><%= categorias.category_name %></span> </p>
-                    <% } %>
+                    <br/>
+                    <p id="categoria">CATEGORIA</p>
                     <p> La Categoría Actual del Usuario es: <%= user.id_category %> </p> 
+                                    
+                        <p> Categorías VALIDAS  seleccione:</p>
+                         <label id="" for ="categoria"></label>
+                            <% for (i=0 ; i< categorias.length ; i++){ %>             
+                             <input type="checkbox" name="categoria" value="<%= categorias[i].id %>"><label><%= categorias[i].category_name %></label>
+                            <% } %>
+                    
                 <% if(locals.errorsUp && locals.errorsUp.categoria){ %>
                     <span id="errorMsge" > <%= errorsUp.categoria.msg  %> </span>
                 <% } %> 

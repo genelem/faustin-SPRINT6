@@ -20,7 +20,12 @@ module.exports = (sequelize, dataTypes) => {
         
     }
     const ProductYear = sequelize.define(alias, cols, config); 
-    
+  /*  ProductYear.associate = function(models) {
+        ProductYear.hasMany(models.Product, {
+            as:"yearsP",
+            foreignKey:"id_product_year"
+        })
+    }*/
 
     return ProductYear
 };
