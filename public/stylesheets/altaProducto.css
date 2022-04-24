@@ -231,6 +231,10 @@ div.closeMain{
 #archivo1{
     width: 8rem;
 }
+#construccion{
+    color:red;
+    font-size:x-large;
+}
 
  
 /***** termina botón volver a página ppal */

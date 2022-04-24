@@ -22,6 +22,11 @@
         <%- include('partials/header') %>
 <main>
             <div class="altaProductLogo">
+            <% if (producto.id <= 11) { %>
+                <h1 id="construccion">SOLO DAR BAJA A PARTIR DE ID 12
+                    PARA MANTENER ESTRUCTURA DE HOME HASTA RECARGAR TODOS
+                    LOS ARCHIVOS DESDE CERO </h1>
+               <% } %>
                 <h3>UD ESTÁ A PUNTO DE BORRAR ESTE PRODUCTO </h3>
                 <ul>      
                 <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>

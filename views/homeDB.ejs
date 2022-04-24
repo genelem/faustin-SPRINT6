@@ -19,35 +19,9 @@
  
     <body>
  
-  <!--     <header class="header">
-         <div class="search-bar">-->
-            <!--<div class="cointainer, logo-nav-container">-->  
-           <!-- <div class="form" action="#" method="GET">-->
-         <!--      <form action="#" method="GET">
-                    <input type="search" name="busqueda" placeholder="¿qué estás buscando?">
-                    <button id="botonSearch" type="submit" aria-placeholder="fa fa-search"><i class="fa fa-search"></i></button>  
-                </form>              
-            </div>                  
-          
-            <div class="logo-nav-container">
-                <div class="Faustine">
-                    <img  class="logoF" src="images/LogoFaustine-header.jpg">
-                    <h3> Faustine </h3>
-                </div>
-                
-                <div class="imgs">
-                 <a href= "/login"><i class="fas fa-user-circle"></i></a>
-                 <a href= "/carritoDeCompras"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                 <a href= "/altaProducto"><i class="fas fa-file-alt"></i></a>
-                 <a href= "/ofertasSemana"><img id="saleLogo" src="images/icono.sale.png"></a>              
-   
-                </div>
-            </div>
-        </header>-->
         <%- include('partials/header') %>
     <body class="body1">
- 
-       <!--- <header> -->
+
     <main>
         <!-- partial:index.partial.html -->
 <div class="slider">
@@ -110,59 +84,59 @@
                    
                     <div class="producto">
                          <div class="cajaGrande">
-                            <a href="/product/detail/1"><img src="images/bolsoFaustineSinFondo.png" alt= "bolsos" class="bolsos1"></a>
+                            <a href="/product/detail/<%= producto[3].id %>"><img src="images/<%= producto[3].image_ppal %>" alt= "bolsos" class="bolsos1"></a>
                             <div class="cajaDetalle">
-                            <h4>BOLSO FAUSTINE </h4>
-                            <p id="titulo" >Cuero "piel"/interior ecológico</p>
+                            <h4><%= producto[3].name %> </h4>
+                            <p id="titulo" ><%= producto[3].description %></p>
                             <br/>
-                            <p>PRECIO : $ 18.000</p>
-                            <p id="oferta">ON SALE: 10%</p>
+                            <p>PRECIO : $<%= producto[3].price %></p>
+                            <p id="oferta">Descuento: <%= producto[3].dto %> %</p>
                             </div>
                         </div>
-                            <h3>Bolsos <span><a href="/product/detail/3"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                     
+                            <h3><%= producto[3].pType.type_name %> <span><a href="/product/detail/<%= producto[3].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                     
                     </div>
                     <div class="producto">
                         <div class="cajaGrande">
-                        <a href="product/detail/2"><img src="images/bandoleraBeigeSinFondo.png" alt= "bandoleraCereza" class="carteras1"></a>
+                        <a href="product/detail/<%= producto[4].id %>"><img src="images/<%= producto[4].image_ppal %>" alt= "bandoleraCereza" class="carteras1"></a>
                         <div class="cajaDetalle">
-                            <h4>CARTERA BRIGIT</h4>
-                            <p id="titulo" >Cuero Ecológico "Supremi"</p>
+                            <h4><%= producto[4].name %></h4>
+                            <p id="titulo" ><%= producto[4].descritption %>"</p>
                             <br/>
-                            <p>PRECIO : $ 14.000</p>
-                            <p id="oferta">ON SALE: 5%</p>
+                            <p>PRECIO : $ <%= producto[4].price %></p>
+                            <p id="oferta">Descuento: <%= producto[4].dto %> %</p>
                             </div>
                         </div>   
-                        <h3>Carteras <span><a href="/product/detail/3"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                       
+                        <h3><%= producto[4].pType.type_name %><span><a href="/product/detail/<%=producto[4].pType.id%>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                       
                         </div>
                     </div>
                 <div class="izquierda">
                     <div class="producto">
                         <div class="cajaGrande">
-                        <a href="/product/detail/4"><img id="bandoleraCereza" src="images/cartera 1SinFondo.png" alt= "carteras" class="bandoleras1"></a>
+                        <a href="/product/detail/<%= producto[6].id %>"><img id="bandoleraCereza" src="images/<%= producto[6].image_ppal %>" alt= "carteras" class="bandoleras1"></a>
                         <div class="cajaDetalle">
-                            <h4>BANDOLERA STACK </h4>
-                            <p id="titulo" >Cuero "novillo" Interior "SOFT"</p>
+                            <h4><%= producto[6].name %></h4>
+                            <p id="titulo" ><%= producto[6].description %></p>
                             <br/>
-                            <p>PRECIO : $ 15.000</p>
-                            <p id="oferta">ON SALE: 12%</p>
+                            <p>PRECIO : $ <%= producto[6].price %></p>
+                            <p id="oferta">Descuento: <%= producto[6].dto %> %</p>
                             </div>
                         </div> 
-                        <h3>Bandoleras <span><a href="/product/detail/3"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                         
+                        <h3><%= producto[6].pType.type_name %><span><a href="/product/detail/<%= producto[6].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                         
                         
                        
                     </div>
                     <div class="producto">
                         <div class="cajaGrande">
-                        <a href="product/detail/5"><img src="images/mochilaGVerdeSinFondo.png" alt= "mochilas" class="mochilas1"></a>
+                        <a href="product/detail/<%= producto[7].name %>"><img src="images/<%= producto[7].image_ppal %>" alt= "mochilas" class="mochilas1"></a>
                         <div class="cajaDetalle">
-                        <h4>MOCHILA BARBIE </h4>
-                            <p id="titulo" >Cuero "piel" Interior "Supremi"</p>
+                        <h4><%= producto[7].name %> </h4>
+                            <p id="titulo" ><%= producto[7].descritpcion %>"</p>
                             <br/>
-                            <p>PRECIO : $ 15.000</p>
-                            <p id="oferta">ON SALE: 12%</p>
+                            <p>PRECIO : $ <%= producto[7].price %></p>
+                            <p id="oferta">Descuento: <%= producto[7].dto %> %</p>
                             </div>
                         </div>   
-                        <h3>Mochilas <span><a href="/product/detail/5"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3>    
+                        <h3><%= producto[7].pType.type_name %><span><a href="/product/detail/<%= producto[7].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3>    
                         
                                  
                 </div>                          
@@ -186,36 +160,7 @@
          
      <footer>
         <%- include('partials/footer') %>
-                                 
-        <!--</header> -->
-       <!-- cambio el footer más arribA -->
-       <!--<footer>-->
-        <!--<div class="footerfaustine">
-                <img width="250" height="200" class="logoff" src="images/logo.jpg">
-                <div class="redes">
-                    <img width="50" height="50" class="logoIgNegro" src="images/logoIgNegro.jpg">
-                    <img width="50" height="50" class="logoFaceNegro" src="images/logoFaceNegro.jpg">
-                    <img width="50" height="50" class="logoWappNegro" src="images/logoWappNegro.jpg">
- 
-                </div>
-                <nav class="lista1">
-                    <ul>
-                        <li class="listasMargenes"><a href="#">Preguntas</a></li>
-                        <li class="listasMargenes"><a href="#">Ayuda</a></li>
-                        <li class="listasMargenes"><a href="#">La Marca</a></li>
-                        <li class="listasMargenes"><a href="#">Cambios y devoluciones</a></li>
-                        <li class="listasMargenes"><a href="#">Whatsapp</a></li>
-                        <li class="listasMargenes"><a href="#">Instagram</a></li>
-                        <li class="listasMargenes"><a href="#">Numero</a></li>
-                        <li class="listasMargenes"><a href="#">Mail</a></li>
-                    </ul>
-                </nav>
-   
-   
-   
-            </div>
-        </footer>-->
- 
+        
     </body>
     
 </html>

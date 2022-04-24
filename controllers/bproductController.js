@@ -576,7 +576,9 @@ const controller = {
   storeDelete: (req, res) => {
     //llamo a la tabla pivot
     //elimino todos los registros de la tabla pivot que tengan el id
-    console.log(req.params.id);
+    if(req.body.params <12){
+      res.send("NO PUEDE DAR DE BAJA ESTE PRODUCTO-DESARROLLO")
+    }
     db.ProductColorProduct.destroy({
       where: {
         id_product: req.params.id,
