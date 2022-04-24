@@ -711,18 +711,67 @@ const controller = {
 },
 detail: (req, res) => {
   /*busco producto */
-   let id=req.params.id;
+  db.Product.findOne({
+    where:{
+      id : req.params.id
+    },
+      include:["pType","pYear","pColection","coloresDB"]
+    
+  })
+   .then(function(product){
+    //return res.json(product)
+    res.render("detallProdNuevoDB",{producto:product})
+  })
+  /*let productosAll=db.Product.findAll({
+    where :{
+      id_type : req.body.similaresTipo
+    }
+  })
+  Promise.all([products,]).then(function ([product]) {
+    //return  res.json(product)
+    return res.render("remitosDB", {
+      producto: product,
+    });
+  });*/
+  /* let id=req.params.id;
    console.log(id)
-   let producto = productModel.find(id);  
+   let prodver = {}
+   let fin=3
+   db.Product.findOne({
+     where:{
+       id:req.params.id
+     }
+   })
+   .then(function(product){
+     prodver = product
+     //return res.json(prodver)
+     return ({producto:product,prodver:prodver})
+   }).then(function(){
+     //return res.json(prodver)
+     db.Product.findAll({
+       where:{
+         id_type:prodver.id_type
+       }
+     })
+   }).then(function(products){
+     return res.json(products)
+     if(products.length >3){
+       fin=3
+     }
+     else{fin=products.length}
+     //return res.json(products)
+     res.render("detalleProdNuevoDB", {filtrados:products,producto:producto,fin })
+   })
+  /* let producto = productModel.find(id);  
    console.log(producto.name)
    console.log(producto.id)
    /*busco relacionados*/         
-   let filtrados = productModel.findSimilares(id);
+  /* let filtrados = productModel.findSimilares(id);
    /*solo puede imprimir 3 relacionados */
-   let fin = 0;
-   if (filtrados.length !== 0 ){
+   
+  /* if (filtrados.length !== 0 ){
        if (filtrados.length >3) {
-           fin = 3
+          // fin = 3
        }
        else {fin = filtrados.length}           
    }
@@ -730,8 +779,8 @@ detail: (req, res) => {
    res.render("detallProdNuevo",{producto,filtrados,fin});
 },
 /*irCarrito: (req,res) => {
-   res.render("irCarrito")
-},*/
+   res.render("irCarrito") */
+},
 carrito: (req,res) => {
    res.render("carritoDeCompras")
 },

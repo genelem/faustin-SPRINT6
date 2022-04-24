@@ -84,7 +84,7 @@
                    
                     <div class="producto">
                          <div class="cajaGrande">
-                            <a href="/product/detail/<%= producto[3].id %>"><img src="images/<%= producto[3].image_ppal %>" alt= "bolsos" class="bolsos1"></a>
+                            <a href="/bproduct/detalle/<%= producto[3].id %>"><img src="images/<%= producto[3].image_ppal %>" alt= "bolsos" class="bolsos1"></a>
                             <div class="cajaDetalle">
                             <h4><%= producto[3].name %> </h4>
                             <p id="titulo" ><%= producto[3].description %></p>
@@ -93,11 +93,12 @@
                             <p id="oferta">Descuento: <%= producto[3].dto %> %</p>
                             </div>
                         </div>
-                            <h3><%= producto[3].pType.type_name %> <span><a href="/product/detail/<%= producto[3].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                     
+                          <!---  <input type ="number "class="noSeVe" name="similaresTipo" value="<%=producto[3].pType.id %>" >-->
+                            <h3><%= producto[3].pType.type_name %> <span><a href="/bproduct/detalletipo/<%= producto[3].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                     
                     </div>
                     <div class="producto">
                         <div class="cajaGrande">
-                        <a href="product/detail/<%= producto[4].id %>"><img src="images/<%= producto[4].image_ppal %>" alt= "bandoleraCereza" class="carteras1"></a>
+                        <a href="bproduct/detalle/<%= producto[4].id %>"><img src="images/<%= producto[4].image_ppal %>" alt= "bandoleraCereza" class="carteras1"></a>
                         <div class="cajaDetalle">
                             <h4><%= producto[4].name %></h4>
                             <p id="titulo" ><%= producto[4].descritption %>"</p>
@@ -106,13 +107,13 @@
                             <p id="oferta">Descuento: <%= producto[4].dto %> %</p>
                             </div>
                         </div>   
-                        <h3><%= producto[4].pType.type_name %><span><a href="/product/detail/<%=producto[4].pType.id%>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                       
+                        <h3><%= producto[4].pType.type_name %><span><a href="/bproduct/detalletipo/<%=producto[4].pType.id%>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                       
                         </div>
                     </div>
                 <div class="izquierda">
                     <div class="producto">
                         <div class="cajaGrande">
-                        <a href="/product/detail/<%= producto[6].id %>"><img id="bandoleraCereza" src="images/<%= producto[6].image_ppal %>" alt= "carteras" class="bandoleras1"></a>
+                        <a href="/bproduct/detalle/<%= producto[6].id %>"><img id="bandoleraCereza" src="images/<%= producto[6].image_ppal %>" alt= "carteras" class="bandoleras1"></a>
                         <div class="cajaDetalle">
                             <h4><%= producto[6].name %></h4>
                             <p id="titulo" ><%= producto[6].description %></p>
@@ -121,13 +122,13 @@
                             <p id="oferta">Descuento: <%= producto[6].dto %> %</p>
                             </div>
                         </div> 
-                        <h3><%= producto[6].pType.type_name %><span><a href="/product/detail/<%= producto[6].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                         
+                        <h3><%= producto[6].pType.type_name %><span><a href="/bproduct/detalletipo/<%= producto[6].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3> </h3>                         
                         
                        
                     </div>
                     <div class="producto">
                         <div class="cajaGrande">
-                        <a href="product/detail/<%= producto[7].name %>"><img src="images/<%= producto[7].image_ppal %>" alt= "mochilas" class="mochilas1"></a>
+                        <a href="bproduct/detalle/<%= producto[7].id %>"><img src="images/<%= producto[7].image_ppal %>" alt= "mochilas" class="mochilas1"></a>
                         <div class="cajaDetalle">
                         <h4><%= producto[7].name %> </h4>
                             <p id="titulo" ><%= producto[7].descritpcion %>"</p>
@@ -136,7 +137,7 @@
                             <p id="oferta">Descuento: <%= producto[7].dto %> %</p>
                             </div>
                         </div>   
-                        <h3><%= producto[7].pType.type_name %><span><a href="/product/detail/<%= producto[7].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3>    
+                        <h3><%= producto[7].pType.type_name %><span><a href="/bproduct/detalletipo/<%= producto[7].pType.id %>"><i class="fas fa-arrow-alt-circle-right"></i></a></span></h3>    
                         
                                  
                 </div>                          

@@ -47,6 +47,7 @@ router.get("/remitos/:id", bproductController.cargaRemitos)
 router.post("/remitos/:id", bproductController.storeRemitos)
 // armo esta ruta para probar el json
 router.get("/probar",bproductController.probar)
+router.get("/detalle/:id",bproductController.detail)
 
 
 module.exports = router
