@@ -224,6 +224,14 @@ div.closeMain{
     justify-content: space-around;
  
 }
+/*** agregado para DB y USAR LAS IMAGENES COMO TEXTO Y NO COMO FILE */
+#archivo{
+    width: 18rem;
+}
+#archivo1{
+    width: 8rem;
+}
+
  
 /***** termina botón volver a página ppal */
 /********************/

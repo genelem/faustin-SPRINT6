@@ -41,6 +41,12 @@ router.post("/updateOneDB/:id",validatorSOLOProduct.updateProducto,bproductContr
 // eliminar producto
 router.get("/bajaProducto/:id",bproductController.bajaProducto)
 router.post("/bajaProducto/:id", bproductController.storeDelete)
+// cargar cantidades de producto-color
+router.get("/listRtos",bproductController.listarProductosRemito)
+router.get("/remitos/:id", bproductController.cargaRemitos)
+router.post("/remitos/:id", bproductController.storeRemitos)
+// armo esta ruta para probar el json
+router.get("/probar",bproductController.probar)
 
 
 module.exports = router

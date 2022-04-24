@@ -7,54 +7,6 @@ const db = require("../src/database/models");
 
 const sequelize = db.sequelize;
 
-/*function buscarEnProductColor(color){
-    db.ProductColor.findOne({
-        where : {
-            color_name:color
-        }
-    }).then( (productColor) =>{
-        return productColor.id
-    } );
-}
-function buscarEnProductYear(year){
-     db.ProductYear.findOne({
-        where : {
-            year_name:year
-        }
-    }).then( (productYear) =>{
-        if (!productYear){
-            console.log("no encontró year")
-        }
-         else{
-            
-             console.log(productYear.id)
-             
-         }
-        return productYear.id
-    } );
-}
-function buscarEnProductType(type){
-     db.ProductType.findOne({
-        where : {
-            type_name:type
-        }
-    }).then( (productType) =>{
-        console.log("en función type es "+ productType.id)
-        return productType.id
-    } );
-}
-function buscarEnProductColection(colection){
-    console.log("entró a buscar colección")
-    console.log("valor de :" + colection)
-    db.ProductColection.findOne({
-       where : {
-           colection_name:colection
-       }
-   }).then( (productColection) =>{
-       console.log(productColection.id+ "en función es")
-       return productColection.id
-   } );
-}   */
 
 const controller = {
   enlaces: (req, res) => {
@@ -469,17 +421,20 @@ const controller = {
         dto: req.body.descuento,
         //created : new DATE(),
         id_colection: req.body.colection,
-
         id_product_year: req.body.anio,
-
         id_type: req.body.tipo,
+        image_ppal:req.body.imagenPPAL,
+        image_back:req.body.imagenDORSO,
+        image_det1:req.body.imagenDetalle1,
+        image_det2:req.body.imagenDetalle2,
+        image_det3:req.body.imagenDetalle3,
       })
-     
-       .then(function (product) {
-         // tengo que pasar un array
-         //tengo armar el input como una array y modificar en validator
-         return product.setColoresDB(req.body.colores);
-       })
+
+        .then(function (product) {
+          // tengo que pasar un array
+          //tengo armar el input como una array y modificar en validator
+          return product.setColoresDB(req.body.colores);
+        })
         .then(function () {
           res.send("alta exitosa ");
         });
@@ -535,22 +490,267 @@ const controller = {
     //res.render("updateProductoDB",{producto:producto,colors,years,types,colections})
   },
   storeUpdate: (req, res) => {
-   // queda analizar la validación de colores.
-    let id = req.params.id         
-    const errors = validationResult(req);        
-    console.log("la lenght de errores es : " + errors.errors.length)
-    if(errors.errors.length > 1){
-//*** */
+    // queda analizar la validación de colores.
+    let id = req.params.id;
+    const errors = validationResult(req);
+    console.log("la lenght de errores es : " + errors.errors.length);
+    if (errors.errors.length > 1) {
+      //*** */
+      let producto = db.Product.findOne({
+        where: {
+          id: req.params.id,
+        },
+        //  include :["coloresDB"],
+        include: ["pYear", "pColection", "pType", "coloresDB"],
+      });
+      let colors = db.ProductColor.findAll();
+      let years = db.ProductYear.findAll();
+      let types = db.ProductType.findAll();
+      let colections = db.ProductColection.findAll();
+
+      Promise.all([producto, colors, years, types, colections]).then(function ([
+        product,
+        productColors,
+        productYears,
+        productTypes,
+        productColections,
+      ]) {
+        //return  res.json(product)
+        return res.render("updateProductoDB", {
+          colors: productColors,
+          years: productYears,
+          types: productTypes,
+          colections: productColections,
+          producto: product,
+          errorsProd: errors.mapped(),
+        });
+      });
+    } else {
+      // acordarse de error oculto por eso el 1
+      if (errors.errors.length == 1) {
+        db.Product.update(
+          {
+            name: req.body.name,
+            description: req.body.description,
+            description2: req.body.description2,
+            price: req.body.price,
+            //falta tema imagenes
+            dto: req.body.descuento,
+            //created : new DATE(),
+            id_colection: req.body.colection,
+            id_product_year: req.body.anio,
+            id_type: req.body.tipo,
+            image_ppal : req.body.imagenPPAL,
+            image_back :req.body.imagenDORSO,
+            image_det1 : req.body.imagenDetalle1,
+            image_det2: req.body.imagenDetalle2,
+            image_det3: req.body.imagenDetalle3
+          },
+          {
+            where: {
+              id: req.params.id,
+            },
+          }
+        )
+          .then(function () {
+            return db.User.findByPk(req.params.id);
+          })
+          .then(function () {
+            return res.send("modificación exitosa");
+          });
+      }
+    }
+  },
+  bajaProducto: (req, res) => {
+    /* reconfirmar que quiere dar de baja */
+    /* reconfirmar que quiere dar de baja */
+    //let id = req.params.id
+    //let producto = productModel.find(id);
+    db.Product.findByPk(req.params.id).then(function (product) {
+      res.render("bajaProductoDB", { producto: product });
+    });
+
+    //llamo a la tabla pivot
+    //elimino todos los registros de la tabla pivot que tengan el id
+  },
+  storeDelete: (req, res) => {
+    //llamo a la tabla pivot
+    //elimino todos los registros de la tabla pivot que tengan el id
+    console.log(req.params.id);
+    db.ProductColorProduct.destroy({
+      where: {
+        id_product: req.params.id,
+      },
+    })
+      .then(function () {
+        //elimino la pelicula
+        return db.Product.destroy({
+          where: {
+            id: req.params.id,
+          },
+        });
+      })
+      .then(function () {
+        return res.send("baja existosa");
+      });
+  },
+  listarProductosRemito: (req, res) => {
+    let array = [];
+
+    db.Product.findAll({
+      order: [["id", "ASC"]],
+    }).then(function (products) {
+      if (products) {
+        res.render("listProdRtosDB", { array: products });
+      } else {
+        res.render("listProdRtosDB", { array });
+      }
+    });
+  },
+  cargaRemitos: (req, res) => {
+    console.log("entro a cargar remitos");
     let producto = db.Product.findOne({
+      where: {
+        id: req.params.id,
+      },
+
+      include: ["coloresDB"],
+    });
+
+    Promise.all([producto]).then(function ([product]) {
+      //return  res.json(product)
+      return res.render("remitosDB", {
+        producto: product,
+      });
+    });
+  },
+  storeRemitos: (req, res) => {
+    console.log("en storeRemitos");
+    console.log(req.body);
+    const errors = validationResult(req);
+
+  db.ProductColorProduct.findAll({
+    where:{
+      id: req.params.id
+    }
+  })
+  .then(function(productColorProducts){
+    return res.json(productColorProducts)
+  })
+ //  if (req.body){
+    /* let arrayID=[]
+   
+    //opción uno actualiza pero siempre el mismo 
+        var promises = []
+        for (var i = 0; i < req.body.idColor.length; i++) {
+          console.log("remito :"+ i + "valor: "+ req.body.remito[i])
+            var newPromise = db.ProductColorProduct.update(
+              {
+                  quantity: req.body.cantidad[i], // aquí no acepta SUMA como hago para que sume
+                  dispach: req.body.remito[i]
+              },{
+                where : {
+                  id_product: req.params.id
+                }
+              })
+              promises.push(newPromise);
+            } // acá termina el for
+       return Promise.all([promises])
+      .then(function() {
+         return res.send ("modificación exitosa")
+       })
+
+    .catch(function (err) {
+        console.log("NO!!!");
+        return next(err);
+    }); */
+    
+  //} else // fin opción UNO
+    // luego agrego PREGUNTAR POR ERRORES 0 PERO AHORA PREGUNTO PARA PROBAR POR BODY
+   /* if (req.body) {
+      for (i = 0; i < req.body.idColor.length; i++) {
+        db.ProductColorProduct.update(
+          {
+            quantity: req.body.cantidad[i],
+            dispach: req.body.remito[i],
+          },
+          {
+            where: {
+              id_product: req.params.id
+            },
+          }
+        )
+          .then(function () {
+            return db.ProductColorProduct.findByPk(req.params.idColor[i]);
+          })
+          .then(function () {
+            return res.send("modificación exitosa ")
+          });
+      }
+    }
+     else
+   {
+      let producto = db.Product.findOne({
+        where: {
+          id: req.params.id,
+        },
+        include: ["coloresDB"],      
+      });
+      Promise.all([producto]).then(function ([product]) {
+        //return  res.json(product)
+        return res.render("remitosDB", {
+          producto: product,
+          errorsProd: errors.mapped(),
+        });
+      });
+    }*/
+  
+
+},
+detail: (req, res) => {
+  /*busco producto */
+   let id=req.params.id;
+   console.log(id)
+   let producto = productModel.find(id);  
+   console.log(producto.name)
+   console.log(producto.id)
+   /*busco relacionados*/         
+   let filtrados = productModel.findSimilares(id);
+   /*solo puede imprimir 3 relacionados */
+   let fin = 0;
+   if (filtrados.length !== 0 ){
+       if (filtrados.length >3) {
+           fin = 3
+       }
+       else {fin = filtrados.length}           
+   }
+   console.log(filtrados)          
+   res.render("detallProdNuevo",{producto,filtrados,fin});
+},
+/*irCarrito: (req,res) => {
+   res.render("irCarrito")
+},*/
+carrito: (req,res) => {
+   res.render("carritoDeCompras")
+},
+finCarrito: (req,res) => {
+   res.render("finCarrito")
+}, 
+list: (req,res) => {
+   let productsFound = productModel.all();
+   res.render("listProductos",{products:productsFound})
+},
+probar:(req,res) => {
+  let producto = db.Product.findAll({
     where: {
-      id: req.params.id,
-   },
-   //  include :["coloresDB"],
+      id_type: "1",
+    },
+    //  include :["coloresDB"],
     include: ["pYear", "pColection", "pType", "coloresDB"],
   });
   let colors = db.ProductColor.findAll();
   let years = db.ProductYear.findAll();
-    let types = db.ProductType.findAll();
+  let types = db.ProductType.findAll();
   let colections = db.ProductColection.findAll();
 
   Promise.all([producto, colors, years, types, colections]).then(function ([
@@ -559,96 +759,19 @@ const controller = {
     productYears,
     productTypes,
     productColections,
-
   ]) {
-  //return  res.json(product)
-  return res.render("updateProductoDB", {
-    colors: productColors,
-    years: productYears,
-    types: productTypes,
-    colections: productColections,
-    producto: product,
-    errorsProd: errors.mapped()
-  });
-});
-
-    } else {
-    
-    // acordarse de error oculto por eso el 1 
-    if (errors.errors.length == 1 ){        
-
-            db.Product.update({
-                name: req.body.name,
-                description: req.body.description,
-                description2: req.body.description2,
-                price: req.body.price,
-                //falta tema imagenes
-                dto: req.body.descuento,
-                //created : new DATE(),
-                id_colection: req.body.colection,
-        
-                id_product_year: req.body.anio,
-        
-                id_type: req.body.tipo,
-              },{
-                  where :{
-                    id : req.params.id  
-                  },
-                
-              } )
-              .then(function () {
-                return db.User.findByPk(req.params.id);
-              })
-              .then (function(){
-                return res.send ("modificación exitosa")
-              })
-              
-               
-                  
-              } 
-               
-          
-            }
-  
-  },
-  bajaProducto: (req,res) =>{ 
-    /* reconfirmar que quiere dar de baja */ 
-         /* reconfirmar que quiere dar de baja */ 
-         //let id = req.params.id
-         //let producto = productModel.find(id); 
-         db.Product.findByPk(req.params.id) 
-         .then(function(product){
-            res.render("bajaProductoDB",{producto:product})
-         })                
-        
-    
-//llamo a la tabla pivot
-        //elimino todos los registros de la tabla pivot que tengan el id 
-
-  } ,       
-storeDelete : (req,res) =>{
-     //llamo a la tabla pivot
-        //elimino todos los registros de la tabla pivot que tengan el id 
-        console.log(req.params.id)
-        db.ProductColorProduct.destroy({
-            where:{
-                id_product: req.params.id
-            }
-        })
-        .then(function(){
-        //elimino la pelicula
-        return db.Product.destroy({
-            where:{
-                id: req.params.id
-            }
-        }) } )
-        .then(function(){
-            return res.send("baja existosa")
-        } )
-
-}   
-   
-}           
-
-
+    return res.json(product)
+    //return res.render("updateProductoDB", {
+    //  colors: productColors,
+    //  years: productYears,
+    //  types: productTypes,
+    //  colections: productColections,
+    //  producto: product,
+   //   errorsProd: errors.mapped(),
+   // }
+   // );
+  }
+)}
+ 
+}
 module.exports = controller;
