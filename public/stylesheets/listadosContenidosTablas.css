@@ -4,3 +4,10 @@
     margin-left: 2.5rem;
 }
 
+.listadoEnBaseGral, .listadoEnBaseGral li, .listadoEnBase a{
+    color:black;
+    text-decoration: none;
+    margin-left: 2.5rem;
+    font-size: 15pt;
+    list-style: none;
+}

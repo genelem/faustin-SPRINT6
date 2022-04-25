@@ -781,6 +781,25 @@ detail: (req, res) => {
 /*irCarrito: (req,res) => {
    res.render("irCarrito") */
 },
+prodPorType: (req,res) => {
+  console.log(req.params.id + "es el paras en listar type")
+  db.Product.findAll({
+    where: {
+      id_type: req.params.id
+    },
+      include : ["pType"]
+    
+  }).then (function(products){
+    if(products){
+      let mensaje = "TIPOS DE PRODUCTOS ";
+      //return res.json(products)
+      res.render("listProductGRALDB",{array:products,mensaje:mensaje})
+    }else{
+      res.send("no hay productos disponibles")
+    }
+  })
+  
+},
 carrito: (req,res) => {
    res.render("carritoDeCompras")
 },
