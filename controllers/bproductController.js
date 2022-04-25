@@ -618,11 +618,17 @@ const controller = {
 
       include: ["coloresDB"],
     });
-
-    Promise.all([producto]).then(function ([product]) {
+    let coloresProd = db.ProductColorProduct.findAll({
+      where :{
+        id_product : req.params.id
+      }
+    })
+    
+    Promise.all([producto,coloresProd]).then(function ([product,productColorProducts]) {
       //return  res.json(product)
+      //return res.json(productColorProducts)
       return res.render("remitosDB", {
-        producto: product,
+        producto: product,coloresProd:productColorProducts
       });
     });
   },
@@ -630,84 +636,27 @@ const controller = {
     console.log("en storeRemitos");
     console.log(req.body);
     const errors = validationResult(req);
+    if (req.body)  {
 
-  db.ProductColorProduct.findAll({
-    where:{
-      id: req.params.id
-    }
-  })
-  .then(function(productColorProducts){
-    return res.json(productColorProducts)
-  })
- //  if (req.body){
-    /* let arrayID=[]
-   
-    //opción uno actualiza pero siempre el mismo 
-        var promises = []
-        for (var i = 0; i < req.body.idColor.length; i++) {
-          console.log("remito :"+ i + "valor: "+ req.body.remito[i])
-            var newPromise = db.ProductColorProduct.update(
-              {
-                  quantity: req.body.cantidad[i], // aquí no acepta SUMA como hago para que sume
-                  dispach: req.body.remito[i]
-              },{
-                where : {
-                  id_product: req.params.id
-                }
-              })
-              promises.push(newPromise);
-            } // acá termina el for
-       return Promise.all([promises])
-      .then(function() {
-         return res.send ("modificación exitosa")
-       })
+      console.log(req.body)
 
-    .catch(function (err) {
-        console.log("NO!!!");
-        return next(err);
-    }); */
-    
-  //} else // fin opción UNO
-    // luego agrego PREGUNTAR POR ERRORES 0 PERO AHORA PREGUNTO PARA PROBAR POR BODY
-   /* if (req.body) {
-      for (i = 0; i < req.body.idColor.length; i++) {
-        db.ProductColorProduct.update(
-          {
-            quantity: req.body.cantidad[i],
-            dispach: req.body.remito[i],
-          },
-          {
-            where: {
-              id_product: req.params.id
-            },
+      for(i=0;i<req.body.idColor.length;i++){
+        db.ProductColorProduct.update({
+          quantity : req.body.cantidad[i],
+          dispach :req.body.remito[i]
+        },{
+        where : {
+          id :req.body.idColor[i]
           }
-        )
-          .then(function () {
-            return db.ProductColorProduct.findByPk(req.params.idColor[i]);
-          })
-          .then(function () {
-            return res.send("modificación exitosa ")
-          });
+      }).then(function(){
+        return db.ProductColorProduct.findByPk(req.body.idColor[i])
+      })
       }
+    }else{
+      res.send("ver que pasó ")
     }
-     else
-   {
-      let producto = db.Product.findOne({
-        where: {
-          id: req.params.id,
-        },
-        include: ["coloresDB"],      
-      });
-      Promise.all([producto]).then(function ([product]) {
-        //return  res.json(product)
-        return res.render("remitosDB", {
-          producto: product,
-          errorsProd: errors.mapped(),
-        });
-      });
-    }*/
+    res.render("enlacesDB")
   
-
 },
 detail: (req, res) => {
   /*busco producto */

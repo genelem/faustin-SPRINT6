@@ -52,20 +52,24 @@
                     <div class="otrosValores"> 
                     <p> Ingrese cantidad/remito por cada COLOR-PRODUCTO :</p>
                     <br/>
-                    <% for(i=0 ;i< producto.coloresDB.length ; i++ ){ %> 
+                    <% for(i=0 ;i< coloresProd.length ; i++ ){ %> 
                     <p><label id="" for ="idColor">Identificación</label>        
-                    <input placeholder="" type="number"  name="idColor" id="user" value="<%= producto.coloresDB[i].id %>"></p>
+                    <input placeholder="" type="number"  name="idColor" id="user" value="<%= coloresProd[i].id %>"></p>
                     <br/>
-                    <p id="remitoColor"><%= producto.coloresDB[i].color_name %></p>
+                    <p id="remitoColor"><%= coloresProd[i].color_name %></p>
                     <p><label id="" for ="cantidad">CANTIDAD</label>
-                    <input placeholder="" type="number"  name="cantidad" id="user" value=""></p>
+                    <p>COLOR <%= producto.coloresDB[i].color_name %> ID: <%= producto.coloresDB[i].id %></p>
+                    <input placeholder="" type="number"  name="cantidad" id="user" value="<%= coloresProd[i].quantity %>"></p>
                     <br/>
                     <p><label id="" for ="remito">REMITO</label>
-                        <input placeholder="" type="text"  name="remito" id="user" value=""></p>
+                        <input placeholder="" type="text"  name="remito" id="user" value="<%= coloresProd[i].dispach %>"></p>
                     <br/>
                     <% if(locals.errorsProd && locals.errorsProd.cantidad){ %>
                         <span id="errorMsge" > <%= errorsProd.cantidad.msg  %> </span>
                     <% } %>  
+                    <% if(locals.errorsProd && locals.errorsProd.remito){ %>
+                        <span id="errorMsge" > <%= errorsProd.remito.msg  %> </span>
+                    <% } %> 
                     <br/>
                     <% } %>
    
