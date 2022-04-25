@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/formularioRegistro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="https://fontawesome.com/">
+    <title>Formulario Registro</title>
+</head>
+<body>
+    
+    <header>
+        <%- include('partials/header') %>
+    </header>    
+
+    <section class="formularioParaRegistro">
+        
+        <form action="/busers/regTaxes?_method=PUT"  method="POST" >
+            <p><label id="" for ="usuario" class="todosLosTitulos">Condición Impositiva</label>
+                <br/>
+                <input type= "checkbox" class="todosLosBotones" placeholder="" type="text"  name="condicion" value="Responsabe Inscripto" ><label>Responsable Inscripto</label></p>
+                <input type= "checkbox" class="todosLosBotones" placeholder="" type="text"  name="condicion" value ="Consumidor FInal" ><label>Consumidor Final</label></p>
+                <% if(locals.errorsReg && locals.errorsReg.usuario){ %>
+                    <span id="errorMsge" > <%= errorsReg.usuario.msg  %> </span>
+                  <% } %> 
+                <br/>
+            <!--<div class="contenedorTodosLosTitulos">-->
+                <p><label id="" for ="cuil" class="todosLosTitulos">CUIL</label>
+                <input class="todosLosBotones" placeholder="" type="text"  name="cuil" ></p> 
+                <% if(locals.errorsReg && locals.errorsReg.primerNombre){ %>
+                    <span id="errorMsge" > <%= errorsReg.primerNombre.msg  %> </span>
+                  <% } %> 
+                <br/>   
+                <p><label id="" for ="cuit" class="todosLosTitulos">CUIT</label>
+                    <input class="todosLosBotones" placeholder="" type="text"  name="cuit" ></p> 
+                    <% if(locals.errorsReg && locals.errorsReg.primerNombre){ %>
+                        <span id="errorMsge" > <%= errorsReg.primerNombre.msg  %> </span>
+                      <% } %> 
+                    <br/>   
+                
+                <p><label id="" for ="brutos" class="todosLosTitulos">Ingresos Brutos</label>
+                <input class="todosLosBotones" placeholder="" type="text"  name="brutos" ></p> 
+                <% if(locals.errorsReg && locals.errorsReg.apellido){ %>
+                    <span id="errorMsge" > <%= errorsReg.apellido.msg  %> </span>
+                  <% } %> 
+                <br/>   
+                
+                <p><label id="" for ="Ganancias" class="todosLosTitulos">Retención Ganancias</label>
+                <input class="todosLosBotones" placeholder="" type="password"  name="Ret Ganancias"></p>
+                <% if(locals.errorsReg && locals.errorsReg.contraseña){ %>
+                    <span id="errorMsge" > <%= errorsReg.contraseña.msg  %> </span>
+                  <% } %> 
+                <br/>                 
+                
+                <p><label id="" for ="email" class="todosLosTitulos">Correo Electrónico</label>
+                <input class="todosLosBotones" placeholder="" type="text"  name="mail" ></p>
+                <% if(locals.errorsReg && locals.errorsReg.mail){ %>
+                    <span id="errorMsge" > <%= errorsReg.mail.msg  %> </span>
+                  <% } %> 
+                <br/> 
+                
+            </div>
+                <p class="terYC">
+                    <span>
+                        <label for="terminos">He leido y acepto los Términos y Condiciones</label>                       
+                        <input type="checkbox" name="terminos" value="ok">
+                  
+            </div>
+            <div class="crearCuenta">
+               <!--- <p> <button type="submit" class="crearCuentaBoton">CREAR CUENTA</button> -->
+                    <p> <button type="submit" id="enviar">CREAR CUENTA</button>                    
+                     <br/>
+                    <br/>
+                    <a href="/" id="vuelvo">Volver a la Pagina Principal</a>
+                </p>
+            </div>
+        </form>
+
+    </section>    
+         
+    <footer>
+        <%- include('partials/footer') %>         
+    </footer>
+    
+</body>
+</html>

@@ -4,6 +4,7 @@ const path = require("path");
 const { validationResult, body } = require("express-validator");
 
 const db = require("../src/database/models");
+const req = require("express/lib/request");
 
 const sequelize = db.sequelize;
 
@@ -729,6 +730,22 @@ detail: (req, res) => {
 },
 /*irCarrito: (req,res) => {
    res.render("irCarrito") */
+},
+comprar : (res,send)=>{
+  if ( req.session.usuarioLogueado) {
+    db.UserTaxe.findByPk(req.session.usuarioLogueado.id)
+    .then(function(userTax){
+      if ( !userTax){
+        req.session.usuarioLogueado.cproduct= req.params.id
+        res.render("formularioTaxes")
+      }else{
+        res.send("seguir con la compra")
+      }
+
+    })
+  }else {
+    res.render("loginDB")
+  }
 },
 prodPorType: (req,res) => {
   console.log(req.params.id + "es el paras en listar type")

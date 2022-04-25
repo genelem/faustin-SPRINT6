@@ -125,6 +125,7 @@ const controller = {
               mail: user.email,
               fechaNacimiento: user.bornDate,
               categoria: user.id_category,
+              cproduct :0,
               //avatar: userFound.avatar,
             };
 
@@ -429,7 +430,13 @@ const controller = {
     });
     res.redirect("/");
   },
-
+  
+  regTaxes: function (req, res) {
+    // usuario = session.usuarioLogueado.usuario
+    // console.log(usuario + "  es el req.session.usuario")
+    // res.render("confirmaLogout")
+    res.render("formularioTaxesDB");
+  },
   ConfirmLogout: function (req, res) {
     // usuario = session.usuarioLogueado.usuario
     // console.log(usuario + "  es el req.session.usuario")

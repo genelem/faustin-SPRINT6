@@ -64,7 +64,7 @@
         <div class="cajaGrande">
                
                 <div class="productValores"> 
-                <form action="/" method="GET">           
+                <form action="/bproduct/compra/<%= producto.id %>" method="GET">           
                     <div class="otrosValores">
                         <h2>REALIZAR COMPRA </h2>
                         <br/>
@@ -130,7 +130,11 @@
                 <div class="submitMasEnviar">  
                     <a href="#modal2">Importante<i class="fas fa-user-edit"></i></a>        
                     <input type="submit" name="submit" id="enviar" value="COMPRAR "> </input>
-                </div>        
+                    <br/>
+                    
+                    <a href="/listarProdType/<%= producto.id %>" id="vuelvo">VER PRODUCTOS SIMILARES</a>
+                </div> 
+
                 <div class= "closeMain" >
                 <a href="/" id="vuelvo">Volver a Pagina Principal</a>
                 </div>

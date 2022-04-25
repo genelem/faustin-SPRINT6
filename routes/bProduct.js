@@ -48,7 +48,10 @@ router.post("/remitos/:id", bproductController.storeRemitos)
 // armo esta ruta para probar el json
 router.get("/probar",bproductController.probar)
 router.get("/listarProdType/:id",bproductController.prodPorType)
+// proceso de compra 
 router.get("/detalle/:id",bproductController.detail)
+router.get("/compra/:id",bproductController.comprar)
+
 
 
 module.exports = router
