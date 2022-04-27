@@ -53,14 +53,18 @@
                     <p> Ingrese cantidad/remito por cada COLOR-PRODUCTO :</p>
                     <br/>
                     <% for(i=0 ;i< coloresProd.length ; i++ ){ %> 
-                    <p><label id="" for ="idColor">Identificación</label>        
-                    <input placeholder="" type="number"  name="idColor" id="user" value="<%= coloresProd[i].id %>"></p>
+                    <p><label id="" for ="idRegistro">el registro de productColorProduct</label>        
+                        <input placeholder="" type="number"  name="idRegistro" id="user" value="<%= coloresProd[i].id %>"></p>
+                        <br/>
+                    <p><label id="" for ="idColor">Id de Color</label>        
+                    <input placeholder="" type="number"  name="idColor" id="user" value="<%= coloresProd[i].id_color %>"></p>
                     <br/>
                     <p id="remitoColor"><%= coloresProd[i].color_name %></p>
                     <p><label id="" for ="cantidad">CANTIDAD</label>
                     <p>COLOR <%= producto.coloresDB[i].color_name %> ID: <%= producto.coloresDB[i].id %></p>
                     <input placeholder="" type="number"  name="cantidad" id="user" value="<%= coloresProd[i].quantity %>"></p>
                     <br/>
+                   
                     <p><label id="" for ="remito">REMITO</label>
                         <input placeholder="" type="text"  name="remito" id="user" value="<%= coloresProd[i].dispach %>"></p>
                     <br/>

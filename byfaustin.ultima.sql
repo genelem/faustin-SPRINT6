@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-04-2022 a las 23:49:46
+-- Tiempo de generación: 27-04-2022 a las 17:37:59
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -105,8 +105,18 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `description`, `description2`, `price`, `id_type`, `id_colection`, `id_product_year`, `dto`, `created`, `updated`, `image_ppal`, `image_back`, `image_det1`, `image_det2`, `image_det3`) VALUES
-(3, 'CARTERA FASHION CROWN', 'cuero piel ultra soft', 'ajustable a diferentes largos', 25000, 4, 5, 2, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'BOLSO ABRIL BEATTY', 'cuero engrasado', 'manija ajustable', 38000, 1, 6, 1, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(4, 'BOLSO LEON FERRARI', 'CUERO ENCERADO INTERVENCIÓN ARTISTA', 'MANIJA REFORZADA ', 21000, 1, 7, 2, 5, NULL, NULL, 'carteraColoresNew.ppal.png', 'carteraColoresNew.back.png', 'carteraColoresNew.det1.png', ' carteraColoresNew.det2.png', 'carteraColoresNew.det1.png'),
+(5, 'MOCHILA DAYRELAX ', 'CUERO ACERADO HUECO GRABADO', 'LIVIANA CON BOLSILLOS ', 30000, 10, 5, 1, 10, NULL, NULL, 'mochilAzulRelax.ppal.png', 'mochilAzulRelax.back.png', 'mochilAzulRelax.detail1', ' mochilAzulRelax.detail2', 'mochilAzulRelax.detail1'),
+(6, 'CARTERA MONTECARLO GLIP', 'CUERO ARGENTINO CON RELIEVES ', 'CON ACCESORIOS', 55000, 4, 7, 2, 30, NULL, NULL, 'carteraVerdeGlipSinFondo.png', 'cartraVerdeGlipSinFondo.back.png', 'carteraVerdeGlipSinFondo.detail1.png', ' carteraVerdeGlipSinFondo.detail2.png', 'carteraVerdeGlipSinFondo.detail1.png'),
+(7, 'BOLSO FAUSTINE', 'CUERO PIEL', 'INTERIOR ECOLOGICO', 25000, 1, 6, 2, 10, NULL, NULL, 'bolsoFaustineSinFondo.png', 'bolsoFaustineSinFondo.back.png', 'bolsoFaustineSinFondo.detail1', 'bolsoFaustineSinFondo.detail3', NULL),
+(8, 'CARTERA BRIGIT', 'CUERO PIEL', 'MANIJAS TRENZADAS', 50000, 4, 6, 2, 20, NULL, NULL, 'bandoleraBeigeSinFondo.png', 'bandoleraBeigeSInFondo.back.png', 'bandoleraBeigeSinFondo.detail1.png', 'bandoleraBeigeSinFondo.detail1.png', 'bandoleraBeigeSInFondo.detailxxx.jpg'),
+(9, 'CARTERA VERSACE STILE', 'CUERO ENCERADO', 'MANIJAS TRENZADAS', 35000, 4, 6, 2, 15, NULL, NULL, 'carteraVersaceNegraSinFondo.png', 'carteraVersaceNegraSinFondo.back.png', 'carteraVersaceNegra.detail2.png', '    carteraVersaceNegra.detail1.png', 'carteraVersaceNegra.detail2.png'),
+(10, 'BANDOLERA DE MANO NUEVA COLECCION', 'CUERO GRANEADO', 'MANIJAS DESMONTABLES', 27500, 5, 6, 2, 20, NULL, NULL, 'cartera 2SinFondo.png', 'cartera 1SinFondo.png', 'cartera 4.jpg', 'cartera 3.jpg', 'cartera 4.jpg'),
+(11, 'MOCHILA VERDE START YOUNG', 'CUERO VACA ENGRASADO', 'HERRAJES USAFORT', 46000, 10, 7, 2, 18, NULL, NULL, 'mochilaGVerdeSinFondo.png', 'mochilaGVerdeSinFondo.back.png', 'mochilaGVerdeSinFondo.detail1.png', 'mochilaGVerdeSinFondo.detail2.png', 'mochilaGVerdeSInFondo.detail2.jpg'),
+(12, 'BANDOLERA EXCLUSIVE', 'CUERO ENCERADO TRUGAL', 'DETALLES COCIDOS /MANIJAS DESMONTABLES', 15000, 5, 6, 2, 15, NULL, NULL, 'bandoleraRojaSinFondo.png', 'bandoleraRojaSinFondo.back.png', 'bandoleraRojaSinFondo.detail1.png', 'bandoleraRojaSInFondo.detail2.png', 'bandoleraRojaSinFondo.detail1.png'),
+(13, 'BANDOLERA GUCCI', 'CUERO VACA ARGENTINO', 'DETALLES SOBRE RELIEVE ', 29000, 5, 5, 1, 10, NULL, NULL, 'bandoleraAzulSinFondo.png', 'bandoleraAzulSInFondo.back.png', 'bandoleraAzulSinFondo.detail1.png', 'bandoleraAzulSInFondo.detail2.png', 'bandoleraAzulSinFondo.detail1.png'),
+(14, 'BANDOLERA BIG MAN', 'CUERO VACA ARGENTINO', 'CARRY NOTEBOOK', 38000, 5, 5, 2, 11, NULL, NULL, 'morralHombreSinFondo.png', 'morralHombreSInFondo.back.png', 'morralHombreSinFondo.detail1.png', 'morralHombreSInFondo.detail2.png', 'morralHombreSinFondo.detail1.png'),
+(15, 'MOCHILA GUCCI TEXTURADA', 'CUERO CHAROL CON BAJO RELIEVE', 'EXTRA LIGHT CON 3 BOLSILLOS', 33000, 10, 7, 1, 10, NULL, NULL, 'mochilaGucciSinFondo.png', 'mochilaGucciSinFondo.back.png', 'mochilaGucciSinFondo.detail1.png', 'mochilaGucciSInFondo.detail1.png', 'morchilaGucciSinFondo.detail2.png');
 
 -- --------------------------------------------------------
 
@@ -125,7 +135,8 @@ CREATE TABLE `product-colection` (
 
 INSERT INTO `product-colection` (`id`, `colection_name`) VALUES
 (5, 'VERANO'),
-(6, 'INVIERNO');
+(6, 'INVIERNO'),
+(7, 'PRIMAVERA');
 
 -- --------------------------------------------------------
 
@@ -170,8 +181,29 @@ CREATE TABLE `product-color-product` (
 --
 
 INSERT INTO `product-color-product` (`id`, `id_color`, `id_product`, `quantity`, `dispach`) VALUES
-(1, 5, 4, NULL, NULL),
-(2, 7, 4, NULL, NULL);
+(1, 5, 4, 150, 'remito para 150 ahora'),
+(2, 7, 4, 250, 'remito para los 250'),
+(3, 5, 5, 500, 'remito.11111111111111111111111111'),
+(4, 6, 5, 500, 'remito.11111111111111111111111111'),
+(5, 4, 6, 410, 'remito para 410'),
+(6, 5, 6, 190, 'remito para 190'),
+(7, 3, 7, NULL, NULL),
+(8, 5, 7, NULL, NULL),
+(9, 2, 8, NULL, NULL),
+(10, 7, 8, NULL, NULL),
+(11, 6, 9, 500, 'remito abril por 500'),
+(12, 7, 9, 150, 'remito para 150'),
+(13, 3, 10, NULL, NULL),
+(14, 6, 10, NULL, NULL),
+(15, 4, 11, NULL, NULL),
+(16, 6, 11, NULL, NULL),
+(17, 4, 12, NULL, NULL),
+(18, 6, 12, NULL, NULL),
+(19, 3, 13, NULL, NULL),
+(20, 6, 13, NULL, NULL),
+(21, 7, 14, NULL, NULL),
+(22, 3, 15, NULL, NULL),
+(23, 6, 15, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +263,8 @@ CREATE TABLE `product-type` (
 INSERT INTO `product-type` (`id`, `type_name`) VALUES
 (1, 'BOLSOS'),
 (4, 'CARTERAS'),
-(5, 'BANDOLERAS');
+(5, 'BANDOLERAS'),
+(10, 'MOCHILAS');
 
 -- --------------------------------------------------------
 
@@ -250,7 +283,8 @@ CREATE TABLE `product-year` (
 
 INSERT INTO `product-year` (`id`, `year_name`) VALUES
 (1, '2022'),
-(2, '2019');
+(2, '2019'),
+(5, 'EN STOCK');
 
 -- --------------------------------------------------------
 
@@ -498,13 +532,13 @@ ALTER TABLE `invoice-item`
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `product-colection`
 --
 ALTER TABLE `product-colection`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `product-color`
@@ -516,7 +550,7 @@ ALTER TABLE `product-color`
 -- AUTO_INCREMENT de la tabla `product-color-product`
 --
 ALTER TABLE `product-color-product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `product-dto`
@@ -540,13 +574,13 @@ ALTER TABLE `product-stock`
 -- AUTO_INCREMENT de la tabla `product-type`
 --
 ALTER TABLE `product-type`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `product-year`
 --
 ALTER TABLE `product-year`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `type-card`

@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/stylesheets/altaProducto.css">
         <link rel="stylesheet" href="/stylesheets/updateProducto.css">
         <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+        <link rel="stylesheet" href="/stylesheets/produNewDB.css">
 
         <script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>
         <title>Faustine</title>
@@ -100,11 +101,11 @@
                             </p>              
                      </div>
 
-                    <div class="seleccionColor">  
+                    <div class="seleccionColorDB">  
                         <% for(i=0 ;i< producto.coloresDB.length ; i++ ){ %>                    
                         <p id="actual">COLORES de Producto: <%= producto.coloresDB[i].id %>"*"<%= producto.coloresDB[i].color_name %> </p>
                         <% } %>
-                        <p>no pueden ser modificados</p>   
+                        <p id="mensajeRestriccion">no pueden ser modificados</p>   
                         <br/>
                    <!---     <p> COLORES ACTIVOS seleccione:</p>
                      <% for (i=0; i < colors.length; i++){ %>

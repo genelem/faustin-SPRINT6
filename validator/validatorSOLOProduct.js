@@ -139,10 +139,11 @@ const validatorSOLOP = {
             .withMessage("Debe Completar el AÑO/Colección  ") 
        //falta tema color 
           
-    ],
-    storeRtos:[
+    ]
+    //*** no valida campos de remitos porque es opcional */
+    /*storeRtos:[
         //recibe array de colores.remitos cantidades
-        check("cantidad")
+        check("idColor")
         .custom(function(value){
             console.log("en validator storeRtos")  
             console.log(value + " es el custom ")  
@@ -157,7 +158,7 @@ const validatorSOLOP = {
         })
         
           
-    ]
+    ]*/
 }
 
 module.exports = validatorSOLOP

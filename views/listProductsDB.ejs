@@ -37,7 +37,7 @@
                     <ul>
                         <% for( let i = 0; i < array.length; i++ ) { %>
                             <li><a href="/bproduct/detailOneDB/<%= array[i].id %>">
-                            <spam>ID:<%= array[i].id %> <spam>Decripción:<%= array[i].name %> Imagen: <img id="archivo1" src="/images/<%=array[i].image_ppal %>"></spam></spam></a> 
+                            <spam>Registro:<%= array[i].id %> <spam><%= array[i].name %><img id="archivo1" src="/images/<%=array[i].image_ppal %>"></spam></spam></a> 
                             
                             </li> 
                              
@@ -51,7 +51,7 @@
                         <a href="#close" title="Close" class="close">X</a>
                         <h2>IMPORTANTE</h2>
                         <p> Clickee el tipo de producto
-                            que desea dar de BAJA 
+                            que desea MODIFICAR/DAR DE BAJA 
                              </p>
                         <p> Luego se le solicitará CONFIRMACIÓN</p>                    
                          

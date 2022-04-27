@@ -1,0 +1,14 @@
+main div.seleccionColorDB{
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        align-items: flex-start;
+    }
+
+main div.seleccionColorDB p{
+    text-align: center;
+}
+#mensajeRestriccion{
+    color:crimson;
+    font-weight: bold;
+}

@@ -86,7 +86,8 @@ const controller = {
         id: req.params.id,
       },
     }).then(function () {
-      res.send("baja existosa");
+      let mensaje="baja exitosa"
+      res.render("mensajesDB",mensaje);
     });
   },
   altaYear: (req, res) => {
@@ -162,7 +163,8 @@ const controller = {
         id: req.params.id,
       },
     }).then(function () {
-      res.send("baja existosa");
+      let mensaje = "baja exitosa"
+      res.render("mensajesDB",mensaje);
     });
   },
 
@@ -238,7 +240,8 @@ const controller = {
         id: req.params.id,
       },
     }).then(function () {
-      res.send("baja existosa");
+      let mensaje = "baja existosa"
+      res.send("mensajesDB",mensaje);
     });
   },
   Colection: (req, res) => {
@@ -264,7 +267,8 @@ const controller = {
         id: req.params.id,
       },
     }).then(function () {
-      res.send("baja existosa");
+      let mensaje= "baja exitosa"
+      res.render("mensajesDB",mensaje);
     });
   },
   altaColor: (req, res) => {
@@ -294,7 +298,6 @@ const controller = {
       },
     ];
     const errors = validationResult(req);
-    console.log("la lenght de errores es : " + errors.errors.length);
 
     //
     db.ProductColor.findAll({
@@ -307,12 +310,10 @@ const controller = {
           array: productColors,
         });
       } else {
-        console.log("está en else de alta " + req.body.name);
         let newColor = {
           color_name: req.body.name,
           color_image: req.body.image,
         };
-        console.log(newColor.color_name + "es el req.body");
         db.ProductColor.create(newColor);
         res.render("enlacesDB");
       } // termina el IF
@@ -341,7 +342,8 @@ const controller = {
         id: req.params.id,
       },
     }).then(function () {
-      res.send("baja existosa");
+      let mensaje= "baja exitosa"
+      res.render("mensajesDB",mensaje);
     });
   },
   altaProduct: (req, res) => {
@@ -375,13 +377,7 @@ const controller = {
   },
   creaProduct: (req, res) => {
     const errors = validationResult(req);
-    console.log("la lenght de errores es : " + errors.errors.length);
-    console.log("en body CreaProduct colection es : " + req.body.colection);
-    console.log("en body CreaProduct type es : " + req.body.tipo);
-    console.log("en body CreaProduct año es : " + req.body.anio);
-    console.log("en body CreaProduct color es : " + req.body.colores);
-    console.log("en body el dto es : " + req.body.descuento);
-
+    
     if (errors.errors.length > 1) {
       /*ver esto porque hay un error que no encuentro y puse 1 */
 
@@ -408,11 +404,7 @@ const controller = {
       });
     }
     if (errors.errors.length == 1) {
-      console.log("está en else de alta " + req.body.name);
 
-      // es temporal este if hasta que arregle el view
-      console.log("EL BODY COLORES ES :");
-      console.log(req.body.colores);
       db.Product.create({
         name: req.body.name,
         description: req.body.description,
@@ -437,7 +429,8 @@ const controller = {
           return product.setColoresDB(req.body.colores);
         })
         .then(function () {
-          res.send("alta exitosa ");
+          let mensaje ="alta exitosa"
+          res.render("mensajesDB",mensaje);
         });
     }
 
@@ -554,10 +547,11 @@ const controller = {
           }
         )
           .then(function () {
-            return db.User.findByPk(req.params.id);
+            return db.Product.findByPk(req.params.id);
           })
           .then(function () {
-            return res.send("modificación exitosa");
+            let mensaje = "modificación exitosa"
+            return res.render("mensajesDB",mensaje);
           });
       }
     }
@@ -578,7 +572,8 @@ const controller = {
     //llamo a la tabla pivot
     //elimino todos los registros de la tabla pivot que tengan el id
     if(req.body.params <12){
-      res.send("NO PUEDE DAR DE BAJA ESTE PRODUCTO-DESARROLLO")
+      let mensaje = "NO PUEDE DAR DE BAJA ESTE PRODUCTO-DESARROLLO"
+      res.render("mensajesDB",mensaje)
     }
     db.ProductColorProduct.destroy({
       where: {
@@ -594,7 +589,8 @@ const controller = {
         });
       })
       .then(function () {
-        return res.send("baja existosa");
+        let mensaje ="baja exitosa"
+        return res.render("mensajesDB",mensaje);
       });
   },
   listarProductosRemito: (req, res) => {
@@ -627,32 +623,36 @@ const controller = {
     
     Promise.all([producto,coloresProd]).then(function ([product,productColorProducts]) {
       //return  res.json(product)
-      //return res.json(productColorProducts)
+     // return res.json(productColorProducts)
       return res.render("remitosDB", {
         producto: product,coloresProd:productColorProducts
       });
     });
   },
   storeRemitos: (req, res) => {
-    console.log("en storeRemitos");
-    console.log(req.body);
     const errors = validationResult(req);
     if (req.body)  {
 
-      console.log(req.body)
-
-      for(i=0;i<req.body.idColor.length;i++){
-        db.ProductColorProduct.update({
-          quantity : req.body.cantidad[i],
+      for(i=0;i<req.body.idRegistro.length;i++){
+        console.log("el registro a actualizar es = "+ req.body.idRegistro[i])
+        db.ProductColorProduct.findByPk(req.body.idRegistro[i])
+        
+        .then(function(productColorProduct){
+          return res.json(producColorProduct)
+          let suma = productColorProduct.quantity + req.body.cantidad[i]; 
+      
+          db.ProductColorProduct.update({
+          quantity : suma,
           dispach :req.body.remito[i]
-        },{
-        where : {
-          id :req.body.idColor[i]
+          },{
+          where : {
+           id :req.body.idRegistro[i]
           }
       }).then(function(){
-        return db.ProductColorProduct.findByPk(req.body.idColor[i])
-      })
-      }
+        return db.ProductColorProduct.findByPk(req.body.idRegistro[i])
+      }) } ) 
+        
+      } // el del for
     }else{
       res.send("ver que pasó ")
     }
@@ -731,17 +731,17 @@ detail: (req, res) => {
 /*irCarrito: (req,res) => {
    res.render("irCarrito") */
 },
-comprar : (res,send)=>{
-  if ( req.session.usuarioLogueado) {
-    db.UserTaxe.findByPk(req.session.usuarioLogueado.id)
+comprar : (req,res)=> {
+ 
+ if (req.session.usuarioLogueado) {
+    db.UserTaxe.findByPk(req.session.usuarioLogueado)
     .then(function(userTax){
       if ( !userTax){
-        req.session.usuarioLogueado.cproduct= req.params.id
         res.render("formularioTaxes")
       }else{
-        res.send("seguir con la compra")
+        req.session.usuarioLogueado.cprod = id.req.params
+        res.send("ver tema de sumar datos con promise")
       }
-
     })
   }else {
     res.render("loginDB")
@@ -761,7 +761,8 @@ prodPorType: (req,res) => {
       //return res.json(products)
       res.render("listProductGRALDB",{array:products,mensaje:mensaje})
     }else{
-      res.send("no hay productos disponibles")
+      let mensaje = "no hay productos disponibles"
+      res.render("mensajesDB",mensaje)
     }
   })
   
@@ -777,7 +778,11 @@ list: (req,res) => {
    res.render("listProductos",{products:productsFound})
 },
 probar:(req,res) => {
-  let producto = db.Product.findAll({
+ console.log("en probar ver que hay en req.session")
+ console.log("el id" + req.session.usuarioLogueado)
+ console.log("el producto"+ req.session.usuarioLogueado)
+
+ /* let producto = db.Product.findAll({
     where: {
       id_type: "1",
     },
@@ -806,8 +811,10 @@ probar:(req,res) => {
    //   errorsProd: errors.mapped(),
    // }
    // );
-  }
-)}
- 
+  }*/
+//)}
 }
+}
+ 
+
 module.exports = controller;

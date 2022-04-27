@@ -18,7 +18,7 @@
        
     </head>
     
-    <body class="body1">
+    <body>
         <%- include('partials/header') %>
    
         <main>
@@ -61,9 +61,9 @@
                 </div>                      
                 </div>
             </nav>  
-        <div class="cajaGrande">
+        <!--<div class="cajaGrande"> -->
                
-                <div class="productValores"> 
+            <div class="productValores"> 
                 <form action="/bproduct/compra/<%= producto.id %>" method="GET">           
                     <div class="otrosValores">
                         <h2>REALIZAR COMPRA </h2>
@@ -82,8 +82,6 @@
                         <p><label id="" for ="descuento">Sobre Precio se aplicará Descuento :<%= producto.dto %> %</label>
                         <input class="noSeVe" placeholder="" type="number" name="descuento" id="user" value="<%= producto.dto %>"></p> 
                     </div>
-                   
-                <div>                 
                  <br/>                       
                         <div class="seleccionColor">
                             <h2>Elija Color </h2>
@@ -95,16 +93,16 @@
                             <div class="colores">
                             <% for (i=0 ; i< producto.coloresDB.length; i++){ %> 
                             <!--<p><img id="colorList" src="public/images/<=% colors[i].color_image %>"></p> -->
-                            <label for="colores"><%= producto.coloresDB[i].color_name %>
-                            <input id="" type="checkbox" name="colores" class="" value="<%= producto.coloresDB[i].id %>">
-                             </label>
+                          <!---  <label for="colores"><%= producto.coloresDB[i].color_name %> -->
+                        <P><%= producto.coloresDB[i].color_name %></P>
+                        <p><input id="" type="checkbox" name="colores" class="" value="<%= producto.coloresDB[i].id %>"></p>
+                         
                             <br/>     
                             <% } %>
                             </div>
-                           
                         </div>
-
-            </div><!--cierro cajaGrande-->       
+                    </div>
+                </div>    
                 <div id="modal2" class="modalmask">            
                     <div class="modalbox rotate">
                         <a href="#close" title="Close" class="close">X</a>
@@ -126,18 +124,25 @@
                           </p> 
                         
                     </div>
-                </div>        
-                <div class="submitMasEnviar">  
+                </div>
+                  
+                <div class="submitMasEnviarDeT">  
                     <a href="#modal2">Importante<i class="fas fa-user-edit"></i></a>        
                     <input type="submit" name="submit" id="enviar" value="COMPRAR "> </input>
                     <br/>
-                    
-                    <a href="/listarProdType/<%= producto.id %>" id="vuelvo">VER PRODUCTOS SIMILARES</a>
+                    <br/>
+                <a href="/bproduct/listarProdType/<%= producto.id %>" id="vuelvoSIM">VER PRODUCTOS SIMILARES</a>
+                <br/>
+                <br/>
+                <p><a href="/" id="vuelvo">Volver a Pagina Principal</a></p>
+                   
                 </div> 
-
+          
                 <div class= "closeMain" >
-                <a href="/" id="vuelvo">Volver a Pagina Principal</a>
+                <br/>
+                
                 </div>
+            </div>
             </form> 
         </main>
         <footer>

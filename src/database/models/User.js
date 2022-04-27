@@ -56,9 +56,16 @@ module.exports = (sequelize, dataTypes) => {
             timestamps: false
         }) 
      
-        User.belongsTo(models.UserCategory,{// -> Movies es el valor de alias en movie.js
+        User.belongsTo(models.UserCategory,{
+                as: "pCategory",// -> Movies es el valor de alias en movie.js
                 foreignKey: 'id_category'       
          }) 
+         
+        User.belongsTo(models.UserTax,{
+            as: "bTax",// 
+            foreignKey: 'id_user'       
+     }) 
+
         }
        
 

@@ -44,13 +44,14 @@ router.post("/bajaProducto/:id", bproductController.storeDelete)
 // cargar cantidades de producto-color
 router.get("/listRtos",bproductController.listarProductosRemito)
 router.get("/remitos/:id", bproductController.cargaRemitos)
-router.post("/remitos/:id", bproductController.storeRemitos)
+//no valida remitos porque es opcional
+router.post("/remitos/:id",bproductController.storeRemitos)
 // armo esta ruta para probar el json
 router.get("/probar",bproductController.probar)
 router.get("/listarProdType/:id",bproductController.prodPorType)
 // proceso de compra 
 router.get("/detalle/:id",bproductController.detail)
-router.get("/compra/:id",bproductController.comprar)
+router.get("/compra/:id",authMiddle,bproductController.comprar)
 
 
 
