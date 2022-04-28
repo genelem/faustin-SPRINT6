@@ -44,8 +44,8 @@ router.post("/cambioPass/:id",validatorUserDb.cambioP,buserController.processCam
 router.get("/list",authMiddle,buserController.list);
 router.get("/detailOne/:id",buserController.detailOne)
 router.post("/updateOne/:id",validatorUserDb.updateUser,buserController.storeUpdate)
-//*** datos IMPOSITIVOS Y TARJETAS  */
-router.get("/userTaxes",buserController.regTaxes)
+//*** datos IMPOSITIVOS Y TARJETAS taxes lo proceso desde bproducController */
+//router.put("/userTaxes",buserController.regTaxes)
 //router.get("/cerrarSesion",userController.ConfirmLogout)
 //router.post("/cerrarSesion",userController.logout)
 

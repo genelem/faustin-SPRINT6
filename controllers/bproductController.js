@@ -668,22 +668,44 @@ const controller = {
       },
       include: ["pType", "pYear", "pColection", "coloresDB"],
     }).then(function (product) {
+      if(req.session.usuarioLogueado.id !== 0){
+        req.session.usuarioLogueado.cprod = req.params
+      }
       //return res.json(product)
       res.render("detallProdNuevoDB", { producto: product });
+      // ver que pasa con el params
     });
   },
   comprar: (req, res) => {
     if (req.session.usuarioLogueado) {
-      db.UserTaxe.findOne({
+      //res.send(req.session.usuarioLogueado.id)
+  
+      db.UserTax.findOne({
         where :{
-          id_user : req.session.usuarioLogueado.id
+         id_user:req.session.usuarioLogueado.id
         }
       }).then(function (
         userTax
       ) {
         if (!userTax) {
-          res.render("formularioTaxes");
+          req.session.usuarioLogueado.cprod= req.params;
+          // ver como va el tema del cprod
+          res.render("formularioTaxesDB");
         } else {
+          // ir a crear item-factura
+          db.InvoiceItem.create({
+            // ver luego el tema de nro de factura
+
+            id_product:req.params.id,
+            quantity : req.body.cantidadProducto,
+            item_u_price : req.body.precio,
+            // falta calcular el precio con descuento
+            id_user : req.session.usuarioLogueado.id,
+
+          }).then (function(){
+            //ver que hace falta en carrito
+            res.render("carritoDB")
+          })
           req.session.usuarioLogueado.cprod = req.params;  
         }
       });
@@ -691,6 +713,37 @@ const controller = {
       res.render("loginDB");
     }
   },
+  storeTaxes :(req,res) =>{
+    const errors = validationResult(req);
+    if(errors.erros.length > 0){
+      res.render("formularioTaxesDB",{errosProd:erros})
+    }else{
+      db.UserTax.create({
+        id_user: req.session.usuarioLogueado.id,
+        tax_condition :req.body.condicion,
+        cuil : req.body.cuil,
+        cuit : req.body.cuit,
+        ingresosBrutos: req.body.brutos,
+        retGanancias : req.body.ganancias
+      })
+      .then(function(){
+        if(req.session.usuarioLogueado.cprod !== 0){
+          db.Product.findOne({
+            where: {
+              id: req.session.usuarioLogueado.cprod,
+            },
+            include: ["pType", "pYear", "pColection", "coloresDB"],
+          }).then(function (product) {
+            //return res.json(product)
+            res.render("detallProdNuevoDB", { producto: product });
+          });
+        }
+          res.redirect("/")
+        } )
+      
+      } // fin de else
+    },
+
   prodPorType: (req, res) => {
     db.Product.findAll({
       where: {

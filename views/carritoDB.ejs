@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/carritoDeCompras.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/modalSimple.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <!--<script src="https://kit.fontawesome.com/812a77d5cc.js" crossorigin="anonymous"></script>-->
+    <link rel="https://fontawesome.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+   
+    <title>Carrito de Compras</title>
+</head>
+<body>
+    <!---
+    <header class="header">
+        <div class="cointainer, logo-nav-container">
+            <div class="barra">
+                <input type="text" id="searchterm" placeholder="¿Que estas buscando?" class="barra1">
+            </div>
+            <nav class="Faustine">
+                <h3> Faustine </h3>
+            </nav>
+            <nav class="imgs">
+            
+            <button><img width="50" height="50" src="images/cuadrado.jpg"></button>
+            <button><img width="50" height="50" src="images/bag.jpg"></button>
+                
+            </nav>
+
+        </div>
+    </header>-->
+    <%- include('partials/header') %>
+<main>
+    <div class="tituloPagina">
+    <!--<p class="tituloPagina"><img width="40" height="40" class="logoCarrito" src="/images/logoCarritoDeCompras.png" alt= "Cartera"> -->
+        <!--<p id="logoCarrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p> -->
+        <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>       
+        <!--<h1>Carrito de Compras</h1></header>-->
+    </div>
+    <section class="productosEnCarrito">
+        <div class="botonTriangulo"><button class="triangulo1"></button></div>
+        <article class="primerProducto">
+            <div><img width="320" height="320" src="/images/bolsoLuoisSinFondo.png" alt= "Cartera"></div>
+            <div><b><label for="producto1" class="titulosDeProductos">Cartera</label></b></div>
+            <div class="botonAgregarEliminar"><input type= "button" name="producto1" id="producto1" value="+ 1 -" class="botonesAgregado"></div>
+        </article>
+        <article class="segundoProducto">
+            <div><img width="320" height="320" src="/images/bandoleraRojaSinFondo.png" alt= "Bolso"></div>
+            <div><b><label for="producto2" class="titulosdeProductos">Bolso</label></b></div>
+            <div class="botonAgregarEliminar"><input type= "button" name="producto2" id="producto2" value="+ 1 -" class="botonesAgregado"></div>
+        </article>
+        <article class="tercerProducto">
+            <div><img width="320" height="320" src="/images/cartera 2SinFondo.png" alt= "Riñonera"></div>
+            <div><b><label for="producto3" class="titulosDeProductos">Riñonera</label></b></div>
+            <div class="botonAgregarEliminar"><input type= "button" name="producto3" id="producto3" value="+ 1 -" class="botonesAgregado"></div>
+        </article>
+        <div class="botonTriangulo"><button class="triangulo2"></button></div>
+
+    </section>
+
+    <div class="botonesParaPasar">
+        <div><button class="seleccionarVentana"></button></div>
+        <div><button class="seleccionarVentana"></button></div>
+        <div><button class="seleccionarVentana"></button></div>
+    </div>
+
+    <section class="finalizarCompra">
+        <div class="totalEnvio">             
+                <p><a href="#modal2">Importante<i class="fas fa-user-edit"></i></p>              
+                <h3 class="totalEnvio2">Total Compra: <spam> $ 55.000 </spam><h3</div>            
+        </div>
+        <div class="finalizar"> 
+            <!--- <p> <button type="submit" class="crearCuentaBoton">CREAR CUENTA</button> -->
+                <a href="/" type="submit" id="finalizarHref">SEGUIR COMPRANDO </a>
+                <a href="/product/finCarrito" type="submit" id="finalizarHref">FINALIZAR COMPRA </a>                 
+                <br/>                
+                <a href="/" id="vuelvo">Volver a la Pagina Principal</a>
+             
+         </div>
+        <!--<div class="direccEntrega">
+            <div class="direccEntrega2"><h3>Direccion de entrega</h4></div>
+            <div class="direccEntrega3">Lorem ipsum dolor sit arnet</div>
+        </div>-->
+        <!--<div class="botonComprar">
+            <input type="button" value="COMPRAR" class="botonDeComprar">
+        </div>-->
+    </section>
+    <div id="modal2" class="modalmask">            
+        <div class="modalbox rotate">
+            <a href="#close" title="Close" class="close">X</a>
+            <h2>RECUERDA</h2>
+            <p> El monto "TOTAL COMPRA" NO INCLUYE : 
+                    1) Costo de envío ( puede optar por envío Premiun /Standar
+                    2) Costos de financiación (según medio de pago)
+                Cuando concluya de elegir productos,podrá definir entrega/modo pago
+                 y le será informado exactamente el monto de la operación </p>       
+        </div>
+    </div>
+</main>
+    <footer>
+        <%- include('partials/footer') %>
+        
+    </footer>
+
+</body>
+</html>

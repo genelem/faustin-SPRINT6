@@ -5,7 +5,12 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.BIGINT(10).UNSIGNED,
             primaryKey: true,
             autoIncrement: true
-        },      
+        },   
+        id_user: {
+            type: dataTypes.BIGINT(10).UNSIGNED,
+            allowNull: true
+            
+        },   
         tax_condition: {
             type: dataTypes.STRING(100),
             allowNull: true

@@ -19,7 +19,8 @@
 
     <section class="formularioParaRegistro">
         
-        <form action="/busers/regTaxes?_method=PUT"  method="POST" >
+        <form action="/bproduct/taxes?_method=PUT"  method="POST" >
+            <!--<input type="" name="idUser" value = "">-->
             <p><label id="" for ="usuario" class="todosLosTitulos">Condición Impositiva</label>
                 <br/>
                 <input type= "checkbox" class="todosLosBotones" placeholder="" type="text"  name="condicion" value="Responsabe Inscripto" ><label>Responsable Inscripto</label></p>
@@ -50,7 +51,7 @@
                 <br/>   
                 
                 <p><label id="" for ="Ganancias" class="todosLosTitulos">Retención Ganancias</label>
-                <input class="todosLosBotones" placeholder="" type="password"  name="Ret Ganancias"></p>
+                <input class="todosLosBotones" placeholder="" type="text"  name="ganancias"></p>
                 <% if(locals.errorsReg && locals.errorsReg.contraseña){ %>
                     <span id="errorMsge" > <%= errorsReg.contraseña.msg  %> </span>
                   <% } %> 
