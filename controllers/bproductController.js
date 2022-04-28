@@ -756,7 +756,6 @@ comprar : (req,res)=> {
   }
 },
 prodPorType: (req,res) => {
-  console.log(req.params.id + "es el paras en listar type")
   db.Product.findAll({
     where: {
       id_type: req.params.id
@@ -782,8 +781,7 @@ mostrarOfertas: (req,res) =>{
   })
   .then(function(productSales){
     //return res.json(productSales)
-    if(typeof(productSales) ==!undefined){
-      console.log("en mostrar ofertas entra por (productSales)")
+      if(productSales){
       res.render("ofertasDB",{produSales:productSales})
     }
     else{
@@ -796,11 +794,12 @@ mostrarOfertas: (req,res) =>{
 updateOfertas: (req,res) =>{
  
   let produSales = db.ProductSale.findAll({
-    include: ["saleP"]
+    include:["saleP"]
   })
   let productos = db.Product.findAll()
   Promise.all([produSales,productos]).then(function ([productSales,products]) {
-    if ((typeof(productSales) ==!undefined) ){
+   // return res.json(productSales)
+    if (productSales){
     //return  res.json(products)  
     return res.render("updateOfertas", {
       productos: products,produSales:productSales
@@ -823,30 +822,40 @@ storeOfertas: (req,res) =>{
     
   if (errors.errors.length > 0) {
    
-  let prodSales = db.ProductSale.findAll({
-    include: ["saleP"]
-  })
-  let productos = db.Product.findaAll()
-  Promise.all([prodSales,productos]).then(function ([productSales,products]) {
-    //return  res.json(productSales)
-   // return res.json(productColorProducts)
-    return res.render("updateOfertas", {
-      productos: products,prodSales:prodSales,errorsProd:errors.mapped()
+      let prodSales = db.ProductSale.findAll({
+       include: ["saleP"]
+      })
+      let productos = db.Product.findAll()
+      Promise.all([prodSales,productos]).then(function ([productSales,products]) {
+  
+      if ((typeof(productSales) ==!undefined) ){
+      return res.render("updateOfertas", {
+      productos: products,produSales:productSales,errorsProd:errors.mapped()
     });
-  });
-}else {
- 
-  for (i=0 ;i< req.body.producto;i++){
-    db.ProductSale.bulkCreate({
-      dtoSale: req.body.descuento,
-      id_product : req.body.producto[i]
-    })
-    .then(function(productSale){
-      return(productSale)
+    }else // en else de errores
+    {
+    console.log("entró por else en updateOfertas")
+    let produSales =[];
+    let saleP=[];
+    return res.render("updateOfertas",{
+      productos:products,produSales:produSales,saleP:saleP,errorsProd:errors.mapped()
     })
   }
- 
-    let mensaje ="alta exitosa"
+  });
+    
+}else {
+
+  for (i=0 ;i< req.body.producto.length;i++){
+    console.log("está en for de ofertas")
+    db.ProductSale.update({
+      dtoSale: req.body.descuento,
+      id_product : req.body.producto[i]},
+     { where:{
+        id :i
+      }  
+    })  
+  }
+    let mensaje ="SE HA MOIFICADO OFERTA SEMANAL"
     res.render("mensajesDB",{mensaje:mensaje});
   ;
   } // fin del else

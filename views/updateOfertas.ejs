@@ -22,7 +22,7 @@
         <%- include('partials/header') %>
 <main>
         <div class="altaProductLogo">
-            <h3> LISTADO DE PRODUCTOS  </h3>
+            <h3> OFERTAS SEMANALES  </h3>
          <ul>      
             <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
             <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
@@ -30,26 +30,27 @@
         </div>
    
                 <form action="/bproduct/updateOfertas?_method=PUT" method="POST" > 
-                
-                    <div class="descriptionProduct">
-                    <% for (i=0 ; i< saleP.length ; i++) {%>
-                        <p><%= produSales[i].id %></p>
-                        <spam><img id="archivo1" src="/images/<%=saleP.productos[i].image_ppal %>"></spam>
+                    <h3>La OFERTA SEMANAL actual es:</h3>
+                    <h3>con DESCUENTO <%= produSales[0].dtoSale %> %</h3>
+                    <p>Si NO desea modificar VUELVA A PAGINA PPAL</p>
+                    <div class="descriptionProductSale">
+                       
+                    <% for (i=0 ; i< produSales.length ; i++) {%>
+                        
+                        <spam><img id="archivo1" src="/images/<%=produSales[i].saleP.image_ppal %>"></spam>
                     <% } %>
                         <p><%= produSales.dtoSale %></p>       
                         <br/>
                     </div>  
                                 
                     <p > Elija CUATRO(4) PRODUCTOS PARA OFERTAR ESTA SEMANA </p>
-                    <div class = "listadoEnBase">
+                   <!--<div class = "listadoEnBase"> -->
 
-                        <div class="seleccionAnio">
+                        <div class="seleccionOfertas">
                             <h3>Productos Disponibles</h3>
  
                         <% for( let i = 0; i < productos.length; i++ ) { %>
-                            <input type="checkbox" name="producto" id="talles" value="<%= productos[i].id %>"><label><%= productos[i].name %></label>    
-                            <spam>Registro:<%= productos[i].id %> <spam><%=productos[i].name %><img id="archivo1" src="/images/<%=productos[i].image_ppal %>"></spam> 
-                            <br/> 
+                            <p><input type="checkbox" name="producto" id="talles" value="<%= productos[i].id %>"><%= productos[i].name %> </p>    
                         <% } %>
                         <% if(locals.errorsProd && locals.errorsProd.producto){ %>
                             <span id="errorMsge" > <%= errorsProd.producto.msg  %> </span>
@@ -60,16 +61,17 @@
                             <% if(locals.errorsProd && locals.errorsProd.descuento){ %>
                                 <span id="errorMsge" > <%= errorsProd.descuento.msg  %> </span>
                             <% } %> 
-                    </div>                
+                        </div>                
                 
                 <div id="modal2" class="modalmask">            
                     <div class="modalbox rotate">
                         <a href="#close" title="Close" class="close">X</a>
                         <h2>IMPORTANTE</h2>
-                        <p> Clickee el tipo de producto
-                            que desea MODIFICAR/DAR DE BAJA 
+                        <p> SI MODIFICA OFERTA SEMANAL deberá 
+                            escoger nuevamente 4 productos e informar
+                            el DESCUENTO ofrecido 
                              </p>
-                        <p> Luego se le solicitará CONFIRMACIÓN</p>                    
+                                           
                          
                         </div>
                 </div>
