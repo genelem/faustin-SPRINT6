@@ -139,7 +139,24 @@ const validatorSOLOP = {
             .withMessage("Debe Completar el AÑO/Colección  ") 
        //falta tema color 
           
-    ]
+    ],
+    validaSale:[
+        check("descuento")
+            .notEmpty()
+            .withMessage("Debe Ingresar Descuento"),
+        check("producto")
+           .notEmpty() 
+           .withMessage("Debe Seleccionar 4 productos para OFERTAR")
+           .bail()   
+            .custom(function(value){
+                if(value.length !== 4){
+                
+                    throw new Error("DEBE ELEGIR 4 PRODUCTOS");
+                }
+                //sino devuelvo true
+                return true
+            })
+        ]
     //*** no valida campos de remitos porque es opcional */
     /*storeRtos:[
         //recibe array de colores.remitos cantidades

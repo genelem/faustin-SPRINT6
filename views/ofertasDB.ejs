@@ -66,11 +66,11 @@
                 <!--<a href="#" class="menu-item blue"> <i class="fa fa-anchor"></i> </a>-->
                <!--- <a href="#" class="menu-item blue"><img src="/img/remeraSupermanSinFondo.png"></a>-->
                 <!--<a href="#" class="menu-item green"><i class="fa fa-coffee"></i> </a>-->
-                <a href="detalleDeProducto" class="menu-item green"><img src="/images/carteraLouisRosa1.SinFondo.png"></a>
-                <a href="detalleDeProducto" class="menu-item red"><img id="imgRed" src="/images/bandoleraBeigeSinFondo.png"></a>
-                <a href="detalleDeProducto" class="menu-item purple"><img id="imgGrande" src="/images/gucci.1.SinFondo.png"></a>
+                <a href="/bproduct/detalle/<%= prodSales.id_product %>" class="menu-item green"><img src="/images/<%= prodSales.saleP[1].image_ppal %> "></a>
+                <a href="/bproduct/detalle/<%= prodSales.id_product %>" class="menu-item red"><img id="imgRed" src="/images/<%= prodSales.saleP[2].image_ppal %>"></a>
+                <a href="/bproduct/detalle/<%= prodSales.id_product %>" class="menu-item purple"><img id="imgGrande" src="/images/<%= prodSales.saleP[3].image_ppal %>"></a>
                 <!--<a href="#" class="menu-item orange"> <i class="fa fa-star"></i> </a>-->
-                <a href="detalleDeProducto" class="menu-item orange"><img id="imgOrange" src="/images/bolsoFaustineSinFondo.png"></a>
+                <a href="/bproduct/detalle/<%= prodSales.id_product %>" class="menu-item orange"><img id="imgOrange" src="/images/<%= prodSales.saleP[4].image_ppal %>"></a>
                 <a href="#" class="menu-item lightblue"> <i class="fa fa-diamond"></i> </a>
             </nav>
             </div>
@@ -84,4 +84,4 @@
             </main>
             </body>
             
-        </html>          
+        </html>

@@ -87,7 +87,7 @@ const controller = {
       },
     }).then(function () {
       let mensaje="baja exitosa"
-      res.render("mensajesDB",mensaje);
+      res.render("mensajesDB",{mensaje:mensaje});
     });
   },
   altaYear: (req, res) => {
@@ -164,8 +164,9 @@ const controller = {
       },
     }).then(function () {
       let mensaje = "baja exitosa"
-      res.render("mensajesDB",mensaje);
+      res.render("mensajesDB",{mensaje:mensaje});
     });
+  
   },
 
   altaColection: (req, res) => {
@@ -241,7 +242,7 @@ const controller = {
       },
     }).then(function () {
       let mensaje = "baja existosa"
-      res.send("mensajesDB",mensaje);
+      res.send("mensajesDB",{mensaje:mensaje});
     });
   },
   Colection: (req, res) => {
@@ -268,7 +269,7 @@ const controller = {
       },
     }).then(function () {
       let mensaje= "baja exitosa"
-      res.render("mensajesDB",mensaje);
+      res.render("mensajesDB",{mensaje:mensaje});
     });
   },
   altaColor: (req, res) => {
@@ -343,7 +344,7 @@ const controller = {
       },
     }).then(function () {
       let mensaje= "baja exitosa"
-      res.render("mensajesDB",mensaje);
+      res.render("mensajesDB",{mensaje:mensaje});
     });
   },
   altaProduct: (req, res) => {
@@ -430,7 +431,7 @@ const controller = {
         })
         .then(function () {
           let mensaje ="alta exitosa"
-          res.render("mensajesDB",mensaje);
+          res.render("mensajesDB",{mensaje:mensaje});
         });
     }
 
@@ -551,7 +552,7 @@ const controller = {
           })
           .then(function () {
             let mensaje = "modificación exitosa"
-            return res.render("mensajesDB",mensaje);
+            return res.render("mensajesDB",{mensaje:mensaje});
           });
       }
     }
@@ -573,7 +574,7 @@ const controller = {
     //elimino todos los registros de la tabla pivot que tengan el id
     if(req.body.params <12){
       let mensaje = "NO PUEDE DAR DE BAJA ESTE PRODUCTO-DESARROLLO"
-      res.render("mensajesDB",mensaje)
+      res.render("mensajesDB",{mensaje:mensaje})
     }
     db.ProductColorProduct.destroy({
       where: {
@@ -590,7 +591,7 @@ const controller = {
       })
       .then(function () {
         let mensaje ="baja exitosa"
-        return res.render("mensajesDB",mensaje);
+        return res.render("mensajesDB",{mensaje:mensaje});
       });
   },
   listarProductosRemito: (req, res) => {
@@ -634,11 +635,18 @@ const controller = {
     if (req.body)  {
 
       for(i=0;i<req.body.idRegistro.length;i++){
+        let suma = 0
+        db.ProductColorProduct.findOne({
+          where : {
+            id:req.body.idRegistro[i]
+          }, 
+        }
+          )
+          suma = quantity
         console.log("el registro a actualizar es = "+ req.body.idRegistro[i])
-        db.ProductColorProduct.findByPk(req.body.idRegistro[i])
-        
+       // db.ProductColorProduct.findByPk(req.body.idRegistro[i])
         .then(function(productColorProduct){
-          return res.json(producColorProduct)
+          //return res.json(producColorProduct)
           let suma = productColorProduct.quantity + req.body.cantidad[i]; 
       
           db.ProductColorProduct.update({
@@ -762,11 +770,89 @@ prodPorType: (req,res) => {
       res.render("listProductGRALDB",{array:products,mensaje:mensaje})
     }else{
       let mensaje = "no hay productos disponibles"
-      res.render("mensajesDB",mensaje)
+      res.render("mensajesDB",{mensaje:mensaje})
     }
   })
   
 },
+
+mostrarOfertas: (req,res) =>{
+  db.ProductSale.findAll({
+    include: ["saleP"]
+  })
+  .then(function(productSales){
+    //return res.json(productSales)
+    if(typeof(productSales) ==!undefined){
+      console.log("en mostrar ofertas entra por (productSales)")
+      res.render("ofertasDB",{produSales:productSales})
+    }
+    else{
+      let mensaje = "NO HAY OFERTAS DISPONIBLES "
+      res.render("mensajesDB",{mensaje:mensaje})
+    }
+  })
+},
+
+updateOfertas: (req,res) =>{
+ 
+  let produSales = db.ProductSale.findAll({
+    include: ["saleP"]
+  })
+  let productos = db.Product.findAll()
+  Promise.all([produSales,productos]).then(function ([productSales,products]) {
+    if ((typeof(productSales) ==!undefined) ){
+    //return  res.json(products)  
+    return res.render("updateOfertas", {
+      productos: products,produSales:productSales
+    });
+  }else{
+    console.log("entró por else en updateOfertas")
+    let produSales =[];
+    let saleP=[];
+    return res.render("updateOfertas",{
+      productos:products,produSales:produSales,saleP:saleP
+    })
+  }
+  });
+
+  
+},
+storeOfertas: (req,res) =>{
+
+  const errors = validationResult(req);
+    
+  if (errors.errors.length > 0) {
+   
+  let prodSales = db.ProductSale.findAll({
+    include: ["saleP"]
+  })
+  let productos = db.Product.findaAll()
+  Promise.all([prodSales,productos]).then(function ([productSales,products]) {
+    //return  res.json(productSales)
+   // return res.json(productColorProducts)
+    return res.render("updateOfertas", {
+      productos: products,prodSales:prodSales,errorsProd:errors.mapped()
+    });
+  });
+}else {
+ 
+  for (i=0 ;i< req.body.producto;i++){
+    db.ProductSale.bulkCreate({
+      dtoSale: req.body.descuento,
+      id_product : req.body.producto[i]
+    })
+    .then(function(productSale){
+      return(productSale)
+    })
+  }
+ 
+    let mensaje ="alta exitosa"
+    res.render("mensajesDB",{mensaje:mensaje});
+  ;
+  } // fin del else
+
+},
+
 carrito: (req,res) => {
    res.render("carritoDeCompras")
 },
