@@ -10,12 +10,9 @@ const { redirect } = require("express/lib/response");
 const db = require("../src/database/models");
 const sequelize = db.sequelize;
 
-//const userModel = modelCrud("userJson");
-// función validar Contraseña
+
 function validarContraseña(userID, bodycontraseña) {
-  // con idUsuario  verifica contraseña
   let contraseñaGuardada = userID.password;
-  console.log(contraseñaGuardada + "es contraseña guardada");
   return bcrypt.compareSync(bodycontraseña, contraseñaGuardada);
 }
 //************************** */
@@ -110,12 +107,10 @@ const controller = {
         console.log("entró en IF usuario luego de promesa");
         console.log(req.body.contraseña);
         let bodycontraseña = req.body.contraseña;
-        let result = validarContraseña(user, bodycontraseña);
-        console.log(result);
+        //let result = validarContraseña(user, bodycontraseña);
+        //console.log(result);
         if (validarContraseña(user, bodycontraseña)) {
           if (req.body) {
-            // aquí buscar el id de categoría.
-            //proceso session
             let userlog = {
               //aquí
               id: user.id,
@@ -123,7 +118,6 @@ const controller = {
               primerNombre: user.first_name,
               apellido: user.last_name,
               mail: user.email,
-              fechaNacimiento: user.bornDate,
               categoria: user.id_category,
               cproduct :0,
               //avatar: userFound.avatar,
@@ -135,7 +129,8 @@ const controller = {
             );
 
             if (req.body.recordame) {
-              res.cookie("user", user.id, { maxAge: 50000 * 24 });
+              res.cookie("usercookie", user.id, { maxAge: 50000 * 24 });
+              //res.send(req.cookie)
             }
             res.redirect("/");
           }

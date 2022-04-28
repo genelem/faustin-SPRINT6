@@ -37,7 +37,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
-//app.use(methodOverride('_method'));
+
 app.use(recordar);
 app.use(locals);
 app.use(methodOverride('_method'));

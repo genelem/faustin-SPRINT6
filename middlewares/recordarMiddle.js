@@ -4,23 +4,21 @@ const userModel = modelCrud("userJson");
 
 
 function recordarMiddle (req, res , next){
-    if(!req.session.usuarioLogueado && req.cookies.user){
-        db.User.findAll()
+    if(!req.session.usuarioLogueado && req.cookies.usercookie){
+        db.User.findByPk(req.cookies.usercookie)
         //let users = userModel.all()
-        .then(function(users){
-            const usuarioCookies = users.find(function(user){
-                return user.id == req.cookies.user
-            })
-    
-            let user = {
-                id: usuarioCookies.id,
-               // nombre: usuarioCookies.primerNombre,
-                nombre:usuarioCookies.nombre,
-                apellido: usuarioCookies.apellido,
+        .then(function(user){                  
+            let usuarioLog = {
+                id: req.cookies.usercookie,
+                nombre:user.first_name,
+                apellido:user.last_name,
+                mail:user.email,
+                categoria : user.id_category,
+                cproduct :0
                 //avatar: usuarioCookies.avatar,
             }   
  
-        req.session.usuarioLogueado = user;
+        req.session.usuarioLogueado = usuarioLog;
         return next()
     })
     }else{

@@ -61,10 +61,7 @@ module.exports = (sequelize, dataTypes) => {
                 foreignKey: 'id_category'       
          }) 
          
-        User.belongsTo(models.UserTax,{
-            as: "bTax",// 
-            foreignKey: 'id_user'       
-     }) 
+        
 
         }
        
