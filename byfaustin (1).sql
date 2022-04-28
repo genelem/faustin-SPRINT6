@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-04-2022 a las 17:37:59
+-- Tiempo de generación: 28-04-2022 a las 20:12:03
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -58,6 +58,8 @@ CREATE TABLE `invoice` (
   `number` int(50) NOT NULL,
   `invoice_date` date NOT NULL,
   `id_user` int(10) UNSIGNED NOT NULL,
+  `delivery_dir` varchar(100) DEFAULT NULL,
+  `delivery_cost` int(10) DEFAULT NULL,
   `total` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -72,7 +74,8 @@ CREATE TABLE `invoice-item` (
   `id_invoice` int(10) UNSIGNED NOT NULL,
   `id_product` int(10) UNSIGNED NOT NULL,
   `quantity` int(8) NOT NULL,
-  `item_u_price` int(10) NOT NULL
+  `item_u_price` int(10) NOT NULL,
+  `id_user` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='item de factura . con precio unitario del producto';
 
 -- --------------------------------------------------------
@@ -229,9 +232,19 @@ CREATE TABLE `product-sale` (
   `id` int(10) UNSIGNED NOT NULL,
   `date_week_max` date DEFAULT NULL,
   `date_week_min` date DEFAULT NULL,
-  `dto` int(3) NOT NULL,
+  `dtoSale` int(3) NOT NULL,
   `id_product` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `product-sale`
+--
+
+INSERT INTO `product-sale` (`id`, `date_week_max`, `date_week_min`, `dtoSale`, `id_product`) VALUES
+(1, NULL, NULL, 12, 12),
+(2, NULL, NULL, 12, 14),
+(3, NULL, NULL, 12, 15),
+(4, NULL, NULL, 15, 9);
 
 -- --------------------------------------------------------
 
@@ -284,7 +297,8 @@ CREATE TABLE `product-year` (
 INSERT INTO `product-year` (`id`, `year_name`) VALUES
 (1, '2022'),
 (2, '2019'),
-(5, 'EN STOCK');
+(5, 'EN STOCK'),
+(6, '2020');
 
 -- --------------------------------------------------------
 
@@ -403,7 +417,8 @@ ALTER TABLE `invoice`
 ALTER TABLE `invoice-item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_invoice` (`id_invoice`),
-  ADD KEY `id_product` (`id_product`);
+  ADD KEY `id_product` (`id_product`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indices de la tabla `product`
@@ -562,7 +577,7 @@ ALTER TABLE `product-dto`
 -- AUTO_INCREMENT de la tabla `product-sale`
 --
 ALTER TABLE `product-sale`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `product-stock`
@@ -580,7 +595,7 @@ ALTER TABLE `product-type`
 -- AUTO_INCREMENT de la tabla `product-year`
 --
 ALTER TABLE `product-year`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `type-card`
@@ -633,7 +648,8 @@ ALTER TABLE `invoice`
 --
 ALTER TABLE `invoice-item`
   ADD CONSTRAINT `invoice-item_ibfk_1` FOREIGN KEY (`id_invoice`) REFERENCES `invoice` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `invoice-item_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `invoice-item_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `invoice-item_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
 -- Filtros para la tabla `product`
