@@ -156,26 +156,18 @@ const validatorSOLOP = {
                 //sino devuelvo true
                 return true
             })
-        ]
-    //*** no valida campos de remitos porque es opcional */
-    /*storeRtos:[
-        //recibe array de colores.remitos cantidades
-        check("idColor")
-        .custom(function(value){
-            console.log("en validator storeRtos")  
-            console.log(value + " es el custom ")  
-            for (i=0; i<value.length ;i++){
-                if( (value.cantidad[i] != 0) && (value.remito[i] == null ) ||
-                (value.cantidad[i] == null) && (value.remito[i] != 0)){
-                throw new Error("VALORES INADECUADOS");
-            }
-        }
-            //sino devuelvo true
-            return true
-        })
-        
-          
-    ]*/
+        ],
+     validaTax:[
+        check("condicion")
+                .notEmpty()
+                .withMessage("Debe Seleccionar este campo"),
+            check("mail")
+               .notEmpty() 
+               .withMessage("Email no puede estar vacío"),
+               check("terminos")
+               .notEmpty() 
+               .withMessage("Debe aceptar términos y condiciones")      
+         ] 
 }
 
 module.exports = validatorSOLOP

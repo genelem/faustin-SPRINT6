@@ -52,7 +52,7 @@ router.get("/listarProdType/:id",bproductController.prodPorType)
 // proceso de compra 
 router.get("/detalle/:id",authMiddle,bproductController.detail)
 router.get("/compra/:id",authMiddle,bproductController.comprar)
-router.put("/taxes",bproductController.storeTaxes)
+router.put("/taxes",validatorSOLOProduct.validaTax,bproductController.storeTaxes)
 // MUESTRA OFERTAS SEMANALES
 router.get("/ofertas",bproductController.mostrarOfertas)
 // ACTUALIZAR / ALTA OFERTAS SEMANALES 

@@ -75,9 +75,7 @@
                            
                             <input type="checkbox" name="colection" value="<%= colections[i].id %>"><label><%= colections[i].colection_name %></label>
                         <% } %> 
-                        <!---    <input type="checkbox" name="colection" value="otoño">Otoño
-                            <input type="checkbox" name="colection" value="invierno">Invierno                   
-                            <input type="checkbox" name="colection" value="primavera">Primavera-->
+
                     <% if(locals.errorsProd && locals.errorsProd.colection){ %>
                             <span id="errorMsge" > <%= errorsProd.colection.msg  %> </span>
                     <% } %>   
@@ -89,9 +87,7 @@
                         <% for (i=0 ; i< types.length ; i++){ %>      
                             <input type="checkbox" name="tipo" value="<%= types[i].id %>"><label><%= types[i].type_name %></label>
                         <% } %>
-                        <!--    <input type="checkbox" name="tipo" value="cartera">Cartera
-                            <input type="checkbox" name="tipo" value="bandolera">Bandolera 
-                            <input type="checkbox" name="tipo" value="mochila">Mochila -->
+
                     <% if(locals.errorsProd && locals.errorsProd.tipo){ %>
                             <span id="errorMsge" > <%= errorsProd.tipo.msg  %> </span>
                     <% } %> 
@@ -115,18 +111,6 @@
                         
                            
                         <% } %>
-                      <!---  <label for=""><img id="colorList" src="/images/etiqueta11Beige1.png"></label>          
-                        <input type="checkbox" id="azul" name="color" value="azul">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Azul.png"></label>          
-                        <input type="checkbox" id="aqua" name="color" value="verde">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Verde.png"></label>          
-                        <input type="checkbox" id ="verde" name="color" value="guinda">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Guinda.png"></label>
-                        <input type="checkbox" id ="negra" name="color" value="suela">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Suela.png"></label>
-                        <input type="checkbox" id ="gris" name="color" value="brue">
-                        <label for=""><img id="colorList" src="/images/etiqueta11Brue.png"></label>-->
-                
                         </div>
                         <p>Nuevo COLOR<a href="/bproduct/altaColor"><i class="fas fa-arrow-alt-circle-right"></i></a>
                         </p>
@@ -140,11 +124,7 @@
                             <input type="checkbox" name="anio" id="talles" value="<%= years[i].id %>"><label><%= years[i].year_name %></label>
                           
                         <% }%>
-                     <!---       <option value = "2022">2022</option>
-                            <option value = "2021">2021</option>
-                            <option value = "2020">2020</option>
-                            <option value = "EN STOCK">EN STOCK </option> -->
-                      
+
                     <% if(locals.errorsProd && locals.errorsProd.anio){ %>
                             <span id="errorMsge" > <%= errorsProd.anio.msg  %> </span>
                     <% } %> 

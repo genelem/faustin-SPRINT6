@@ -41,9 +41,6 @@ const controller = {
       },
     ];
     const errors = validationResult(req);
-    console.log("la lenght de errores es : " + errors.errors.length);
-
-    //
     db.UserCategory.findAll().then(function (userCategorys) {
       //chequea errores
       if (errors.errors.length > 0) {
@@ -52,11 +49,9 @@ const controller = {
           array: userCategorys,
         });
       } else {
-        console.log("está en else de alta " + req.body.name);
         let newCategory = {
           category_name: req.body.name,
         };
-        console.log(newCategory.category_name + "es el req.body");
         db.UserCategory.create(newCategory);
         res.render("enlacesDB");
       } // termina el IF
@@ -95,8 +90,7 @@ const controller = {
     if (errors.errors.length > 0) {
       res.render("loginDB", { errorsLogin: errors.mapped() });
     }
-    console.log("en register el req.usuario=" + req.body.usuario);
-    //let userID =  userModel.findUser(req.body.usuario);
+   
     db.User.findOne({
       where: {
         userName: req.body.usuario,
@@ -104,8 +98,7 @@ const controller = {
     }).then(function (user) {
       // return ({
       if (user) {
-        console.log("entró en IF usuario luego de promesa");
-        console.log(req.body.contraseña);
+     
         let bodycontraseña = req.body.contraseña;
         //let result = validarContraseña(user, bodycontraseña);
         //console.log(result);
@@ -122,11 +115,7 @@ const controller = {
               cproduct :0,
               //avatar: userFound.avatar,
             };
-
             req.session.usuarioLogueado = userlog;
-            console.log(
-              "en alta P.usuarioLogueado" + req.session.usuarioLogueado
-            );
 
             if (req.body.recordame) {
               res.cookie("usercookie", user.id, { maxAge: 50000 * 24 });
@@ -135,7 +124,8 @@ const controller = {
             res.redirect("/");
           }
         } else {
-          res.send("Credenciales Incorrectas");
+          let mensaje = "Credenciales Incorrectas"
+          res.render("mensajesDBuser",{mensaje:mensaje});
         }
       }
     });
@@ -159,11 +149,11 @@ const controller = {
   altaRegister: (req, res) => {
     let errors = [];
     errors = validationResult(req);
-    console.log(errors.errors.length + "errores length");
+  
     if (errors.errors.length > 0) {
       return res.render("formularioRegistroDb", { errorsReg: errors.mapped() });
     } else {
-      console.log("entró al else en alta");
+      
       db.UserCategory.findOne({
         where: {
           category_name: req.body.categoria,
@@ -258,7 +248,8 @@ const controller = {
         return db.User.findByPk(req.params.id);
       })
       .then(function () {
-        return res.send("modificación exitosa");
+        let mensaje= "Modificación exitosa" 
+        return res.render("mensajesDBuser",{mensaje:mensaje});
       });
       ////******* ahora actualizo la tabla PRODUCTCOLORPRODUCT
       
@@ -330,7 +321,8 @@ const controller = {
             //res.redirect("/");
           }
         } else {
-          res.send("Credenciales Incorrectas");
+          let mensaje= "Credenciales Incorrectas"
+          res.render("mensajesDBuser",{mensaje:mensaje});
         }
       }
     });
@@ -379,7 +371,8 @@ const controller = {
         res.render("loginCambiaPassDB", { user: user });
       }
     } else {
-      res.send("Credenciales Incorrectas");
+      let mensaje= "Credenciales Incorrectas"
+      res.send("mensajesDBuser",{mensaje:mensaje});
     }
   },
   processCambioP: (req, res) => {
@@ -397,7 +390,8 @@ const controller = {
     //let userID =  userModel.find(req.session.usuarioLogueado.id);
     db.User.findByPk(req.session.usuarioLogueado.id).then(function (user) {
       if (user && validarContraseña(user, req.body.contraseña1)) {
-        res.send("NUEVA CONTRASEÑA debe ser DIFERENTE a la registrada");
+        let mensaje = "NUEVA CONTRASEÑA deber ser DIFERENTE a la registrada"
+        res.render("mensajesDBuser",{mensaje:mensaje});
       } else {
         db.User.update(
           {
@@ -419,7 +413,8 @@ const controller = {
             return db.User.findByPk(req.session.usuarioLogueado.id);
           })
           .then(function () {
-            return res.send("modificación exitosa");
+            let mensaje ="Se Ha realizado cambio de contraseña"
+            return res.render("mensajesDBuser",{mensaje:mensaje});
           });
       }
     });

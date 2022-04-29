@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-04-2022 a las 20:12:03
+-- Tiempo de generación: 29-04-2022 a las 22:57:27
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -71,12 +71,21 @@ CREATE TABLE `invoice` (
 
 CREATE TABLE `invoice-item` (
   `id` int(10) UNSIGNED NOT NULL,
-  `id_invoice` int(10) UNSIGNED NOT NULL,
+  `id_invoice` int(10) UNSIGNED DEFAULT NULL,
   `id_product` int(10) UNSIGNED NOT NULL,
   `quantity` int(8) NOT NULL,
   `item_u_price` int(10) NOT NULL,
-  `id_user` int(10) UNSIGNED DEFAULT NULL
+  `id_user` int(10) UNSIGNED DEFAULT NULL,
+  `made` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='item de factura . con precio unitario del producto';
+
+--
+-- Volcado de datos para la tabla `invoice-item`
+--
+
+INSERT INTO `invoice-item` (`id`, `id_invoice`, `id_product`, `quantity`, `item_u_price`, `id_user`, `made`) VALUES
+(3, NULL, 11, 0, 0, 1, NULL),
+(4, NULL, 11, 0, 0, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -336,7 +345,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `userName`, `first_name`, `last_name`, `email`, `id_category`, `password`, `avatar`, `bornDate`, `terminos`) VALUES
 (1, 'usuarioPepe', 'PEPE', 'español', 'pepito@gmail.com', 1, '$2a$10$KwGzQpVhar97qy.AUD8HTuHB0bUoweNA1nzyBNX2j.ZHLzViF0qoC', 'nuevo-1650456416697.png', '1979-01-25', ''),
-(2, 'usuarioJefe', 'jefecito', 'dorsen', 'jefecito@gmail.com', 2, '$2a$10$rng5orz9re9tOQbNpoV46ua8ujjxv7DhhVvuurno7M3txjJmhEwKu', 'nuevo-1650456510853.png', '1994-02-22', '');
+(2, 'usuarioJefe', 'jefecito', 'dorsen', 'jefecito@gmail.com', 2, '$2a$10$rng5orz9re9tOQbNpoV46ua8ujjxv7DhhVvuurno7M3txjJmhEwKu', 'nuevo-1650456510853.png', '1994-02-22', ''),
+(3, 'usuarioJazmi', 'JAZMIN', 'DE CHEDDAR', 'jazmin@gmail.com', 1, '$2a$10$znao08QjCtQIFNPB9P0Ctu6q3yyG3VD26fE5bc9mMKBTcGDRHsPcK', 'nuevo-1651237460351.png', '1990-02-12', ''),
+(4, 'usuarioLucas', 'lucas', 'Calamitoso', 'lucas@gmail.com', 1, '$2a$10$0wvH1FpUGy8s3iLww7I3xe0nTDXrhrb.UzcptvU8C7Exmusv7s6Zm', 'nuevo-1651237611605.png', '1965-01-18', '');
 
 -- --------------------------------------------------------
 
@@ -386,6 +397,14 @@ CREATE TABLE `user-taxes` (
   `ingresosBrutos` varchar(100) NOT NULL,
   `retGanancias` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `user-taxes`
+--
+
+INSERT INTO `user-taxes` (`id`, `id_user`, `tax_condition`, `cuit`, `cuil`, `ingresosBrutos`, `retGanancias`) VALUES
+(1, 1, 'Consumidor FInal', '', '30-151515-22-36-202', '', ''),
+(2, 4, 'Responsabe Inscripto', '30708075112-11', '', '151515-33333-10', 'si');
 
 --
 -- Índices para tablas volcadas
@@ -541,7 +560,7 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT de la tabla `invoice-item`
 --
 ALTER TABLE `invoice-item`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
@@ -607,7 +626,7 @@ ALTER TABLE `type-card`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `user-cards`
@@ -625,7 +644,7 @@ ALTER TABLE `user-category`
 -- AUTO_INCREMENT de la tabla `user-taxes`
 --
 ALTER TABLE `user-taxes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

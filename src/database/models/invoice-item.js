@@ -25,13 +25,17 @@ module.exports = (sequelize, dataTypes) => {
         id_user: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: true
+        },
+        made: {
+            type: dataTypes.INTEGER(10),
+            allowNull: true
         }             
        
     };         
     
     let config = {
         timestamps: false,
-        tableName:"invoice_item"
+        tableName:"invoice-item"
         
     }
 

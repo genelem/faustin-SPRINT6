@@ -20,47 +20,35 @@
     <section class="formularioParaRegistro">
         
         <form action="/bproduct/taxes?_method=PUT"  method="POST" >
-            <!--<input type="" name="idUser" value = "">-->
+         
             <p><label id="" for ="usuario" class="todosLosTitulos">Condición Impositiva</label>
                 <br/>
                 <input type= "checkbox" class="todosLosBotones" placeholder="" type="text"  name="condicion" value="Responsabe Inscripto" ><label>Responsable Inscripto</label></p>
                 <input type= "checkbox" class="todosLosBotones" placeholder="" type="text"  name="condicion" value ="Consumidor FInal" ><label>Consumidor Final</label></p>
-                <% if(locals.errorsReg && locals.errorsReg.usuario){ %>
-                    <span id="errorMsge" > <%= errorsReg.usuario.msg  %> </span>
+                <% if(locals.errorsProd && locals.errorsProd.condicion){ %>
+                    <span id="errorMsge" > <%= errorsProd.condicion.msg  %> </span>
                   <% } %> 
                 <br/>
-            <!--<div class="contenedorTodosLosTitulos">-->
+           
                 <p><label id="" for ="cuil" class="todosLosTitulos">CUIL</label>
                 <input class="todosLosBotones" placeholder="" type="text"  name="cuil" ></p> 
-                <% if(locals.errorsReg && locals.errorsReg.primerNombre){ %>
-                    <span id="errorMsge" > <%= errorsReg.primerNombre.msg  %> </span>
-                  <% } %> 
+                 
                 <br/>   
                 <p><label id="" for ="cuit" class="todosLosTitulos">CUIT</label>
-                    <input class="todosLosBotones" placeholder="" type="text"  name="cuit" ></p> 
-                    <% if(locals.errorsReg && locals.errorsReg.primerNombre){ %>
-                        <span id="errorMsge" > <%= errorsReg.primerNombre.msg  %> </span>
-                      <% } %> 
-                    <br/>   
+                    <input class="todosLosBotones" placeholder="" type="text"  name="cuit" ></p>   
                 
                 <p><label id="" for ="brutos" class="todosLosTitulos">Ingresos Brutos</label>
                 <input class="todosLosBotones" placeholder="" type="text"  name="brutos" ></p> 
-                <% if(locals.errorsReg && locals.errorsReg.apellido){ %>
-                    <span id="errorMsge" > <%= errorsReg.apellido.msg  %> </span>
-                  <% } %> 
-                <br/>   
+                   
                 
                 <p><label id="" for ="Ganancias" class="todosLosTitulos">Retención Ganancias</label>
                 <input class="todosLosBotones" placeholder="" type="text"  name="ganancias"></p>
-                <% if(locals.errorsReg && locals.errorsReg.contraseña){ %>
-                    <span id="errorMsge" > <%= errorsReg.contraseña.msg  %> </span>
-                  <% } %> 
-                <br/>                 
+                                 
                 
-                <p><label id="" for ="email" class="todosLosTitulos">Correo Electrónico</label>
+                <p><label id="" for ="mail" class="todosLosTitulos">Correo Electrónico</label>
                 <input class="todosLosBotones" placeholder="" type="text"  name="mail" ></p>
-                <% if(locals.errorsReg && locals.errorsReg.mail){ %>
-                    <span id="errorMsge" > <%= errorsReg.mail.msg  %> </span>
+                <% if(locals.errorsProd && locals.errorsProd.mail){ %>
+                    <span id="errorMsge" > <%= errorsProd.mail.msg  %> </span>
                   <% } %> 
                 <br/> 
                 
@@ -69,11 +57,14 @@
                     <span>
                         <label for="terminos">He leido y acepto los Términos y Condiciones</label>                       
                         <input type="checkbox" name="terminos" value="ok">
-                  
+                        <% if(locals.errorsProd && locals.errorsProd.mail){ %>
+                            <span id="errorMsge" > <%= errorsProd.terminos.msg  %> </span>
+                          <% } %> 
+                        <br/>
             </div>
             <div class="crearCuenta">
                <!--- <p> <button type="submit" class="crearCuentaBoton">CREAR CUENTA</button> -->
-                    <p> <button type="submit" id="enviar">CREAR CUENTA</button>                    
+                    <p> <button type="submit" id="enviar">Actualizar </button>                    
                      <br/>
                     <br/>
                     <a href="/" id="vuelvo">Volver a la Pagina Principal</a>

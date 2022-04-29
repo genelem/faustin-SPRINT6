@@ -69,7 +69,11 @@
                         <h2>REALIZAR COMPRA </h2>
                         <br/>
                         <p>EL PRECIO DE ESTE PRODUCTO ES :$ <%=producto.price %> </p>
+                        <p>Dto Sobre Precio Lista :$ <%=producto.dto %> </p>
                         <p class ="noSeVe"><input placeholder="" id="noSeVe" name="precio" value="<%= producto.price %>" ></p>
+                        <input class="noSeVe" id="" placeholder="" type="number"  name="precio" id="user" value="<%= producto.price %>" ></p>
+                        <input class="noSeVe" id="" placeholder="" type="number"  name="descuento" id="user" value="<%= producto.dto %>" ></p>
+ 
                         <p> <label id="" for ="cantidadProducto">CANTIDAD ?</label>
                         <input id="cantidadPlace" placeholder="" type="number" min="1" pattern="^[0-9]+" name="cantidadProducto" id="user" ></p> 
                         <br/>

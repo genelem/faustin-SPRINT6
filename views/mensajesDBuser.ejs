@@ -22,7 +22,7 @@
         <%- include('partials/header') %>
 <main>
             <div class="altaProductLogo">
-                <h3>DAR ALTA TIPO DE PRODUCTO  </h3>
+                <h3><%= mensaje %>  </h3>
                 <ul>      
                 <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
                 <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
@@ -30,20 +30,8 @@
             </div> 
             
           
-            <form action="/bproduct/creaType?_method=PUT" method="POST" >   
-                <div class="descriptionProduct">
-                   
-                    <p><label id="" for ="nombreProducto">Tipo De Producto</label>
-                    <input placeholder="" type="text" name="name" id="user1" ></p>
-                    <% if(locals.errorsProd && locals.errorsProd.name){ %>
-                        <span id="errorMsge" > <%= errorsProd.name.msg  %> </span>
-                <% } %>
-                    <br/>                     
-                    <p >TIPOS DE PRODUCTOS ACTUALES </p> 
-                    <%- include('partials/listadoEnBase') %>   
-       
-                </div>
- 
+                
+                
                 <div id="modal2" class="modalmask">            
                     <div class="modalbox rotate">
                         <a href="#close" title="Close" class="close">X</a>
@@ -54,12 +42,11 @@
                          
                         </div>
                 </div>
-                
-                <div class="submitMasEnviar">          
-                    <input type="submit" name="submit" id="irBaja" value="DAR ALTA TIPO DE PRODUCTO "> </input>
-                </div>        
+                       
                 <div class= "closeMain" >
-                <a href="/" id="vuelvo">Volver a Pagina Principal</a>
+                <a href="/busers/loginDB" id="vuelvo">Volver a LOGIN</a>
+                <br/>
+                <p id="volver"><a href="/" class= "boton1">Volver a Pagina Principal</a></p>
                 </div>
                
         </form>
@@ -71,5 +58,4 @@
             <%- include('partials/footer') %>                
         </footer>   
 
-   </html > 
-     
+   </html >

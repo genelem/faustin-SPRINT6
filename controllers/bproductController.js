@@ -625,24 +625,20 @@ const controller = {
   storeRemitos: (req, res) => {
     const errors = validationResult(req);
     if (req.body) {
-      for (i = 0; i < req.body.idRegistro.length; i++) {
-        let suma = 0;
+      let suma = 0
+      for (i = 0; i < req.body.idRegistro.length; i++) {        
         db.ProductColorProduct.findOne({
           where: {
             id: req.body.idRegistro[i],
           },
-        });
-        suma = quantity;
-        console
-          .log("el registro a actualizar es = " + req.body.idRegistro[i])
-          // db.ProductColorProduct.findByPk(req.body.idRegistro[i])
+        })
           .then(function (productColorProduct) {
-            //return res.json(producColorProduct)
+            //return res.json(productColorProduct)
             let suma = productColorProduct.quantity + req.body.cantidad[i];
 
             db.ProductColorProduct.update(
               {
-                quantity: suma,
+                quantity: quantiy + req.body.contadidad[i],
                 dispach: req.body.remito[i],
               },
               {
@@ -650,9 +646,7 @@ const controller = {
                   id: req.body.idRegistro[i],
                 },
               }
-            ).then(function () {
-              return db.ProductColorProduct.findByPk(req.body.idRegistro[i]);
-            });
+            )
           });
       } // el del for
     } else {
@@ -677,9 +671,9 @@ const controller = {
     });
   },
   comprar: (req, res) => {
+    
     if (req.session.usuarioLogueado) {
       //res.send(req.session.usuarioLogueado.id)
-  
       db.UserTax.findOne({
         where :{
          id_user:req.session.usuarioLogueado.id
@@ -689,34 +683,41 @@ const controller = {
       ) {
         if (!userTax) {
           req.session.usuarioLogueado.cprod= req.params;
+          req.session.usuarioLogueado.cproduct = 1;
           // ver como va el tema del cprod
           res.render("formularioTaxesDB");
         } else {
           // ir a crear item-factura
+          let precio = req.body.precio * (100/(100-req.body.dto));
           db.InvoiceItem.create({
             // ver luego el tema de nro de factura
-
             id_product:req.params.id,
             quantity : req.body.cantidadProducto,
-            item_u_price : req.body.precio,
+            item_u_price : precio,
+
             // falta calcular el precio con descuento
             id_user : req.session.usuarioLogueado.id,
 
           }).then (function(){
+            req.session.usuarioLogueado.cprod = req.params; 
+            req.session.usuarioLogueado.cproduct = req.session.usuarioLogueado.cproduct +1;
+             
             //ver que hace falta en carrito
             res.render("carritoDB")
-          })
-          req.session.usuarioLogueado.cprod = req.params;  
+          })     
         }
       });
     } else {
-      res.render("loginDB");
+      res.render("loginDB")
     }
   },
   storeTaxes :(req,res) =>{
-    const errors = validationResult(req);
-    if(errors.erros.length > 0){
-      res.render("formularioTaxesDB",{errosProd:erros})
+
+    const errors = validationResult(req)
+    console.log("el req. es = " + req)
+    console.log("errors es "+ errors)
+    if(errors.errors.length > 0 ){
+      res.render("formularioTaxesDB",{errorsProd:errors})
     }else{
       db.UserTax.create({
         id_user: req.session.usuarioLogueado.id,
@@ -727,14 +728,14 @@ const controller = {
         retGanancias : req.body.ganancias
       })
       .then(function(){
-        if(req.session.usuarioLogueado.cprod !== 0){
+        if(req.session.usuarioLogueado.cproduct !== 0){
           db.Product.findOne({
             where: {
-              id: req.session.usuarioLogueado.cprod,
+              id: req.session.usuarioLogueado.cprod.id,
             },
             include: ["pType", "pYear", "pColection", "coloresDB"],
           }).then(function (product) {
-            //return res.json(product)
+            //return res.json(product) 
             res.render("detallProdNuevoDB", { producto: product });
           });
         }
@@ -823,7 +824,7 @@ const controller = {
           });
         } // en else de errores
         else {
-          console.log("entró por else en updateOfertas");
+      
           let produSales = [];
           let saleP = [];
           return res.render("updateOfertas", {
@@ -836,7 +837,7 @@ const controller = {
       });
     } else {
       for (i = 0; i < req.body.producto.length; i++) {
-        console.log("está en for de ofertas");
+    
         db.ProductSale.update(
           {
             dtoSale: req.body.descuento,

@@ -92,6 +92,7 @@ module.exports = (sequelize, dataTypes) => {
       as: "pYear",
       foreignKey: "id_product_year",
     });
+
     Product.belongsToMany(models.ProductColor, {      
       as: "coloresDB",
       through: "product-color-product",
