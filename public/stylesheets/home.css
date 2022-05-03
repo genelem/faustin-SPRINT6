@@ -60,11 +60,11 @@ div .producto {
 .bolsos1, .carteras1, .bandoleras1, .mochilas1 {
     /*width: 950px;
     height: 600px;*/
-    background-color: #e6d8cc;    
+    /*background-color: #e6d8cc;    */
     /*width:5rem;
     height: 5rem;*/
     box-shadow: 0px 0px 10px rgb(100, 100, 100);
-    border-radius: 30%;
+    border-radius: 5%;
     position:left;
 }
 #bandoleraCereza {

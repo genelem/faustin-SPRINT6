@@ -10,7 +10,15 @@ const sequelize = db.sequelize;
 
 const controller = {
   enlaces: (req, res) => {
-    res.render("enlacesDB");
+    if (
+      req.session.usuarioLogueado &&
+      req.session.usuarioLogueado.categoria == 2
+    ) {
+      res.render("enlacesDB");
+    } else {
+      let mensaje = "SU CATEGORIA DE USUARIO NO HABILITA ESTA OPERACION";
+      res.render("mensajesDB", { mensaje: mensaje });
+    }
   },
   altaType: (req, res) => {
     let array = [
@@ -548,6 +556,9 @@ const controller = {
       }
     }
   },
+  irBajaProduct: (req, res) => {
+    res.render("listProdBAJADB");
+  },
   bajaProducto: (req, res) => {
     /* reconfirmar que quiere dar de baja */
     /* reconfirmar que quiere dar de baja */
@@ -625,29 +636,28 @@ const controller = {
   storeRemitos: (req, res) => {
     const errors = validationResult(req);
     if (req.body) {
-      let suma = 0
-      for (i = 0; i < req.body.idRegistro.length; i++) {        
+      let suma = 0;
+      for (i = 0; i < req.body.idRegistro.length; i++) {
         db.ProductColorProduct.findOne({
           where: {
             id: req.body.idRegistro[i],
           },
-        })
-          .then(function (productColorProduct) {
-            //return res.json(productColorProduct)
-            let suma = productColorProduct.quantity + req.body.cantidad[i];
+        }).then(function (productColorProduct) {
+          //return res.json(productColorProduct)
+          let suma = productColorProduct.quantity + req.body.cantidad[i];
 
-            db.ProductColorProduct.update(
-              {
-                quantity: quantiy + req.body.contadidad[i],
-                dispach: req.body.remito[i],
+          db.ProductColorProduct.update(
+            {
+              quantity: quantiy + req.body.contadidad[i],
+              dispach: req.body.remito[i],
+            },
+            {
+              where: {
+                id: req.body.idRegistro[i],
               },
-              {
-                where: {
-                  id: req.body.idRegistro[i],
-                },
-              }
-            )
-          });
+            }
+          );
+        });
       } // el del for
     } else {
       res.send("ver que pasó ");
@@ -662,8 +672,8 @@ const controller = {
       },
       include: ["pType", "pYear", "pColection", "coloresDB"],
     }).then(function (product) {
-      if(req.session.usuarioLogueado.id !== 0){
-        req.session.usuarioLogueado.cprod = req.params
+      if (req.session.usuarioLogueado.id !== 0) {
+        req.session.usuarioLogueado.cprod = req.params;
       }
       //return res.json(product)
       res.render("detallProdNuevoDB", { producto: product });
@@ -671,79 +681,76 @@ const controller = {
     });
   },
   comprar: (req, res) => {
-    
     if (req.session.usuarioLogueado) {
       //res.send(req.session.usuarioLogueado.id)
       db.UserTax.findOne({
-        where :{
-         id_user:req.session.usuarioLogueado.id
-        }
-      }).then(function (
-        userTax
-      ) {
+        where: {
+          id_user: req.session.usuarioLogueado.id,
+        },
+      }).then(function (userTax) {
         if (!userTax) {
-          req.session.usuarioLogueado.cprod= req.params;
+          req.session.usuarioLogueado.cprod = req.params;
           req.session.usuarioLogueado.cproduct = 1;
           // ver como va el tema del cprod
           res.render("formularioTaxesDB");
         } else {
           // ir a crear item-factura
-          let precio = req.body.precio * (100/(100-req.body.dto));
+          let precio = req.body.precio * (100 / (100 - req.body.dto));
           db.InvoiceItem.create({
             // ver luego el tema de nro de factura
-            id_product:req.params.id,
-            quantity : req.body.cantidadProducto,
-            item_u_price : precio,
+            id_product: req.params.id,
+            quantity: req.body.cantidadProducto,
+            item_u_price: precio,
 
             // falta calcular el precio con descuento
-            id_user : req.session.usuarioLogueado.id,
+            id_user: req.session.usuarioLogueado.id,
+          }).then(function () {
+            req.session.usuarioLogueado.cprod = req.params;
+            req.session.usuarioLogueado.cproduct =
+              req.session.usuarioLogueado.cproduct + 1;
 
-          }).then (function(){
-            req.session.usuarioLogueado.cprod = req.params; 
-            req.session.usuarioLogueado.cproduct = req.session.usuarioLogueado.cproduct +1;
-             
             //ver que hace falta en carrito
-            res.render("carritoDB")
-          })     
+            res.render("carritoDB");
+          });
         }
       });
     } else {
-      res.render("loginDB")
+      res.render("loginDB");
     }
   },
-  storeTaxes :(req,res) =>{
-
-    const errors = validationResult(req)
-    console.log("el req. es = " + req)
-    console.log("errors es "+ errors)
-    if(errors.errors.length > 0 ){
-      res.render("formularioTaxesDB",{errorsProd:errors})
-    }else{
+  altaTaxes: (req, res) => {
+    res.render("formularioTaxesDB");
+  },
+  storeTaxes: (req, res) => {
+    const errors = validationResult(req);
+    console.log("el req. es = " + req);
+    console.log("errors es " + errors);
+    if (errors.errors.length > 0) {
+      res.render("formularioTaxesDB", { errorsProd: errors });
+    } else {
       db.UserTax.create({
         id_user: req.session.usuarioLogueado.id,
-        tax_condition :req.body.condicion,
-        cuil : req.body.cuil,
-        cuit : req.body.cuit,
+        tax_condition: req.body.condicion,
+        cuil: req.body.cuil,
+        cuit: req.body.cuit,
         ingresosBrutos: req.body.brutos,
-        retGanancias : req.body.ganancias
-      })
-      .then(function(){
-        if(req.session.usuarioLogueado.cproduct !== 0){
+        retGanancias: req.body.ganancias,
+      }).then(function () {
+        if (req.session.usuarioLogueado.cproduct !== 0) {
           db.Product.findOne({
             where: {
               id: req.session.usuarioLogueado.cprod.id,
             },
             include: ["pType", "pYear", "pColection", "coloresDB"],
           }).then(function (product) {
-            //return res.json(product) 
+            //return res.json(product)
             res.render("detallProdNuevoDB", { producto: product });
           });
         }
-          res.redirect("/")
-        } )
-      
-      } // fin de else
-    },
+        res.redirect("/");
+      });
+    } // fin de else
+  },
 
   prodPorType: (req, res) => {
     db.Product.findAll({
@@ -824,7 +831,6 @@ const controller = {
           });
         } // en else de errores
         else {
-      
           let produSales = [];
           let saleP = [];
           return res.render("updateOfertas", {
@@ -837,7 +843,6 @@ const controller = {
       });
     } else {
       for (i = 0; i < req.body.producto.length; i++) {
-    
         db.ProductSale.update(
           {
             dtoSale: req.body.descuento,

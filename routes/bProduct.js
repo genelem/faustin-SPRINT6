@@ -9,7 +9,7 @@ const validatorPDB = require("../validator/validatorProductDb");
 const validatorSOLOProduct = require("../validator/validatorSOLOProduct");
 
 
-router.get('/opciones', bproductController.enlaces);
+router.get('/opciones',authMiddle,bproductController.enlaces);
 // TIPO DE PRODUCTO
 
 router.get("/altaType",bproductController.altaType);
@@ -39,6 +39,7 @@ router.get("/listProduct",bproductController.listarProduct);
 router.get("/detailOneDB/:id",bproductController.detailOneDB)
 router.post("/updateOneDB/:id",validatorSOLOProduct.updateProducto,bproductController.storeUpdate)
 // eliminar producto
+router.get("/irBajaProduct",bproductController.irBajaProduct)
 router.get("/bajaProducto/:id",bproductController.bajaProducto)
 router.post("/bajaProducto/:id", bproductController.storeDelete)
 // cargar cantidades de producto-color
@@ -52,6 +53,7 @@ router.get("/listarProdType/:id",bproductController.prodPorType)
 // proceso de compra 
 router.get("/detalle/:id",authMiddle,bproductController.detail)
 router.get("/compra/:id",authMiddle,bproductController.comprar)
+router.get("/taxes",bproductController.altaTaxes)
 router.put("/taxes",validatorSOLOProduct.validaTax,bproductController.storeTaxes)
 // MUESTRA OFERTAS SEMANALES
 router.get("/ofertas",bproductController.mostrarOfertas)

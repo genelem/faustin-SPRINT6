@@ -268,6 +268,16 @@ main div.submitMasEnviar{
     align-content: space-around;  
    /* color: #383536;*/
 }
+main div.submitMasEnviarDet{    
+    display: flex;
+    flex-wrap: wrap;   
+    text-decoration: none;
+    flex-direction:column;
+    margin: 10px 1px 10px 18px;
+    /*background-color: #F4F1DE;*/
+    align-content: space-around;  
+   /* color: #383536;*/
+}
 #importanteFinal{
     color:black;
     align-self: center;
@@ -276,6 +286,8 @@ main div.submitMasEnviar{
 
 #enviar{    
     background-color: #81b29a;
+    color:black;
+    text-decoration: none;
     width: 8rem;
     height: auto;
     /*color: white;*/
