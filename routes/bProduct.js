@@ -8,7 +8,7 @@ const {body, check} = require('express-validator')
 const validatorPDB = require("../validator/validatorProductDb"); 
 const validatorSOLOProduct = require("../validator/validatorSOLOProduct");
 
-
+router.get('/buscarPorBarra',bproductController.search);
 router.get('/opciones',authMiddle,bproductController.enlaces);
 // TIPO DE PRODUCTO
 

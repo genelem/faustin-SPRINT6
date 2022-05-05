@@ -12,14 +12,23 @@ const mainControllerDB = {
           include: ["pType"]
         })
         let types = db.ProductType.findAll();
-        Promise.all([producto,types]).then(function ([
+        let colections= db.ProductColection.findAll();
+        let anios = db.ProductYear.findAll();
+        let colores= db.ProductColor.findAll();
+        Promise.all([producto,types,colections,anios,colores]).then(function ([
             product,
-            productTypes
+            productTypes,
+            productColections,
+            productYears,
+            productColors
           ]) {
            //return res.json(product)
             return res.render("homeDB", {
              producto: product,
-             types: productTypes  
+             tipos: productTypes,
+             colecciones :productColections,
+             anios : productYears,
+             colores:productColors 
             }
             );
           }

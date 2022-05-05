@@ -859,7 +859,75 @@ const controller = {
       res.render("mensajesDB", { mensaje: mensaje });
     } // fin del else
   },
+  search: (req,res) =>{
+    //console.log(req.query.busca[o])
+    console.log("en el query viene... "+ req.query.busca)
 
+    let verprimera = req.query.busca.split(' ');
+    let busca1 = verprimera[0];
+    let idBusca = verprimera[1]
+    console.log("la primer letra es "+  verprimera[0])
+
+   if (busca1 === "C"){
+     db.Product.findAll({
+    where :{
+      id_colection : idBusca
+    },
+      include : ["pType","pColection","pYear","coloresDB"]
+    } )
+    .then(function(products){
+     // if(req.query.nombre == "todos"){
+      let mensaje = "Productos según Colección ";
+      res.render("listProductGRALDB", { array: products, mensaje: mensaje });
+      return res.json(products)
+     
+    })
+  }
+    if (busca1 ==="Y"){
+      db.Product.findAll({
+        where :{
+          id_year : idBusca
+        },
+          include : ["pType","pColection","pYear","coloresDB"]
+        } )
+        .then(function(products){
+         // if(req.query.nombre == "todos"){
+          let mensaje = "Productos según Colección ";
+          res.render("listProductGRALDB", { array: products, mensaje: mensaje });
+          return res.json(products)
+         
+        })
+      
+    }
+    if(busca === "T"){
+      db.Product.findAll({
+        where :{
+          id_type : idBusca
+        },
+          include : ["pType","pColection","pYear","coloresDB"]
+        } )
+        .then(function(products){
+         // if(req.query.nombre == "todos"){
+          let mensaje = "Productos según Colección ";
+          res.render("listProductGRALDB", { array: products, mensaje: mensaje });
+          return res.json(products)
+         
+        })
+    }
+    if (req.query.busca === "TODOS"){
+      db.Product.findAll({
+        
+          include : ["pType","pColection","pYear","coloresDB"]
+        } )
+        .then(function(products){
+         // if(req.query.nombre == "todos"){
+          let mensaje = "Todos los productos Disponibles ";
+          res.render("listProductGRALDB", { array: products, mensaje: mensaje });
+          return res.json(products)
+         
+        })
+    }
+  },
   carrito: (req, res) => {
     res.render("carritoDeCompras");
   },
