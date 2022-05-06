@@ -842,7 +842,7 @@ const controller = {
         }
       });
     } else {
-      for (i = 0; i < req.body.producto.length; i++) {
+      for (i =0 ; i < req.body.producto.length; i++) {
         db.ProductSale.update(
           {
             dtoSale: req.body.descuento,
@@ -862,15 +862,14 @@ const controller = {
   search: (req,res) =>{
     //console.log(req.query.busca[o])
     console.log("en el query viene... "+ req.query.busca)
-
     let verprimera = req.query.busca.split(' ');
     let busca1 = verprimera[0];
-    let idBusca = verprimera[1]
-    console.log("la primer letra es "+  verprimera[0])
-
-   if (busca1 === "C"){
+    let idBusca = verprimera[1] ;
+    console.log("la primer letra es "+  verprimera[0]);
+    switch (busca1){
+      case "C" :
      db.Product.findAll({
-    where :{
+      where :{
       id_colection : idBusca
     },
       include : ["pType","pColection","pYear","coloresDB"]
@@ -878,12 +877,11 @@ const controller = {
     .then(function(products){
      // if(req.query.nombre == "todos"){
       let mensaje = "Productos según Colección ";
-      res.render("listProductGRALDB", { array: products, mensaje: mensaje });
-      return res.json(products)
-     
+      mensaje2= products[0].pColection.colection_name;
+      res.render("listProductGRALDB", { array: products, mensaje: mensaje, mensaje2:mensaje2}) 
     })
-  }
-    if (busca1 ==="Y"){
+    break;
+    case "Y":
       db.Product.findAll({
         where :{
           id_year : idBusca
@@ -892,14 +890,13 @@ const controller = {
         } )
         .then(function(products){
          // if(req.query.nombre == "todos"){
-          let mensaje = "Productos según Colección ";
-          res.render("listProductGRALDB", { array: products, mensaje: mensaje });
-          return res.json(products)
-         
-        })
-      
-    }
-    if(busca === "T"){
+          let mensaje = "Tu Selección de Productos por Año Lanzamiento";
+          let mensaje2 = products[0].pYear.year_name;
+          res.render("listProductGRALDB", { array: products, mensaje: mensaje })
+         // return res.json(products)
+        })  
+    break; 
+    case "T": 
       db.Product.findAll({
         where :{
           id_type : idBusca
@@ -908,24 +905,31 @@ const controller = {
         } )
         .then(function(products){
          // if(req.query.nombre == "todos"){
-          let mensaje = "Productos según Colección ";
-          res.render("listProductGRALDB", { array: products, mensaje: mensaje });
-          return res.json(products)
+          let mensaje = "Tu Selección de Productos ";
+          let mensaje2=products[0].pType.type_name;
+         res.render("listProductGRALDB", { array: products, mensaje: mensaje,mensaje2:mensaje2 })
+          //return res.json(products)
          
         })
-    }
-    if (req.query.busca === "TODOS"){
-      db.Product.findAll({
-        
+     break;
+    case  "all":
+      db.Product.findAll({  
           include : ["pType","pColection","pYear","coloresDB"]
         } )
         .then(function(products){
          // if(req.query.nombre == "todos"){
           let mensaje = "Todos los productos Disponibles ";
-          res.render("listProductGRALDB", { array: products, mensaje: mensaje });
-          return res.json(products)
-         
+          let mensaje2= "";
+          res.render("listProductGRALDB", { array: products, mensaje: mensaje,mensaje2:mensaje2 })
+          //return res.json(products)  
         })
+      break;
+      case "O":
+        let mensaje= "SELECCIONÁ EL ICONO % EN LA BARRA para ver las OFertas de la Semana ";
+        res.render("mensajesDB",{mensaje:mensaje});
+      break;
+      default :
+      res.send ("error en búsqueda")
     }
   },
   carrito: (req, res) => {

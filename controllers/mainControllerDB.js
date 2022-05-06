@@ -9,7 +9,7 @@ const sequelize = db.sequelize;
 const mainControllerDB = {
     home: (req, res) => {
         let producto = db.Product.findAll({
-          include: ["pType"]
+          include: ["pType","pYear","pColection"]
         })
         let types = db.ProductType.findAll();
         let colections= db.ProductColection.findAll();

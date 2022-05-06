@@ -22,7 +22,7 @@
         <%- include('partials/header') %>
 <main>
         <div class="altaProductLogo">
-            <h3><%= mensaje %>  </h3>
+          
          <ul>      
             <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
             <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
@@ -32,8 +32,9 @@
            <!--- <form action="/bproduct/delete/id?_method=DELETE" method="POST" >  --> 
                 <div class="descriptionProduct"> 
                     <br/>                     
-                    <p > PRODUCTOS DISPONIBLES </p> 
-                    <h3><%= array[0].pType.type_name %></h3>
+                   
+                    <h3><%= mensaje %></h3>
+                    <h3 id="buscaH3"><%= mensaje2 %></h3>
                     <div class = "listadoEnBaseGral">
                     <ul>
                         <% for( let i = 0; i < array.length; i++ ) { %>

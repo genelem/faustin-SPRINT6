@@ -1,6 +1,6 @@
 <!DOCTYPE html>
- 
-<html>
+<html lang="en"> 
+
     <head>
         <meta charset="UTF-8">
         <title>Home</title>
@@ -18,7 +18,54 @@
     </head>
  
     <body>
-        <%- include('partials/header') %>
+        <header class="header">
+            <!--<div class="cointainer, logo-nav-container">-->  
+           <!-- <div class="form" action="#" method="GET">-->
+             <div class="barraBusqueda">
+                 <form action="/bproduct/buscarPorBarra" method="GET">
+                         <select name ="busca"  class="selectBuscaBarra">
+                         <option value="">QUE ESTAS BUSCANDO ? </option>
+                         <option value="all">Todos los productos </option>
+                         <option value="O">OFERTAS de la SEMANA </option>
+                         <% for (i=0 ; i < anios.length ; i++) { %>
+                         <option  value = "Y <%= anios[i].id %>">AÑO:<%= anios[i].year_name %> </option>
+                         <% } %> 
+                        <% for (i=0 ; i < colecciones.length ; i++) { %>
+                        <option value = "C <%= colecciones[i].id %>">COLECCION:<%= colecciones[i].colection_name %></option>
+                        <% } %> 
+                       
+                        <% for (i=0 ; i < tipos.length ; i++) { %>
+                        <option value = "T <%= tipos[i].id %>"> TIPO :<%=tipos[i].type_name %></option>
+                        <% } %>
+                        
+                                
+                         </select>
+                         <button id="botonSearch" value="busca" type="submit" aria-placeholder="fa fa-search"><i class="fa fa-search"></i></button>
+          
+             </div>
+                             
+          
+            <div class="logo-nav-container">
+                <div class="Faustine">
+                    <img  class="logoF" src="/images/LogoFaustine-header.jpg">
+                    <h3> Faustine </h3>
+                </div>
+                
+                <div class="imgs">
+                 <a href= "/busers/login"><i class="fas fa-user-circle"></i></a>
+                 <a href= "/busers/list"><img id="saleLogo" src="/images/address-book-solid.svg"></a>                      
+                 <a href= "/users/cerrarSesion"><img id="saleLogo" src="/images/right-from-bracket-solid.svg"></a>                      
+                 <a href= "/product/carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                 <!--<a href= "/bproduct/altaProduct"><i class="fas fa-file-alt"></i></a>-->
+              <!---   <a href= "/bproduct/opciones">OPCIONES BASE DE DATOS </a> -->
+                <!--- <a href= "/product/bajaProducto"><i class="fa-regular fa-trash-can"></i></a>-->
+                <a href="/bproduct/opciones"><img id="borrarIcon" src="/images/trash-can-solid.svg"></a>
+                 <a href= "/product/ofertas"><img id="saleLogo" src="/images/icono.sale.png"></a>              
+   
+                </div>
+            </div>
+        </header>
+  
         
     <body class="body1">
 

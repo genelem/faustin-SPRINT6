@@ -50,6 +50,13 @@ div .producto {
     flex-wrap: wrap;  
     flex-direction: column;
 }
+/* agrego para el listado de la barra de búsqueda */
+#buscaH3 {
+    color:darkred;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
 /*.izquierda{
     width: 50%;
     height: 50%;

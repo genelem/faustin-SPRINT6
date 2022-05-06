@@ -1,27 +1,8 @@
 
         <header class="header">
                <!--<div class="cointainer, logo-nav-container">-->  
-              <!-- <div class="form" action="#" method="GET">-->
-                <div class="barraBusqueda">
-                    <form action="/bproduct/buscarPorBarra" method="GET">
-                            <select name ="busca"  class="selectBuscaBarra">
-                            <option value="">QUE ESTAS BUSCANDO ? </option>
-                            <option value="todos">Todos los productos </option>
-                            <option value="nombre">nombre del producto </option>
-                            <% for (i=0 ; i < anios.length ; i++) { %>
-                                <option  value = "Y <%= anios[i].id %>">AÑO:<%= anios[i].year_name %> </option>
-                                 <% } %>
-                            <% for (i=0 ; i < colecciones.length ; i++) { %>
-                                <option value = "C <%= colecciones[i].id %>">COLECCION: <%= colecciones[i].colection_name %></option>
-                                 <% } %> 
-                            <% for (i=0 ; i < tipos.length ; i++) { %>
-                                <option value = "T <%= tipos[i].id %>"> TIPO :<%=tipos[i].type_name %></option>
-                            <% } %>        
-                            </select>
-                            <button id="botonSearch" value="busca" type="submit" aria-placeholder="fa fa-search"><i class="fa fa-search"></i></button>
-             
-                </div>
-                                
+
+              <!-- <div class="form" action="#" method="GET">-->     
              
                <div class="logo-nav-container">
                    <div class="Faustine">
