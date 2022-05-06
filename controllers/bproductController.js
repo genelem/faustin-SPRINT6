@@ -644,11 +644,11 @@ const controller = {
           },
         }).then(function (productColorProduct) {
           //return res.json(productColorProduct)
-          let suma = productColorProduct.quantity + req.body.cantidad[i];
+         suma = productColorProduct.quantity + req.body.cantidad[i];
 
           db.ProductColorProduct.update(
             {
-              quantity: quantiy + req.body.contadidad[i],
+              quantity: suma,
               dispach: req.body.remito[i],
             },
             {
