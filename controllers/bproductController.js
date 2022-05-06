@@ -601,7 +601,9 @@ const controller = {
 
     db.Product.findAll({
       order: [["id", "ASC"]],
+      include: ["coloresDB"]
     }).then(function (products) {
+     //return res.json(products)
       if (products) {
         res.render("listProdRtosDB", { array: products });
       } else {
@@ -614,7 +616,6 @@ const controller = {
       where: {
         id: req.params.id,
       },
-
       include: ["coloresDB"],
     });
     let coloresProd = db.ProductColorProduct.findAll({
@@ -638,13 +639,8 @@ const controller = {
     if (req.body) {
       let suma = 0;
       for (i = 0; i < req.body.idRegistro.length; i++) {
-        db.ProductColorProduct.findOne({
-          where: {
-            id: req.body.idRegistro[i],
-          },
-        }).then(function (productColorProduct) {
-          //return res.json(productColorProduct)
-         suma = productColorProduct.quantity + req.body.cantidad[i];
+        
+         suma = req.body.cantidadStock[i] + req.body.cantidad[i];
 
           db.ProductColorProduct.update(
             {
@@ -657,7 +653,7 @@ const controller = {
               },
             }
           );
-        });
+        
       } // el del for
     } else {
       res.send("ver que pasó ");

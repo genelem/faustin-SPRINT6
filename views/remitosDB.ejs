@@ -40,8 +40,9 @@
                     <p><label id="" for ="descripcionProducto">DETALLE  </label>
                         <input placeholder="" type="text" name="description2" id="user1" value="<%= producto.description2 %>"></p>  
                     <br/> 
-                    <p><label id="" for ="descripcionProducto">ID   </label>
-                        <input placeholder="" type="text" name="id" id="user1" value="<%= producto.id %>"></p>  
+                    <!-- aquí el ID del placeholder es user1 pero aqui pongo noSeVe-->
+                    <p><label id="noSeVe" for ="descripcionProducto">ID   </label>
+                        <input placeholder="" type="text" name="id" id="noSeVe" value="<%= producto.id %>"></p>  
                     <br/>    
                     <p><img id="imagenProducto" src="<%= producto.imagenPPAL %>"></p>
                                        
@@ -53,20 +54,23 @@
                     <p> Ingrese cantidad/remito por cada COLOR-PRODUCTO :</p>
                     <br/>
                     <% for(i=0 ;i< coloresProd.length ; i++ ){ %> 
-                    <p><label id="" for ="idRegistro">el registro de productColorProduct</label>        
-                        <input placeholder="" type="number"  name="idRegistro" id="user" value="<%= coloresProd[i].id %>"></p>
+                    <p><label id="noSeVe" for ="idRegistro">el registro de productColorProduct</label> 
+                        <!-- aquí el id debería ser user pero ahora le pongo noSeVe-->       
+                        <input placeholder="" type="number"  name="idRegistro" id="noSeVe" value="<%= coloresProd[i].id %>"></p>
                         <br/>
-                    <p><label id="" for ="idColor">Id de Color</label>        
-                    <input placeholder="" type="number"  name="idColor" id="user" value="<%= coloresProd[i].id_color %>"></p>
+                    <p><label id="noSeVe" for ="idColor">Id de Color</label>        
+                    <input placeholder="" type="number"  name="idColor" id="noSeVe" value="<%= coloresProd[i].id_color %>"></p>
                     <br/>
                     <p id="remitoColor"><%= coloresProd[i].color_name %></p>
                     <p><label id="" for ="cantidad">CANTIDAD</label>
                     <p>COLOR <%= producto.coloresDB[i].color_name %> ID: <%= producto.coloresDB[i].id %></p>
-                    <input placeholder="" type="number"  name="cantidad" id="user" value="<%= coloresProd[i].quantity %>"></p>
+                    Cantidad en Stock<input placeholder="" type="number"  name="cantidadStock" id="user" value="<%= coloresProd[i].quantity %>"></p>
+                    <input placeholder="" type="number"  name="cantidad" id="user" value="">Ingrese Cantidad</p>
                     <br/>
                    
                     <p><label id="" for ="remito">REMITO</label>
-                        <input placeholder="" type="text"  name="remito" id="user" value="<%= coloresProd[i].dispach %>"></p>
+                     Ultimo Remito <input placeholder="" type="text"  name="remitoStock" id="user" value="<%= coloresProd[i].dispach %>"></p>
+                     Nuevo REmito<input placeholder="" type="text"  name="remito" id="user" value="">NUEVO REmito</p>
                     <br/>
                     <% if(locals.errorsProd && locals.errorsProd.cantidad){ %>
                         <span id="errorMsge" > <%= errorsProd.cantidad.msg  %> </span>
