@@ -70,25 +70,31 @@
     <body class="body1">
 
     <main>
-        <!-- partial:index.partial.html -->
+      
 <div class="slider">
 	<div class="slide-track">
+      <% for (i=4 ; i< 18 ; i++) { %>
 		<div class="slide">
-			<!--<img id="imgBarra" src="images/gucci.1.SinFondo.png" height="100" width="250" alt="" />-->
-            <img id="imgBarra" src="images/gucci.1.SinFondo.png">
+           <a href="/bproduct/detalle/<%= producto[i].id %>"><img id= "imgBarra" src="images/<%= producto[i].image_ppal %>"></a>
+			<!--<img id="imgBarra" src="images/gucci.1.SinFondo.png" height="100" width="250" alt="" >-->
+            <!--<img id="imgBarra" src="images/gucci.1.SinFondo.png">-->
 		</div>
+        <% } %>
+      
+     <!---   
 		<div class="slide">
-			<!--<img id="imgBarra" src="images/dymsSinFondo.png" height="100" width="250" alt="" />-->
+			
             <img id="imgBarra" src="images/bandoleraHombre1SinFondo.png">
 
 		</div>
+        
 		<div class="slide">
-			<!--<img id="imgBarra" src="images/carteraLouisRosa1.jpg" height="100" width="250" alt="" />-->
+			
             <img id="imgBarraMediana" src="images/dymsSinFondo.png">
 
 		</div>
 		<div class="slide">
-			<!--<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/4.png" height="100" width="250" alt="" />-->
+			
             <img id="imgBarraGrande" src="images/bandoleraLouisSinFondo.png">
 		</div>
 		<div class="slide">
@@ -98,6 +104,7 @@
 		<div class="slide">
 			<img id="imgBarra" src="images/bandoleraAzulSinFondo.png" >
 		</div>
+        
 		<div class="slide">
 			<img id="imgBarra" src="images/mochilaGucciSinFondo.png">
 		</div>
@@ -105,11 +112,13 @@
 			<img id="imgBarra" src="images/bandoleraRojaSinFondo.png" >
 		</div>
 		<div class="slide">
+            
 			<img id="imgBarraGrande" src="images/carteraColoresSinFondo.png" >
 		</div>
 		<div class="slide">
 			<img id="imgBarra" src="images/bolsoLuoisSinFondo.png" >
 		</div>
+        
 		<div class="slide">
 			<img id="imgBarraGrande" src="images/mochilaColoresSinFondo.png" >
 		</div>
@@ -122,9 +131,11 @@
 		<div class="slide">
 			<img id="imgBarra" src="images/mochilaGverdeSinFondo" >
 		</div>
+
+    -->
 	</div>
 </div>
-<!-- partial -->
+
 
             <section class="productos">
                 <div class="derecha">
