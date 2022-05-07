@@ -22,7 +22,7 @@
         <%- include('partials/header') %>
 <main>
             <div class="altaProductLogo">
-                <h3>ACTUALIZAR CANTIDADES POR COLOR del PRODUCTO </h3>
+                <h3>ACTUALIZAR STOCK  PRODUCTO/COLOR </h3>
                 <ul>      
                 <li><img id="trashLogo" src ="/images/trash-can-solid.svg"></li>
                 <li><a href="#modal2">Importante<i class="fas fa-user-edit"></i></a></li>
@@ -58,19 +58,19 @@
                         <!-- aquí el id debería ser user pero ahora le pongo noSeVe-->       
                         <input placeholder="" type="number"  name="idRegistro" id="noSeVe" value="<%= coloresProd[i].id %>"></p>
                         <br/>
-                    <p><label id="noSeVe" for ="idColor">Id de Color</label>        
+                    <p><label id="noSeVe" for ="idColor">Código del Producto</label>        
                     <input placeholder="" type="number"  name="idColor" id="noSeVe" value="<%= coloresProd[i].id_color %>"></p>
                     <br/>
                     <p id="remitoColor"><%= coloresProd[i].color_name %></p>
-                    <p><label id="" for ="cantidad">CANTIDAD</label>
+                    <p><label id="" for ="cantidad"></label>
                     <p>COLOR <%= producto.coloresDB[i].color_name %> ID: <%= producto.coloresDB[i].id %></p>
                     Cantidad en Stock<input placeholder="" type="number"  name="cantidadStock" id="user" value="<%= coloresProd[i].quantity %>"></p>
-                    <input placeholder="" type="number"  name="cantidad" id="user" value="">Ingrese Cantidad</p>
+                    Ingreses Cantidad <input placeholder="" type="number"  name="cantidad" id="user" value=""></p>
                     <br/>
                    
                     <p><label id="" for ="remito">REMITO</label>
                      Ultimo Remito <input placeholder="" type="text"  name="remitoStock" id="user" value="<%= coloresProd[i].dispach %>"></p>
-                     Nuevo REmito<input placeholder="" type="text"  name="remito" id="user" value="">NUEVO REmito</p>
+                     Nuevo Remito<input placeholder="" type="text"  name="remito" id="user" value=""></p>
                     <br/>
                     <% if(locals.errorsProd && locals.errorsProd.cantidad){ %>
                         <span id="errorMsge" > <%= errorsProd.cantidad.msg  %> </span>
@@ -112,4 +112,4 @@
             <%- include('partials/footer') %>                
         </footer>   
 
-   </html > 
+</html > 

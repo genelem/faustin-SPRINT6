@@ -636,12 +636,11 @@ const controller = {
   },
   storeRemitos: (req, res) => {
     const errors = validationResult(req);
+    console.log (req.body)
     if (req.body) {
       let suma = 0;
       for (i = 0; i < req.body.idRegistro.length; i++) {
-        
-         suma = req.body.cantidadStock[i] + req.body.cantidad[i];
-
+         suma = parseInt(req.body.cantidadStock[i]) + parseInt( req.body.cantidad[i] );
           db.ProductColorProduct.update(
             {
               quantity: suma,
@@ -756,9 +755,10 @@ const controller = {
       include: ["pType"],
     }).then(function (products) {
       if (products) {
+        let mensaje2=""
         let mensaje = "TIPOS DE PRODUCTOS ";
         //return res.json(products)
-        res.render("listProductGRALDB", { array: products, mensaje: mensaje });
+        res.render("listProductGRALDB", { array: products, mensaje: mensaje , mensaje2:mensaje2 });
       } else {
         let mensaje = "no hay productos disponibles";
         res.render("mensajesDB", { mensaje: mensaje });
