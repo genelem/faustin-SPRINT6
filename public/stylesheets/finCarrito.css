@@ -29,6 +29,10 @@ div.datosFacturacion{
     width: 20%;
     border-radius: 7px;
 }
+/* agregué para que no se vea */
+#noSeVe {
+    display: none;
+}
 div.seleccionDistribucion, div.seleccionCuotas{
     margin:1rem 0 1rem 0;
 }

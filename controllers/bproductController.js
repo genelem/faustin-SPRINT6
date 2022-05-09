@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const modelCrud = require("../data/modelCrud");
 //const {validationResult, body} = require("express-validator")
 const { validationResult, body } = require("express-validator");
 
@@ -604,9 +605,9 @@ const controller = {
 
     db.Product.findAll({
       order: [["id", "ASC"]],
-      include: ["coloresDB"]
+      include: ["coloresDB"],
     }).then(function (products) {
-     //return res.json(products)
+      //return res.json(products)
       if (products) {
         res.render("listProdRtosDB", { array: products });
       } else {
@@ -639,23 +640,23 @@ const controller = {
   },
   storeRemitos: (req, res) => {
     const errors = validationResult(req);
-    console.log (req.body)
+    console.log(req.body);
     if (req.body) {
       let suma = 0;
       for (i = 0; i < req.body.idRegistro.length; i++) {
-         suma = parseInt(req.body.cantidadStock[i]) + parseInt( req.body.cantidad[i] );
-          db.ProductColorProduct.update(
-            {
-              quantity: suma,
-              dispach: req.body.remito[i],
+        suma =
+          parseInt(req.body.cantidadStock[i]) + parseInt(req.body.cantidad[i]);
+        db.ProductColorProduct.update(
+          {
+            quantity: suma,
+            dispach: req.body.remito[i],
+          },
+          {
+            where: {
+              id: req.body.idRegistro[i],
             },
-            {
-              where: {
-                id: req.body.idRegistro[i],
-              },
-            }
-          );
-        
+          }
+        );
       } // el del for
     } else {
       res.send("ver que pasó ");
@@ -665,154 +666,186 @@ const controller = {
   detail: (req, res) => {
     /*busco producto y oferta semanal */
     productoD = db.Product.findOne({
-      where :{
-        id : req.params.id
+      where: {
+        id: req.params.id,
       },
-   
+
       include: ["pType", "pYear", "pColection", "coloresDB"],
-  })
-  ofertaD = db.ProductSale.findOne({
-    where : {
-      id_product : req.params.id
-    }
-  })
-  Promise.all([productoD,ofertaD]).then(function ([
-    product,
-    productSale,
-  ]) { if (productSale){
-    return res.render ("detallProdNuevoDB",{producto:product,oferta:productSale})
-  }else{
-    oferta =[];
-    return res.render("detallProdNuevoDB",{producto:product,oferta:productSale})
-  }
-})
+    });
+    ofertaD = db.ProductSale.findOne({
+      where: {
+        id_product: req.params.id,
+      },
+    });
+    Promise.all([productoD, ofertaD]).then(function ([product, productSale]) {
+      if (productSale) {
+        return res.render("detallProdNuevoDB", {
+          producto: product,
+          oferta: productSale,
+        });
+      } else {
+        oferta = [];
+        return res.render("detallProdNuevoDB", {
+          producto: product,
+          oferta: productSale,
+        });
+      }
+    });
   },
   comprar: async (req, res) => {
-    console.log(req.body.cantidadProducto + "es body cantidaProducto")
-    console.log(req.body.precio + "es body precio")
-    if ( !req.session.usuarioLogueado) {
-      res.render("loginDB")
-    }else {
-      // cargo las bases que quiero usar
-      try {
-        let impuesto = await db.UserTax.findOne({
-          where:{
-            id_user : req.session.usuarioLogueado.id
-          }
-        })
-        if (!impuesto) {
-          res.render("formularioTaxesDB")
-        } else {// de impuesto
-          let aux3 = 0
-          let precioBody = parseInt(req.body.precio);
-          let dtoBody = parseInt(req.body.descuento)
-          let precioSub= precioBody * parseInt(req.body.cantidadProducto)
-          let dto = 100-dtoBody
-          
-          let aux2 = 0
-          aux3 = 100/dto
-          let aux1= precioSub * aux3
-          
-          if (req.body.ofertaSem != undefined){
-           
-            let saleBody = parseInt(req.body.ofertaSem)
-            let sale = 100-saleBody ;
-            aux3 = 0.01 * sale
-            aux2 = aux1 * aux3
-           
-          } else { // de ofertaSem
-            aux2 = aux1 
-          }
-        
-        
-          let compra = await db.InvoiceItem.create({
-              id_product : req.params.id,
-              quantity : req.body.cantidadProducto,
-              item_u_price : aux2,
-              id_user : req.session.usuarioLogueado.id,
-              made:0
+    if (!req.session.usuarioLogueado) {
+      res.render("loginDB");
+    } else {
+      const errors = validationResult(req);
 
-          })
-          let otrasCompras = await db.InvoiceItem.findAll({
-            where :{
-              id_user : req.session.usuarioLogueado.id,
-              made : 0
+      if (errors.errors.length > 0) {
+        res.render("detallProdNuevoDB", { errorsProd: errors });
+      } else {
+        // cargo las bases que quiero usar
+        try {
+          let impuesto = await db.UserTax.findOne({
+            where: {
+              id_user: req.session.usuarioLogueado.id,
             },
-            include : ["itemProduct"],
-          })
-          //return res.json(otrasCompras)
+          });
+          if (!impuesto) {
+            res.render("formularioTaxesDB");
+          } else {
+            // de impuesto
+            let aux3 = 0;
+            let precioBody = parseInt(req.body.precio);
+            let dtoBody = parseInt(req.body.descuento);
+            let precioSub = precioBody * parseInt(req.body.cantidadProducto);
+            let dto = 100 - dtoBody;
 
-          let suma = 0 ;
-          for (i= 0 ; i< otrasCompras.length ; i++){
-            suma = suma + otrasCompras.price_u_item ;
-          }
-          res.render ("carritoDB",{compras:otrasCompras,suma:suma})
-        } // el else de impuestos
-        } // cierra el try
-        catch(error){
-          console.log(error)
+            let aux2 = 0;
+            aux3 = dto * 0.01;
+            let aux1 = precioSub * aux3;
+
+            if (req.body.ofertaSem != undefined) {
+              let saleBody = parseInt(req.body.ofertaSem);
+              let sale = 100 - saleBody;
+              aux3 = sale * 0.01;
+              aux2 = aux1 * aux3;
+            } else {
+              // de ofertaSem
+              aux2 = aux1;
+            }
+
+            let compra = await db.InvoiceItem.create({
+              id_product: req.params.id,
+              quantity: req.body.cantidadProducto,
+              item_u_price: aux2,
+              id_user: req.session.usuarioLogueado.id,
+              made: 0,
+            });
+            let otrasCompras = await db.InvoiceItem.findAll({
+              where: {
+                id_user: req.session.usuarioLogueado.id,
+                made: 0,
+              },
+              include: ["itemProduct"],
+            });
+            //return res.json(otrasCompras)
+
+            let suma = 0;
+            montoItem = 0;
+            //return res.json(otrasCompras)
+            for (i = 0; i < otrasCompras.length; i++) {
+              if (
+                otrasCompras.item_u_price !== 0 ||
+                otrasCompras.item_u_price !== undefined
+              ) {
+                montoItem = parseInt(otrasCompras.price_u_item);
+                suma = suma + montoItem;
+                console.log("montoItem = "+ montoItem + "suma es = "+ suma)
+              } // fin del if
+            }
+
+            //res.send("suma es igual a = " + suma)
+            //res.send("el montoItem es = " + montoItem)
+            res.render("carritoDB", { compras: otrasCompras, suma: suma });
+          } // el else de impuestos
+        } catch (error) {
+          // cierra el try
+          console.log(error);
         }
-      }
+      } // fin if errors
+    } // fin usuarioLogueado
   },
-  borraCarrito :  (req,res) =>{
+  borraCarrito: (req, res) => {
+    if (req.session.usuarioLogueado.id) {
       db.InvoiceItem.destroy({
-        where:{
-          id_user : req.session.usuarioLogueado.id,
-          made : 0
-        }
-      }).then(function( ){
+        where: {
+          id_user: req.session.usuarioLogueado.id,
+          made: 0,
+        },
+      }).then(function () {
         let mensaje = "Se ha eliminado compras en CARRITO ";
-        res.render("mensajeDB",{mensaje:mensaje})
-      })
+        return res.render("mensajesDB", { mensaje: mensaje });
+      });
+    } else {
+      // de usaurio Logueado
+      res.render("loginDB");
+    }
   },
-  finComprar:(req,res)=>{
-    let facturacion = productModel.find(0);
-    res.render("finCarritoDB",{facturacion:facturacion,suma:req.params.suma})
+  finComprar: (req, res) => {
+    let row = productModel.find(0);
+
+    res.render("finCarritoDB", { facturacion: row, suma: req.params.suma });
   },
-  creaFactura: async(req,res)=>{
+  creaFactura: async (req, res) => {
     // falta validationResults
+    const errors = validationResult(req);
+
+      if (errors.errors.length > 0) {
+        res.render("finCarritoDB", { errorsProd: errors });
+      } else
+       {
     let factura = await db.Invoice.create({
-        number : req.body.nroFact,
-        id_user : req.session.usuarioLogueado.id,
-        delivery_dir: req.body.direccion,
-        delivery_cost:req.body.costoDistribucion
-    })
+      number: req.body.nroFact,
+      id_user: req.session.usuarioLogueado.id,
+      delivery_dir: req.body.direccion,
+      delivery_cost: req.body.costoDistribucion,
+    });
     let items = await db.InvoiceItem.findAll({
-      where:{
-        id_user : req.session.usuarioLogueado.id,
-        made : 0
-      }
-    })
+      where: {
+        id_user: req.session.usuarioLogueado.id,
+        made: 0,
+      },
+    });
     // actualiza el nro de factura en JSON
     let facturacion = productModel.find(0);
     let numeroFact = facturacion.numero + 1;
     let facturaData = {
-      id:0,
-      numero : numeroFact,
-      standard : facturacion.standard,
-      premiun: facturacion.premiun
-    }
-    productModel.update(facturacionData);
-    let actualiza = {}
+      id: 0,
+      numero: numeroFact,
+      standard: facturacion.standard,
+      premiun: facturacion.premiun,
+    };
+    productModel.update(facturaData);
+    let actualiza = [];
     // actualiza InvoiceItem
-    for (i= 0 ; i< items.length ; i++){
-      actualiza = await db.InvoiceItem.update({
-        made: numeroFact 
-      },{
-        where: {
-          id_user : req.session.usuarioLogueado.id
+    for (i = 0; i < items.length; i++) {
+      actualiza = await db.InvoiceItem.update(
+        {
+          made: numeroFact,
+        },
+        {
+          where: {
+            id_user: req.session.usuarioLogueado.id,
+          },
         }
-      })
+      );
     }
-
+  }
   },
   altaTaxes: (req, res) => {
     res.render("formularioTaxesDB");
   },
   storeTaxes: (req, res) => {
     const errors = validationResult(req);
-    console.log("el req. es = " + req);
-    console.log("errors es " + errors);
+
     if (errors.errors.length > 0) {
       res.render("formularioTaxesDB", { errorsProd: errors });
     } else {
@@ -848,10 +881,14 @@ const controller = {
       include: ["pType"],
     }).then(function (products) {
       if (products) {
-        let mensaje2=""
+        let mensaje2 = "";
         let mensaje = "TIPOS DE PRODUCTOS ";
         //return res.json(products)
-        res.render("listProductGRALDB", { array: products, mensaje: mensaje , mensaje2:mensaje2 });
+        res.render("listProductGRALDB", {
+          array: products,
+          mensaje: mensaje,
+          mensaje2: mensaje2,
+        });
       } else {
         let mensaje = "no hay productos disponibles";
         res.render("mensajesDB", { mensaje: mensaje });
@@ -931,7 +968,7 @@ const controller = {
         }
       });
     } else {
-      for (i =0 ; i < req.body.producto.length; i++) {
+      for (i = 0; i < req.body.producto.length; i++) {
         db.ProductSale.update(
           {
             dtoSale: req.body.descuento,
@@ -948,77 +985,88 @@ const controller = {
       res.render("mensajesDB", { mensaje: mensaje });
     } // fin del else
   },
-  search: (req,res) =>{
+  search: (req, res) => {
     //console.log(req.query.busca[o])
-    console.log("en el query viene... "+ req.query.busca)
-    let verprimera = req.query.busca.split(' ');
+    console.log("en el query viene... " + req.query.busca);
+    let verprimera = req.query.busca.split(" ");
     let busca1 = verprimera[0];
-    let idBusca = verprimera[1] ;
-    console.log("la primer letra es "+  verprimera[0]);
-    switch (busca1){
-      case "C" :
-     db.Product.findAll({
-      where :{
-      id_colection : idBusca
-    },
-      include : ["pType","pColection","pYear","coloresDB"]
-    } )
-    .then(function(products){
-     // if(req.query.nombre == "todos"){
-      let mensaje = "Productos según Colección ";
-      mensaje2= products[0].pColection.colection_name;
-      res.render("listProductGRALDB", { array: products, mensaje: mensaje, mensaje2:mensaje2}) 
-    })
-    break;
-    case "Y":
-      db.Product.findAll({
-        where :{
-          id_year : idBusca
-        },
-          include : ["pType","pColection","pYear","coloresDB"]
-        } )
-        .then(function(products){
-         // if(req.query.nombre == "todos"){
+    let idBusca = verprimera[1];
+    console.log("la primer letra es " + verprimera[0]);
+    switch (busca1) {
+      case "C":
+        db.Product.findAll({
+          where: {
+            id_colection: idBusca,
+          },
+          include: ["pType", "pColection", "pYear", "coloresDB"],
+        }).then(function (products) {
+          // if(req.query.nombre == "todos"){
+          let mensaje = "Productos según Colección ";
+          mensaje2 = products[0].pColection.colection_name;
+          res.render("listProductGRALDB", {
+            array: products,
+            mensaje: mensaje,
+            mensaje2: mensaje2,
+          });
+        });
+        break;
+      case "Y":
+        db.Product.findAll({
+          where: {
+            id_year: idBusca,
+          },
+          include: ["pType", "pColection", "pYear", "coloresDB"],
+        }).then(function (products) {
+          // if(req.query.nombre == "todos"){
           let mensaje = "Tu Selección de Productos por Año Lanzamiento";
           let mensaje2 = products[0].pYear.year_name;
-          res.render("listProductGRALDB", { array: products, mensaje: mensaje })
-         // return res.json(products)
-        })  
-    break; 
-    case "T": 
-      db.Product.findAll({
-        where :{
-          id_type : idBusca
-        },
-          include : ["pType","pColection","pYear","coloresDB"]
-        } )
-        .then(function(products){
-         // if(req.query.nombre == "todos"){
+          res.render("listProductGRALDB", {
+            array: products,
+            mensaje: mensaje,
+          });
+          // return res.json(products)
+        });
+        break;
+      case "T":
+        db.Product.findAll({
+          where: {
+            id_type: idBusca,
+          },
+          include: ["pType", "pColection", "pYear", "coloresDB"],
+        }).then(function (products) {
+          // if(req.query.nombre == "todos"){
           let mensaje = "Tu Selección de Productos ";
-          let mensaje2=products[0].pType.type_name;
-         res.render("listProductGRALDB", { array: products, mensaje: mensaje,mensaje2:mensaje2 })
+          let mensaje2 = products[0].pType.type_name;
+          res.render("listProductGRALDB", {
+            array: products,
+            mensaje: mensaje,
+            mensaje2: mensaje2,
+          });
           //return res.json(products)
-         
-        })
-     break;
-    case  "all":
-      db.Product.findAll({  
-          include : ["pType","pColection","pYear","coloresDB"]
-        } )
-        .then(function(products){
-         // if(req.query.nombre == "todos"){
+        });
+        break;
+      case "all":
+        db.Product.findAll({
+          include: ["pType", "pColection", "pYear", "coloresDB"],
+        }).then(function (products) {
+          // if(req.query.nombre == "todos"){
           let mensaje = "Todos los productos Disponibles ";
-          let mensaje2= "";
-          res.render("listProductGRALDB", { array: products, mensaje: mensaje,mensaje2:mensaje2 })
-          //return res.json(products)  
-        })
-      break;
+          let mensaje2 = "";
+          res.render("listProductGRALDB", {
+            array: products,
+            mensaje: mensaje,
+            mensaje2: mensaje2,
+          });
+          //return res.json(products)
+        });
+        break;
       case "O":
-        let mensaje= "SELECCIONÁ EL ICONO % EN LA BARRA para ver las OFertas de la Semana ";
-        res.render("mensajesDB",{mensaje:mensaje});
-      break;
-      default :
-      res.send ("error en búsqueda")
+        let mensaje =
+          "SELECCIONÁ EL ICONO % EN LA BARRA para ver las OFertas de la Semana ";
+        res.render("mensajesDB", { mensaje: mensaje });
+        break;
+      default:
+        res.send("error en búsqueda");
     }
   },
   carrito: (req, res) => {

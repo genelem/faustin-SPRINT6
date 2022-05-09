@@ -52,10 +52,13 @@ router.get("/probar",bproductController.probar)
 router.get("/listarProdType/:id",bproductController.prodPorType)
 // proceso de compra 
 router.get("/detalle/:id",authMiddle,bproductController.detail)
+//router.post("/compra/:id",authMiddle,validatorSOLOProduct.detalleCompra,bproductController.comprar)
 router.post("/compra/:id",authMiddle,bproductController.comprar)
-router.post("/cierraCompra/:suma",authMiddle,bproductController.finComprar)
+router.get("/cierraCompra/:suma",authMiddle,bproductController.finComprar)
+
+//router.post("/registraCompra/:suma",authMiddle,validatorSOLOProduct.finCompra,bproductController.creaFactura)
 router.post("/registraCompra/:suma",authMiddle,bproductController.creaFactura)
-router.post("/cancelaCarrito",authMiddle,bproductController.borraCarrito)
+router.get("/cancelaCarrito",authMiddle,bproductController.borraCarrito)
 // impuestos
 router.get("/taxes",bproductController.altaTaxes)
 router.put("/taxes",validatorSOLOProduct.validaTax,bproductController.storeTaxes)

@@ -47,7 +47,7 @@
         <article class="primerProducto">
             <div><img width="320" height="320" src="/images/<%= compras[i].itemProduct.image_ppal %>" alt= "Cartera"></div>
             <div><b><label for="producto1" class="titulosDeProductos"><%= compras[i].itemProduct.name %></label></b>
-            <p>Cantidad= <%= compras[i].quantity</p>
+            <p>Cantidad= <%= compras[i].quantity %></p>
             <p>Precio Item = <%= compras[i].item_u_price %></p></div>
             <div class="botonAgregarEliminar"><input type= "button" name="producto1" id="producto1" value="+ 1 -" class="botonesAgregado"></div>
         </article>
@@ -75,7 +75,7 @@
     <section class="finalizarCompra">
         <div class="totalEnvio">             
                 <p><a href="#modal2">Importante <i class="fas fa-user-edit"></i></p>              
-                <h3 class="totalEnvio2">Total Compra SIN IVA ni Retenciones: <spam> $ <%= suma %> </spam><h3</div>            
+                <h3 class="totalEnvio2">Total Compra SIN IVA ni Retenciones: <spam> $ <%= suma.suma %> </spam><h3</div>            
         </div>
         <div class="finalizar"> 
             <!--- <p> <button type="submit" class="crearCuentaBoton">CREAR CUENTA</button> -->

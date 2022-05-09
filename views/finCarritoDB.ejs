@@ -25,20 +25,27 @@
             <!--<p id="logoCarrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p> -->
             <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>       
             <!--<h1>Carrito de Compras</h1></header>-->
-            <h3 class="totalEnvio2">Sub-Total Compra: <spam> $ 55.000 </spam></h3>
+            <h3 class="totalEnvio2">Sub-Total Compra: <spam> $ <%= suma %> </spam></h3>
             <input placeholder="" type="number" name="subTotal" id="noSeVe" value="<%= suma %>" ></p>
             <input placeholder="" type="number" name="nroFact" id="noSeVe" value="<%= facturacion.numero %>" ></p>
     </div>
-    <form action="/bproduct/registraCompra" method="POST">
+    <form action="/bproduct/registraCompra/<%= suma %>" method="POST">
         <div class="datosFacturacion">
             <p><label id="" for ="nombreProducto">DIRECCION ENTREGA</label>
             <input placeholder="" type="text" minlength="10" maxlength="45" name="direccion" id="direccion" required "[[A-Za-z ]{1,6}"></p>
-
+            <% if(locals.errorsProd && locals.errorsProd.color){ %>
+                <br/>
+                <p id="errorMsge"> <%= errorsProd.direccion.msg  %> </p>
+    <% } %> 
             <br/>
+
             <p><label id="" for ="descripcionProducto">CODIGO POSTAL</label>
                 <input placeholder="" type="text" minlength="4" maxlength="18" name="codigoPostal" id="codigoPostal" required "[[A-Za-z ]{1,6}"></p> 
-
             <br/> 
+    <% if(locals.errorsProd && locals.errorsProd.color){ %>
+                <br/>
+                <p id="errorMsge"> <%= errorsProd.codigoPostal.msg  %> </p>
+    <% } %> 
             <div class="seleccionDistribucion">
                 <h3>Tipo De Distribución</h3>
                 <div id="tipoDistribucion">
@@ -46,6 +53,10 @@
                     <option value ="<%= facturacion.standard %>">Standard:$ <%= facturacion.standard %> </option>
                     <option value ="<%= facturacion.premiun %>">Premiun :$ <%= facturacion.premiun %></option>                     
                 </select>
+        <% if(locals.errorsProd && locals.errorsProd.color){ %>
+                    <br/>
+                    <p id="errorMsge"> <%= errorsProd.costoDistribucion.msg  %> </p>
+        <% } %> 
             </div> 
             <br/> 
             <div class="seleccionPago">
@@ -63,7 +74,7 @@
                 <label for=""><img id="idPago" src="/images/master.jpg"></label>
                 <input type="checkbox" id ="banco" name="banco" value="superman">
                 <label for="" class="iconoPago" ><i class="fa-solid fa-money-check"></i></label>
-  
+               
  
             </div>  
             <div class="seleccionCuotas">

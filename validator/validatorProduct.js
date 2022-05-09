@@ -94,6 +94,27 @@ const validatorP = {
             .notEmpty()               
             .withMessage("Debe Seleciona COLOR ")  
           
+    ],
+    detalleCompra:[
+        check("cantidadProducto")
+        .notEmpty()
+        .withMessage("Debe Indicar Cantidad que desea comprar"),
+        check("colores")
+        .notEmpty()
+        .withMessage("Debe ELEGIR un COLOR ")
+    ],
+    finCompra:[
+        check("direccion")
+        .notEmpty()
+        .withMessage("Debe Indicar direccion de entrega"),
+        check("codigoPostal")
+        .notEmpty()
+        .withMessage("Debe Indicar Codigo Postal "),
+        check("costoDistribucion")
+        .notEmpty()
+        .withMessage("Debe elegir TIPO DE DISTRIBUCION")
+
+
     ]
 }
 

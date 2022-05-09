@@ -77,6 +77,10 @@
                         <p> <label id="" for ="cantidadProducto">CANTIDAD ?</label>
                         <input id="cantidadPlace" placeholder="" type="number" min="1" pattern="^[0-9]+" name="cantidadProducto" id="user" ></p> 
                         <br/>
+                        <% if(locals.errorsProd && locals.errorsProd.color){ %>
+                            <br/>
+                            <p id="errorMsge"> <%= errorsProd.cantidadProducto.msg  %> </p>
+                <% } %> 
 
                     </div>
                     <br/>
@@ -87,15 +91,16 @@
                         <input class="noSeVe" placeholder="" type="number" name="descuento" id="user" value="<%= producto.dto %>"></p> 
                         <% if(oferta){ %>
                         <p><label id="" for ="ofertaSem">Oferta Semanal  :<%= oferta.dtoSale %> %</label>
-                            <input class="noSeVe" placeholder="" type="number" name="ofertaSem" id="user" value="<%= oferta.dtoSale.dto %>"></p>
+                            <input class="noSeVe" placeholder="" type="number" name="ofertaSem" id="user" value="<%= oferta.dtoSale %>"></p>
                         <% } %>
                     </div>
                  <br/>                       
                         <div class="seleccionColor">
-                            <h2>Elija Color </h2>
+                            <h2>Elija UN COLOR para su pedido</h2>
+                            <h2>Luego podrá volver a comprar el/los colores disponibles</h2>
                      <% if(locals.errorsProd && locals.errorsProd.color){ %>
                                 <br/>
-                                <p id="errorMsge"> <%= errorsProd.color.msg  %> </p>
+                                <p id="errorMsge"> <%= errorsProd.colores.msg  %> </p>
                     <% } %> 
                             <br/>
                             <div class="colores">
