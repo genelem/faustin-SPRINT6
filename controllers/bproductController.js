@@ -3,8 +3,11 @@ const path = require("path");
 //const {validationResult, body} = require("express-validator")
 const { validationResult, body } = require("express-validator");
 
+const productModel = modelCrud("factura");
+
 const db = require("../src/database/models");
 const req = require("express/lib/request");
+const { equal } = require("assert");
 
 const sequelize = db.sequelize;
 
@@ -660,58 +663,148 @@ const controller = {
     res.render("enlacesDB");
   },
   detail: (req, res) => {
-    /*busco producto */
-    db.Product.findOne({
-      where: {
-        id: req.params.id,
+    /*busco producto y oferta semanal */
+    productoD = db.Product.findOne({
+      where :{
+        id : req.params.id
       },
+   
       include: ["pType", "pYear", "pColection", "coloresDB"],
-    }).then(function (product) {
-      if (req.session.usuarioLogueado.id !== 0) {
-        req.session.usuarioLogueado.cprod = req.params;
-      }
-      //return res.json(product)
-      res.render("detallProdNuevoDB", { producto: product });
-      // ver que pasa con el params
-    });
-  },
-  comprar: (req, res) => {
-    if (req.session.usuarioLogueado) {
-      //res.send(req.session.usuarioLogueado.id)
-      db.UserTax.findOne({
-        where: {
-          id_user: req.session.usuarioLogueado.id,
-        },
-      }).then(function (userTax) {
-        if (!userTax) {
-          req.session.usuarioLogueado.cprod = req.params;
-          req.session.usuarioLogueado.cproduct = 1;
-          // ver como va el tema del cprod
-          res.render("formularioTaxesDB");
-        } else {
-          // ir a crear item-factura
-          let precio = req.body.precio * (100 / (100 - req.body.dto));
-          db.InvoiceItem.create({
-            // ver luego el tema de nro de factura
-            id_product: req.params.id,
-            quantity: req.body.cantidadProducto,
-            item_u_price: precio,
-
-            // falta calcular el precio con descuento
-            id_user: req.session.usuarioLogueado.id,
-          }).then(function () {
-            req.session.usuarioLogueado.cprod = req.params;
-            req.session.usuarioLogueado.cproduct =
-              req.session.usuarioLogueado.cproduct + 1;
-
-            //ver que hace falta en carrito
-            res.render("carritoDB");
-          });
-        }
-      });
-    } else {
-      res.render("loginDB");
+  })
+  ofertaD = db.ProductSale.findOne({
+    where : {
+      id_product : req.params.id
     }
+  })
+  Promise.all([productoD,ofertaD]).then(function ([
+    product,
+    productSale,
+  ]) { if (productSale){
+    return res.render ("detallProdNuevoDB",{producto:product,oferta:productSale})
+  }else{
+    oferta =[];
+    return res.render("detallProdNuevoDB",{producto:product,oferta:productSale})
+  }
+})
+  },
+  comprar: async (req, res) => {
+    console.log(req.body.cantidadProducto + "es body cantidaProducto")
+    console.log(req.body.precio + "es body precio")
+    if ( !req.session.usuarioLogueado) {
+      res.render("loginDB")
+    }else {
+      // cargo las bases que quiero usar
+      try {
+        let impuesto = await db.UserTax.findOne({
+          where:{
+            id_user : req.session.usuarioLogueado.id
+          }
+        })
+        if (!impuesto) {
+          res.render("formularioTaxesDB")
+        } else {// de impuesto
+          let aux3 = 0
+          let precioBody = parseInt(req.body.precio);
+          let dtoBody = parseInt(req.body.descuento)
+          let precioSub= precioBody * parseInt(req.body.cantidadProducto)
+          let dto = 100-dtoBody
+          
+          let aux2 = 0
+          aux3 = 100/dto
+          let aux1= precioSub * aux3
+          
+          if (req.body.ofertaSem != undefined){
+           
+            let saleBody = parseInt(req.body.ofertaSem)
+            let sale = 100-saleBody ;
+            aux3 = 0.01 * sale
+            aux2 = aux1 * aux3
+           
+          } else { // de ofertaSem
+            aux2 = aux1 
+          }
+        
+        
+          let compra = await db.InvoiceItem.create({
+              id_product : req.params.id,
+              quantity : req.body.cantidadProducto,
+              item_u_price : aux2,
+              id_user : req.session.usuarioLogueado.id,
+              made:0
+
+          })
+          let otrasCompras = await db.InvoiceItem.findAll({
+            where :{
+              id_user : req.session.usuarioLogueado.id,
+              made : 0
+            },
+            include : ["itemProduct"],
+          })
+          //return res.json(otrasCompras)
+
+          let suma = 0 ;
+          for (i= 0 ; i< otrasCompras.length ; i++){
+            suma = suma + otrasCompras.price_u_item ;
+          }
+          res.render ("carritoDB",{compras:otrasCompras,suma:suma})
+        } // el else de impuestos
+        } // cierra el try
+        catch(error){
+          console.log(error)
+        }
+      }
+  },
+  borraCarrito :  (req,res) =>{
+      db.InvoiceItem.destroy({
+        where:{
+          id_user : req.session.usuarioLogueado.id,
+          made : 0
+        }
+      }).then(function( ){
+        let mensaje = "Se ha eliminado compras en CARRITO ";
+        res.render("mensajeDB",{mensaje:mensaje})
+      })
+  },
+  finComprar:(req,res)=>{
+    let facturacion = productModel.find(0);
+    res.render("finCarritoDB",{facturacion:facturacion,suma:req.params.suma})
+  },
+  creaFactura: async(req,res)=>{
+    // falta validationResults
+    let factura = await db.Invoice.create({
+        number : req.body.nroFact,
+        id_user : req.session.usuarioLogueado.id,
+        delivery_dir: req.body.direccion,
+        delivery_cost:req.body.costoDistribucion
+    })
+    let items = await db.InvoiceItem.findAll({
+      where:{
+        id_user : req.session.usuarioLogueado.id,
+        made : 0
+      }
+    })
+    // actualiza el nro de factura en JSON
+    let facturacion = productModel.find(0);
+    let numeroFact = facturacion.numero + 1;
+    let facturaData = {
+      id:0,
+      numero : numeroFact,
+      standard : facturacion.standard,
+      premiun: facturacion.premiun
+    }
+    productModel.update(facturacionData);
+    let actualiza = {}
+    // actualiza InvoiceItem
+    for (i= 0 ; i< items.length ; i++){
+      actualiza = await db.InvoiceItem.update({
+        made: numeroFact 
+      },{
+        where: {
+          id_user : req.session.usuarioLogueado.id
+        }
+      })
+    }
+
   },
   altaTaxes: (req, res) => {
     res.render("formularioTaxesDB");

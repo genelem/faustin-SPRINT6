@@ -42,17 +42,13 @@
 
     </div>
     <section class="productosEnCarrito">
-        <!--<div class="botonTriangulo"><button class="triangulo1"></button></div>-->
-        <% for (i=0 ; i< compras.length ; i++) { %>
+        <div class="botonTriangulo"><button class="triangulo1"></button></div>
         <article class="primerProducto">
-            <div><img width="320" height="320" src="/images/<%= compras[i].itemProduct.image_ppal %>" alt= "Cartera"></div>
-            <div><b><label for="producto1" class="titulosDeProductos"><%= compras[i].itemProduct.name %></label></b>
-            <p>Cantidad= <%= compras[i].quantity</p>
-            <p>Precio Item = <%= compras[i].item_u_price %></p></div>
+            <div><img width="320" height="320" src="/images/bolsoLuoisSinFondo.png" alt= "Cartera"></div>
+            <div><b><label for="producto1" class="titulosDeProductos">Cartera</label></b></div>
             <div class="botonAgregarEliminar"><input type= "button" name="producto1" id="producto1" value="+ 1 -" class="botonesAgregado"></div>
         </article>
-        <% } %>
-       <!--- <article class="segundoProducto">
+        <article class="segundoProducto">
             <div><img width="320" height="320" src="/images/bandoleraRojaSinFondo.png" alt= "Bolso"></div>
             <div><b><label for="producto2" class="titulosdeProductos">Bolso</label></b></div>
             <div class="botonAgregarEliminar"><input type= "button" name="producto2" id="producto2" value="+ 1 -" class="botonesAgregado"></div>
@@ -61,8 +57,8 @@
             <div><img width="320" height="320" src="/images/cartera 2SinFondo.png" alt= "Riñonera"></div>
             <div><b><label for="producto3" class="titulosDeProductos">Riñonera</label></b></div>
             <div class="botonAgregarEliminar"><input type= "button" name="producto3" id="producto3" value="+ 1 -" class="botonesAgregado"></div>
-        </article>-->
-        <!--<div class="botonTriangulo"><button class="triangulo2"></button></div>-->
+        </article>
+        <div class="botonTriangulo"><button class="triangulo2"></button></div>
 
     </section>
 
@@ -74,20 +70,14 @@
 
     <section class="finalizarCompra">
         <div class="totalEnvio">             
-                <p><a href="#modal2">Importante <i class="fas fa-user-edit"></i></p>              
-                <h3 class="totalEnvio2">Total Compra SIN IVA ni Retenciones: <spam> $ <%= suma %> </spam><h3</div>            
+                <p><a href="#modal2">Importante<i class="fas fa-user-edit"></i></p>              
+                <h3 class="totalEnvio2">Total Compra: <spam> $ 55.000 </spam><h3</div>            
         </div>
         <div class="finalizar"> 
             <!--- <p> <button type="submit" class="crearCuentaBoton">CREAR CUENTA</button> -->
-                <a href="/"  id="finalizarHref">SEGUIR COMPRANDO </a>
-                <br/>
-                <br/>
-                <a href="/bproduct/cierraCompra/<%= suma %>" id="finalizarHref">FINALIZAR COMPRA </a> 
-                <br/>
-                <br/>
-                <a href="/bproduct/cancelaCarrito" id="finalizarHref">CANCELAR CARRITO </a>                
-                <br/> 
-                <br/>               
+                <a href="/" type="submit" id="finalizarHref">SEGUIR COMPRANDO </a>
+                <a href="/product/finCarrito" type="submit" id="finalizarHref">FINALIZAR COMPRA </a>                 
+                <br/>                
                 <a href="/" id="vuelvo">Volver a la Pagina Principal</a>
              
          </div>

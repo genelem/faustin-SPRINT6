@@ -1,0 +1,14 @@
+[
+  {
+    "id": 0,
+    "numero": 100,
+    "standard": 3500,
+    "premiun": 6000
+  },
+  {
+    "id": 1,
+    "numero": 101,
+    "standard": 3500,
+    "premiun": 6000
+  }
+]

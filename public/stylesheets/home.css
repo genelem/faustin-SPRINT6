@@ -85,7 +85,7 @@ div .producto {
 div.cajaGrande{
     display: flex;
     flex-wrap: wrap;
-    justify-content:space-around;
+    /*justify-content:space-around;*/
     margin: 1rem 1rem 1rem 1rem;
     
 
@@ -97,7 +97,7 @@ div.cajaDetalle{
     margin-left:0.7 rem;
     color:black;
     font-size: 1rem;
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    /*padding: 0.5rem 0.5rem 0.5rem 1rem;*/
 }
 div.cajaDetalle h4{
     font-weight: bold;
