@@ -69,7 +69,7 @@
                         <h2>REALIZAR COMPRA </h2>
                         <br/>
                         <p>EL PRECIO DE ESTE PRODUCTO ES :$ <%=producto.price %> </p>
-                        <p>Dto Sobre Precio Lista :$ <%=producto.dto %> </p>
+                     
  
                         <input class="noSeVe" id="" placeholder="" type="number"  name="precio" id="user" value="<%= producto.price %>" ></p>
                       
@@ -87,10 +87,10 @@
                     <div class="ofertaPorcentaje">
                         <h2><a href="#modal4"><img id="sale"  src="/images/icono.sale.png"></a></h2>
                         
-                        <p><label id="" for ="descuento">Sobre Precio se aplicará Descuento :<%= producto.dto %> %</label>
+                        <p id ="tituloDto"><label id="" for ="descuento">Sobre Precio se aplicará Descuento :<%= producto.dto %> %</label>
                         <input class="noSeVe" placeholder="" type="number" name="descuento" id="user" value="<%= producto.dto %>"></p> 
                         <% if(oferta){ %>
-                        <p><label id="" for ="ofertaSem">Oferta Semanal  :<%= oferta.dtoSale %> %</label>
+                        <p id ="tituloDto"><label id="userOferta" for ="ofertaSem">Oferta Semanal  :<%= oferta.dtoSale %> %</label>
                             <input class="noSeVe" placeholder="" type="number" name="ofertaSem" id="user" value="<%= oferta.dtoSale %>"></p>
                         <% } %>
                     </div>

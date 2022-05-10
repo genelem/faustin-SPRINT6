@@ -342,6 +342,12 @@ div.closeMain{
 .noSeVe{
     display:none;
 }
+#userOferta {
+    color:brown;
+}
+#tituloDto{
+    font-size: large;
+}
 
 /***** termina botón volver a página ppal */
 /********************/

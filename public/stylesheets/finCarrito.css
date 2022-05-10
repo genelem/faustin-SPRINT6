@@ -23,11 +23,11 @@ div.datosFacturacion{
 }
 #direccion{
     width: 60%;
-    border-radius: 7px;
+    border-radius: 2px;
 }
 #codigoPostal{
     width: 20%;
-    border-radius: 7px;
+    border-radius: 2px;
 }
 /* agregué para que no se vea */
 #noSeVe {

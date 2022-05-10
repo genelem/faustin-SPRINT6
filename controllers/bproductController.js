@@ -303,7 +303,6 @@ const controller = {
       },
     ];
     const errors = validationResult(req);
-
     //
     db.ProductColor.findAll({
       order: [["id", "ASC"]],
@@ -364,7 +363,6 @@ const controller = {
     let years = db.ProductYear.findAll();
     let types = db.ProductType.findAll();
     let colections = db.ProductColection.findAll();
-
     Promise.all([colors, years, types, colections]).then(function ([
       productColors,
       productYears,
@@ -437,12 +435,10 @@ const controller = {
           res.render("mensajesDB", { mensaje: mensaje });
         });
     }
-
     ///******************************************* */
   },
   listarProduct: (req, res) => {
     let array = [];
-
     db.Product.findAll({
       order: [["id", "ASC"]],
     }).then(function (products) {
@@ -482,9 +478,7 @@ const controller = {
         producto: product,
       });
     });
-
     //let producto = productModel.find(id);
-
     //res.render("updateProductoDB",{producto:producto,colors,years,types,colections})
   },
   storeUpdate: (req, res) => {
@@ -669,7 +663,6 @@ const controller = {
       where: {
         id: req.params.id,
       },
-
       include: ["pType", "pYear", "pColection", "coloresDB"],
     });
     ofertaD = db.ProductSale.findOne({
@@ -697,7 +690,6 @@ const controller = {
       res.render("loginDB");
     } else {
       const errors = validationResult(req);
-
       if (errors.errors.length > 0) {
         res.render("detallProdNuevoDB", { errorsProd: errors });
       } else {
@@ -717,11 +709,9 @@ const controller = {
             let dtoBody = parseInt(req.body.descuento);
             let precioSub = precioBody * parseInt(req.body.cantidadProducto);
             let dto = 100 - dtoBody;
-
             let aux2 = 0;
             aux3 = dto * 0.01;
             let aux1 = precioSub * aux3;
-
             if (req.body.ofertaSem != undefined) {
               let saleBody = parseInt(req.body.ofertaSem);
               let sale = 100 - saleBody;
@@ -731,7 +721,6 @@ const controller = {
               // de ofertaSem
               aux2 = aux1;
             }
-
             let compra = await db.InvoiceItem.create({
               id_product: req.params.id,
               quantity: req.body.cantidadProducto,
@@ -747,9 +736,8 @@ const controller = {
               include: ["itemProduct"],
             });
             //return res.json(otrasCompras)
-
             let suma = 0;
-            montoItem = 0;
+            let montoItem = 0;
             //return res.json(otrasCompras)
             for (i = 0; i < otrasCompras.length; i++) {
               if (
@@ -758,10 +746,9 @@ const controller = {
               ) {
                 montoItem = parseInt(otrasCompras.price_u_item);
                 suma = suma + montoItem;
-                console.log("montoItem = "+ montoItem + "suma es = "+ suma)
+                console.log("montoItem = " + montoItem + "suma es = " + suma);
               } // fin del if
             }
-
             //res.send("suma es igual a = " + suma)
             //res.send("el montoItem es = " + montoItem)
             res.render("carritoDB", { compras: otrasCompras, suma: suma });
@@ -796,49 +783,58 @@ const controller = {
   },
   creaFactura: async (req, res) => {
     // falta validationResults
-    const errors = validationResult(req);
+    //const errors = validationResult(req);
 
-      if (errors.errors.length > 0) {
-        res.render("finCarritoDB", { errorsProd: errors });
-      } else
-       {
-    let factura = await db.Invoice.create({
-      number: req.body.nroFact,
-      id_user: req.session.usuarioLogueado.id,
-      delivery_dir: req.body.direccion,
-      delivery_cost: req.body.costoDistribucion,
-    });
-    let items = await db.InvoiceItem.findAll({
-      where: {
-        id_user: req.session.usuarioLogueado.id,
-        made: 0,
-      },
-    });
-    // actualiza el nro de factura en JSON
-    let facturacion = productModel.find(0);
-    let numeroFact = facturacion.numero + 1;
-    let facturaData = {
-      id: 0,
-      numero: numeroFact,
-      standard: facturacion.standard,
-      premiun: facturacion.premiun,
-    };
-    productModel.update(facturaData);
-    let actualiza = [];
-    // actualiza InvoiceItem
-    for (i = 0; i < items.length; i++) {
-      actualiza = await db.InvoiceItem.update(
-        {
-          made: numeroFact,
-        },
-        {
-          where: {
-            id_user: req.session.usuarioLogueado.id,
-          },
+    //if (errors.errors.length > 0) {
+     // res.render("finCarritoDB", { errorsProd: errors });
+   //} else {
+     let total1 = parseInt(req.params.suma)
+   try {
+      // actualiza el nro de factura en JSON
+      // busco el nro de factura
+      let facturacion = productModel.find(0);
+      let numeroFact = facturacion.numero + 1;
+      let facturaData = {
+        id: 0,
+        numero: numeroFact,
+        standard: facturacion.standard,
+        premiun: facturacion.premiun,
+      };
+      productModel.update(facturaData);
+      //let actualiza = [];
+      // actualiza InvoiceItem
+      let items = await db.InvoiceItem.findAll({
+        where :{
+          id_user : req.session.usuarioLogueado.id,
+          made:0
         }
-      );
+      })
+      let actualiza =[];
+      for (i = 0; i < items.length; i++) {
+       actualiza = await db.InvoiceItem.update(
+          {
+            made: numeroFact,
+          },
+          {
+            where: {
+              id_user: req.session.usuarioLogueado.id,
+            },
+          }
+        );
+      } // final del for
+      total1 = total1 + parseInt(req.body.costoDistribucion);
+      let factura = await db.Invoice.create({
+        number: numeroFact,
+        id_user: req.session.usuarioLogueado.id,
+        delivery_dir: req.body.direccion,
+        delivery_cost: req.body.costoDistribucion,
+        total :total1
+      });
+    } // final del try
+    catch(error){
+      console.log(error)
     }
-  }
+  //} // finsl del else
   },
   altaTaxes: (req, res) => {
     res.render("formularioTaxesDB");
@@ -872,7 +868,6 @@ const controller = {
       });
     } // fin de else
   },
-
   prodPorType: (req, res) => {
     db.Product.findAll({
       where: {
@@ -895,7 +890,6 @@ const controller = {
       }
     });
   },
-
   mostrarOfertas: (req, res) => {
     db.ProductSale.findAll({
       include: ["saleP"],
@@ -909,7 +903,6 @@ const controller = {
       }
     });
   },
-
   updateOfertas: (req, res) => {
     let produSales = db.ProductSale.findAll({
       include: ["saleP"],
